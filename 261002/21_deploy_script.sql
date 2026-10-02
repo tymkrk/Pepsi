@@ -167,7 +167,7 @@ GO
 			into	#sync_data
 			from	(values
 			
-	('1', 'PEPSICO_sector_business_mapping', 'Bonus Setup', 'Sector Business Mapping', '-1', '#NULL#', '50', '1', '#NULL#', '#NULL#', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '0', '0', '-1', '0', '1', '15', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '', 'SP_Grid_Save_Post_PEPSICO_sector_business_mapping', '', 'SP_Grid_Save_Post_PEPSICO_sector_business_mapping', '', '', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '0', '1', '0', '#NULL#', '0', '0', '1', '1', '', '', '0')
+	('1', 'PEPSICO_sector_business_mapping', 'ND_Grid', 'Sector Business Mapping', '-1', '#NULL#', '50', '1', '#NULL#', '#NULL#', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '0', '0', '-1', '0', '1', '15', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '', 'SP_Grid_Save_Post_PEPSICO_sector_business_mapping', '', 'SP_Grid_Save_Post_PEPSICO_sector_business_mapping', '', '', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '0', '1', '0', '#NULL#', '0', '0', '1', '1', '', '', '0')
 	) s ( rn, ref_name_table_view, ref_name_folder, name_grid, type_grid, comments, page_size, is_addable, form_id, url, is_deletable, is_searchable, is_exportable, date_grid, grouping_field, frozen_column, active_trace, filtering_field, is_simulated, is_importable, idOwner, is_auto_resize, is_track_change, sort_grid, width, fit_to_screen, id_source_tenant, id_source, id_change_set, sp_grid_add_pre, sp_grid_add_post, sp_grid_save_pre, sp_grid_save_post, sp_grid_delete_pre, sp_grid_delete_post, is_bulk_insert, is_tree, master_id_table_view_field, child_id_table_view_field, parent_id_table_view_field, is_staging_area_enabled, is_export_template_enabled, show_default_security_view, use_attached_objects, tree_collapse_after_save, is_password_protection_enabled, apply_user_filter, wrap_header, header_tooltip, sp_grid_import_pre, sp_grid_import_post, allow_attached_file) ;
 
 
@@ -562,8 +562,12 @@ GO
 /* ------------------------------------------------------------------------------------------------- */
 /* 6. QUICK CHECK                                                                                  */
 /* ------------------------------------------------------------------------------------------------- */
-SELECT g.name_grid, g.ref_name_table_view, g.ref_name_folder, g.is_track_change
+SELECT g.id_grid, g.name_grid, rtv.name_table_view, rgf.name_folder, g.id_grid_parent, g.is_track_change
 FROM dbo.k_referential_grids AS g
+LEFT JOIN dbo.k_referential_tables_views AS rtv
+	ON rtv.id_table_view = g.id_table_view
+LEFT JOIN dbo.k_referential_grid_folders AS rgf
+	ON rgf.id_folder = g.id_grid_parent
 WHERE g.name_grid = 'Sector Business Mapping';
 
 SELECT id_sector, sector_name FROM dbo.vPEPSICO_sector_business_mapping_sector_lookup ORDER BY sort_order;
