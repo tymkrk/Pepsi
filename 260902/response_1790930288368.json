@@ -1,0 +1,110 @@
+{
+  "id": "65509ca7-8a0e-49bb-bfb9-aa9a802fba62",
+  "name": "Bonus",
+  "description": "Rednimbus",
+  "type": "8707ecb1-c14e-41d1-9413-d01bd297caf6",
+  "attributes": [
+    {
+      "id": "e484ef12-1be4-42b0-9d4e-4aeeab4a4b40",
+      "fieldAlias": "3_12_56",
+      "name": "pr_ind_bonus_approval.Bonus Approval Overall Status",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "7580e79b-5945-46d8-8f26-97703ac5c392",
+      "fieldAlias": "3_12_55",
+      "name": "pr_ind_bonus_approval.Bonus Approval Reason",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "020530ba-698b-44f5-8642-dd3602b63537",
+      "fieldAlias": "3_12_54",
+      "name": "pr_ind_bonus_approval.Bonus Approval Involvement Status",
+      "uidObjectAttributeType": "29a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "bebab41a-6599-4daa-9df1-bb360f331d18",
+      "fieldAlias": "3_21_137",
+      "name": "pr_ind_bonus_team.Bonus Team Preassigned",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "fae7891f-21f1-4b6c-9010-c57b9c330ba6",
+      "fieldAlias": "3_21_143",
+      "name": "pr_ind_bonus_team.Bonus Team Step 3",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "ab40ec6e-14c5-4b82-b405-b26d7434cf6c",
+      "fieldAlias": "3_21_140",
+      "name": "pr_ind_bonus_team.Bonus Team Enabling Function",
+      "uidObjectAttributeType": "29a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "2bb05781-4886-462a-8644-ebafb3818dee",
+      "fieldAlias": "3_21_141",
+      "name": "pr_ind_bonus_team.Bonus Team Step 1",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "fc5c14ac-7c57-49ba-a495-91ee08852b6d",
+      "fieldAlias": "3_21_142",
+      "name": "pr_ind_bonus_team.Bonus Team Step 2",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "12ab4ec7-7684-462f-b8a6-1bce85b41e80",
+      "fieldAlias": "3_21_139",
+      "name": "pr_ind_bonus_team.Bonus Team Correction Reason",
+      "uidObjectAttributeType": "29a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "29ca90d4-9ed1-40fd-8555-799b4f42eb41",
+      "fieldAlias": "3_21_138",
+      "name": "pr_ind_bonus_team.Bonus Team Assignment Correct",
+      "uidObjectAttributeType": "29a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "e9c8f90c-7ff3-41a5-83e7-8db123b68aa0",
+      "fieldAlias": "3_21_147",
+      "name": "pr_ind_bonus_team.Bonus Team Step 3.5 helper",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "065ee5fb-dcfd-4113-9406-91a8ec8e3f89",
+      "fieldAlias": "3_21_144",
+      "name": "pr_ind_bonus_team.Bonus Team Step 4",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "8d701453-59c3-4590-9c51-a58e33704037",
+      "fieldAlias": "3_21_146",
+      "name": "pr_ind_bonus_team.Bonus Team Final",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "b950757e-cd9d-4529-8591-d3479f69960b",
+      "fieldAlias": "3_21_145",
+      "name": "pr_ind_bonus_team.Bonus Team Step 5",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "cc30ec4e-729e-408d-ad7b-b59636479c39",
+      "fieldAlias": "3_21_148",
+      "name": "pr_ind_bonus_team.Bonus Team Double Hatter",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "12a0665d-d0e5-4005-bf20-f1108ead35e9",
+      "fieldAlias": "3_21_150",
+      "name": "pr_ind_bonus_team.Bonus Team Comment",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    },
+    {
+      "id": "3e6a37b8-046a-4f62-a4a1-0b7293583fe6",
+      "fieldAlias": "3_21_149",
+      "name": "pr_ind_bonus_team.Bonus Team PRT Message",
+      "uidObjectAttributeType": "27a42df1-8172-e911-80f4-0003ff4b7fb9"
+    }
+  ]
+}
