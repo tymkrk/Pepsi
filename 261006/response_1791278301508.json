@@ -1,0 +1,30 @@
+[
+  {
+    "id": "4dfcf92c-073e-4c3a-bf66-b5e0a68e0dfe",
+    "uidObject": "65509ca7-8a0e-49bb-bfb9-aa9a802fba62",
+    "objectAction": null,
+    "triggers": [
+      {
+        "id": "d3db7706-a761-441d-ae9e-03f1b1774e82",
+        "attribute": "fc5c14ac-7c57-49ba-a495-91ee08852b6d",
+        "alias": "3_21_142",
+        "behaviour": "CALCULATE",
+        "triggerType": "ONCHANGE"
+      },
+      {
+        "id": "d5e79ec3-9ed3-427b-9c1a-0aac3c6a886f",
+        "attribute": "29ca90d4-9ed1-40fd-8555-799b4f42eb41",
+        "alias": "3_21_138",
+        "behaviour": "CALCULATE",
+        "triggerType": "ONCHANGE"
+      },
+      {
+        "id": "020d60b5-fd60-4af9-8304-7b1620fc70df",
+        "attribute": "2bb05781-4886-462a-8644-ebafb3818dee",
+        "alias": "3_21_141",
+        "behaviour": "CALCULATE",
+        "triggerType": "ONCHANGE"
+      }
+    ]
+  }
+]
