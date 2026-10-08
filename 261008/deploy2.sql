@@ -38,6 +38,7 @@ BEGIN
 		[comp_group_name] [nvarchar](256) NOT NULL,
 		[number_of_businesses] [int] NOT NULL CONSTRAINT [CK_PEPSICO_sector_business_rule_number_of_businesses] CHECK ([number_of_businesses] BETWEEN 1 AND 3),
 		[split_rule] [nvarchar](200) NOT NULL,
+		[is_region] [bit] NOT NULL CONSTRAINT [DF_PEPSICO_sector_business_rule_is_region] DEFAULT ((0)),
 	 CONSTRAINT [PK_PEPSICO_sector_business_rule] PRIMARY KEY CLUSTERED
 	(
 		[comp_group_name] ASC,
@@ -48,6 +49,14 @@ BEGIN
 END
 GO
 
+-- Upgrade an existing table; old rows receive the default flag 0.
+IF COL_LENGTH('dbo.PEPSICO_sector_business_rule', 'is_region') IS NULL
+BEGIN
+    ALTER TABLE dbo.PEPSICO_sector_business_rule
+        ADD is_region BIT NOT NULL
+            CONSTRAINT DF_PEPSICO_sector_business_rule_is_region DEFAULT ((0)) WITH VALUES;
+END;
+GO
 -- Earlier version had PK (comp_group_name, number_of_businesses); one Comp Group + Number of Businesses
 -- can have several rules, so the PK also includes split_rule.
 IF EXISTS
@@ -89,44 +98,44 @@ CREATE TABLE #seed
 	seed_order INT IDENTITY(1,1) NOT NULL,
 	comp_group_name NVARCHAR(256) NOT NULL,
 	number_of_businesses INT NOT NULL,
-	split_rule NVARCHAR(200) NOT NULL
+	split_rule NVARCHAR(200) NOT NULL, is_region BIT NOT NULL
 );
 
-INSERT INTO #seed (comp_group_name, number_of_businesses, split_rule)
+INSERT INTO #seed (comp_group_name, number_of_businesses, split_rule, is_region)
 VALUES
 	-- 1 business
-	('Global S&T', 1, '75% Bonus Team / 25% Corporate'),
-	('Global R&D', 1, '75% Bonus Team / 25% Corporate'),
-	('Global Procurement', 1, '75% Bonus Team / 25% Corporate'),
+	('Global S&T', 1, '75% Bonus Team / 25% Corporate', 0),
+	('Global R&D', 1, '75% Bonus Team / 25% Corporate', 0),
+	('Global Procurement', 1, '75% Bonus Team / 25% Corporate', 0),
 	-- 2 businesses
-	('EMEA', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team'),
-	('APAC', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team'),
-	('LATAM', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team'),
-	('International Beverages', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team'),
-	('Global R&D', 2, '37.5% 1st Bonus Team / 37.5% 2nd Bonus Team / 25% Corporate'),
-	('Global S&T', 2, '75% OU / 25% Corporate'),
-	('Global S&T', 2, '75% Region / 25% Corporate'),
-	('Global S&T', 2, 'Corporate'),
-	('Global Procurement', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team'),
-	-- 3 businesses
-	('International Beverages', 3, '100% International Beverages'),
-	('Global R&D', 3, '75% Region / 25% Corporate'),
-	('Global R&D', 3, '75% OU / 25% Corporate'),
-	('Global R&D', 3, 'Corporate'),
-	('Global S&T', 3, '75% OU / 25% Corporate'),
-	('Global S&T', 3, '75% Region / 25% Corporate'),
-	('Global S&T', 3, 'Corporate'),
-	('Global Procurement', 3, '100% OU'),
-	('Global Procurement', 3, '100% Region');
+	('EMEA', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team', 0),
+	('APAC', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team', 0),
+	('LATAM', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team', 0),
+	('International Beverages', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team', 0),
+	('Global R&D', 2, '37.5% 1st Bonus Team / 37.5% 2nd Bonus Team / 25% Corporate', 0),
+	('Global S&T', 2, '75% OU / 25% Corporate OR 75% sector / 25% Corporate', 0),
+	('Global S&T', 2, 'Corporate', 1),
+	('Global Procurement', 2, '50% 1st Bonus Team / 50% 2nd Bonus Team', 0),
+    -- 3 businesses: user-supplied rules; OR remains part of the configured text.
+    ('EMEA', 3, '100% OU or 100% Sector', 0),
+    ('APAC', 3, '100% Sector', 0),
+    ('LATAM', 3, '100% Sector', 0),
+    ('International Beverages', 3, '100% Sector', 0),
+    ('Global R&D', 3, '75% Sector / 25% Corporate OR 75% OU / 25% Corporate', 0),
+    ('Global R&D', 3, 'Corporate', 1),
+    ('Global S&T', 3, '75% Sector / 25% Corporate OR 75% OU / 25% Corporate', 0),
+    ('Global S&T', 3, 'Corporate', 1),
+    ('Global Procurement', 3, '100% OU or 100% Sector', 0);
 
 BEGIN TRY
 	BEGIN TRANSACTION;
 
-	INSERT INTO dbo.PEPSICO_sector_business_rule (comp_group_name, number_of_businesses, split_rule)
+	INSERT INTO dbo.PEPSICO_sector_business_rule (comp_group_name, number_of_businesses, split_rule, is_region)
 	SELECT
 		s.comp_group_name,
 		s.number_of_businesses,
-		s.split_rule
+		s.split_rule,
+		s.is_region
 	FROM #seed AS s
 	WHERE NOT EXISTS
 		(
@@ -140,6 +149,15 @@ BEGIN TRY
 
 	PRINT CONCAT('Inserted rows: ', @@ROWCOUNT);
 
+    -- Synchronize flags for existing seed rows as well as newly inserted rows.
+    UPDATE r
+    SET r.is_region = s.is_region
+    FROM dbo.PEPSICO_sector_business_rule AS r
+    INNER JOIN #seed AS s
+        ON s.comp_group_name = r.comp_group_name
+       AND s.number_of_businesses = r.number_of_businesses
+       AND s.split_rule = r.split_rule
+    WHERE r.is_region <> s.is_region;
 	COMMIT TRANSACTION;
 END TRY
 BEGIN CATCH
@@ -170,7 +188,9 @@ GO
 SELECT
 	r.comp_group_name,
 	r.number_of_businesses,
-	r.split_rule
+	r.split_rule,
+	r.is_region
 FROM dbo.PEPSICO_sector_business_rule AS r
 ORDER BY r.number_of_businesses, r.comp_group_name, r.split_rule;
 GO
+
