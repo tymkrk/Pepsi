@@ -17,7 +17,7 @@ BEGIN
                             resolve common OU/sector for OR rules, merge repeated teams,
                             and format percentages before alphabetically sorted team names
                             with a slash separator, Corporate last, explicit 100%, and Other for unresolved setups;
-                            use business codes and CompGroup IDs as configuration keys.
+                            resolve incoming business names to codes and use CompGroup IDs as configuration keys.
 
     Workflow: count nonblank steps -> any step is_region -> configured rule.
     OR rules use a common OU first, otherwise sector_name; unresolved setups return Other.
@@ -34,32 +34,29 @@ BEGIN
     DECLARE @steps TABLE
     (
         step_number INT NOT NULL,
-        bt_business_code NVARCHAR(50) NOT NULL,
+        bt_business_code NVARCHAR(50) NULL,
         business_name NVARCHAR(100) NULL
     );
 
-    IF EXISTS
-    (
-        SELECT 1
-        FROM (VALUES (@Step1), (@Step2), (@Step3)) AS s(business_code)
-        WHERE LEN(LTRIM(RTRIM(s.business_code))) > 50
-    )
-    BEGIN
-        RETURN N'Other';
-    END;
-
+    -- RTC supplies business names; resolve codes internally without changing the arguments.
     INSERT INTO @steps (step_number, bt_business_code, business_name)
-    SELECT s.step_number, LTRIM(RTRIM(s.business_code)), b.BTBusinessValue
-    FROM (VALUES (1, @Step1), (2, @Step2), (3, @Step3)) AS s(step_number, business_code)
+    SELECT s.step_number, b.bt_business_code, b.business_name
+    FROM (VALUES (1, @Step1), (2, @Step2), (3, @Step3)) AS s(step_number, business_name)
+    CROSS APPLY
+    (
+        SELECT LTRIM(RTRIM(REPLACE(REPLACE(REPLACE(s.business_name,
+            NCHAR(160), N' '), NCHAR(146), NCHAR(39)), NCHAR(8217), NCHAR(39)))) AS business_name
+    ) AS n
     OUTER APPLY
     (
-        SELECT CASE WHEN COUNT(*) = 1 THEN MAX(d.BTBusinessValue) END AS BTBusinessValue
+        SELECT CASE WHEN COUNT(DISTINCT d.BTBusinessCode) = 1 THEN MAX(d.BTBusinessCode) END AS bt_business_code,
+               CASE WHEN COUNT(DISTINCT d.BTBusinessCode) = 1 THEN MAX(d.BTBusinessValue) END AS business_name
         FROM dbo.PEPSICO_Bonus_Team_Business AS d
-        WHERE d.BTBusinessCode = LTRIM(RTRIM(s.business_code))
+        WHERE LTRIM(RTRIM(REPLACE(REPLACE(REPLACE(d.BTBusinessValue,
+            NCHAR(160), N' '), NCHAR(146), NCHAR(39)), NCHAR(8217), NCHAR(39)))) = n.business_name
     ) AS b
-    WHERE NULLIF(LTRIM(RTRIM(s.business_code)), N'') IS NOT NULL;
+    WHERE NULLIF(n.business_name, N'') IS NOT NULL;
 
-    -- Step arguments contain BTBusinessCode; display names come from the business dictionary.
     -- Count supplied steps, including repeated names; NULL/blank steps are ignored.
     SELECT @number_of_businesses = COUNT(*) FROM @steps;
 
@@ -75,7 +72,8 @@ BEGIN
     IF EXISTS
     (
         SELECT 1 FROM @steps AS s
-        WHERE NULLIF(LTRIM(RTRIM(s.business_name)), N'') IS NULL OR NOT EXISTS
+        WHERE s.bt_business_code IS NULL
+           OR NULLIF(LTRIM(RTRIM(s.business_name)), N'') IS NULL OR NOT EXISTS
         (
             SELECT 1 FROM dbo.PEPSICO_bonus_team_business_mapping AS m
             WHERE m.bt_business_code = s.bt_business_code
