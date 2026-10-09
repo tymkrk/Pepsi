@@ -8,6 +8,8 @@ CREATE PROCEDURE [dbo].[Kernel_SP_Process_DataOnChange]
 	@Values AS [dbo].[Kernel_Type_Process_Values] READONLY
 AS
 BEGIN
+	SET NOCOUNT ON;
+	BEGIN TRY
 
 -- created by James Mackay ?????? to update Process fields using RTC
 -- modified by James Mackay 20210527 update ic_score range and merit_range when Performance Rating changes
@@ -247,7 +249,7 @@ SELECT [idIndicator], [idField], [isTrigger], [inputValue] FROM @Values
 		--@id_field_bonus_team_enabling int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_enabling'), --YS 20250724
 		@id_field_bonus_team_step_1 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_1'), --YS 20250724 
 		@id_field_bonus_team_step_2 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_2'), --YS 20250724 
-		--@id_field_bonus_team_step_3 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_3'), --YS 20250724 
+		@id_field_bonus_team_step_3 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_3'), --YS 20250724 
 		--@id_field_bonus_team_step_35 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_35'), --YS 20250724
 		--@id_field_bonus_team_step_4 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_4'), --YS 20250724
 		--@id_field_bonus_team_step_5 int = (SELECT id_field from k_m_fields where code_field = 'bonus_team_step_5'), --YS 20250724
@@ -2903,27 +2905,52 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 		END
 
 		
-		---- If Step 1 is the trigger, nothing to set
-		
-		---- If Step 2 is the trigger, nothing to set
-		IF @id_field = @id_field_bonus_team_step_2 --YS 20250821
-		BEGIN
-			
-			INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
-			SELECT 
-					@idStep AS PrimaryKey, 
-					CONCAT(CAST(@PlanId AS NVARCHAR(30)), '_', CAST(@id_ind_bonus_team AS NVARCHAR(30)), '_', CAST(@id_field_bonus_team_step_2 AS NVARCHAR(30))) AS ObjectFieldAlias,
-					'' AS ObjectAttribute,
-					0 AS IsValid,
-					'Employees should only be assigned a combined bonus team when their role consistently and significantly supports multiple parts of the business. HRBPs will review bonus team changes.' AS InvalidReason,
-					0 AS AllowEdit,
-					@inputValue AS NewValue
-		END
+        -- Resolve stored business codes before checking the displayed Step 1 choice.
+        SELECT @step_1_name = BTBusinessValue FROM dbo.PEPSICO_Bonus_Team_Business WHERE BTBusinessCode = @step_1;
+        SELECT @step_2_name = BTBusinessValue FROM dbo.PEPSICO_Bonus_Team_Business WHERE BTBusinessCode = @step_2;
+        SELECT @step_3_name = BTBusinessValue FROM dbo.PEPSICO_Bonus_Team_Business WHERE BTBusinessCode = @step_3;
 
-		---- Get Bonus Parameter names from lookup views
-		select @step_1_name = BTBusinessValue from PEPSICO_Bonus_Team_Business where BTBusinessCode = @step_1
-		select @step_2_name = BTBusinessValue from PEPSICO_Bonus_Team_Business where BTBusinessCode = @step_2
-		select @step_3_name = BTBusinessValue from PEPSICO_Bonus_Team_Business where BTBusinessCode = @step_3 ----TK 20261008
+        -- 20261009: Other and North America allow only Step 1 among the three business steps.
+        -- Preserve dependent values; RTC controls editability, not the stored selections.
+        DECLARE @allow_bonus_team_details BIT = 1;
+
+        IF LTRIM(RTRIM(REPLACE(@step_1_name, NCHAR(160), N' '))) = N'Other'
+            OR EXISTS
+            (
+                SELECT 1
+                FROM dbo.PEPSICO_CompGroup AS cg
+                WHERE cg.idCompGroup = @idCompGroup
+                    AND LTRIM(RTRIM(REPLACE(cg.CompGroupName, NCHAR(160), N' '))) = N'North America'
+            )
+            OR @is_correct IN (N'CORRECT', N'SELECT', N'INCORRECT_DATA')
+        BEGIN
+            SET @allow_bonus_team_details = 0;
+        END;
+
+        -- Replace any earlier Step 2 response so each alias occurs exactly once.
+        DELETE FROM #tempTable
+        WHERE ObjectFieldAlias IN
+        (
+            CONCAT(@PlanId, '_', @id_ind_bonus_team, '_', @id_field_bonus_team_step_2),
+            CONCAT(@PlanId, '_', @id_ind_bonus_team, '_', @id_field_bonus_team_step_3)
+        );
+
+        INSERT INTO #tempTable
+            (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
+        SELECT @idStep,
+               CONCAT(@PlanId, '_', @id_ind_bonus_team, '_', f.id_field),
+               '',
+               CASE WHEN @allow_bonus_team_details = 1 AND @id_field = @id_field_bonus_team_step_2
+                         AND f.id_field = @id_field_bonus_team_step_2 THEN 0 ELSE 1 END,
+               CASE WHEN @allow_bonus_team_details = 1 AND @id_field = @id_field_bonus_team_step_2
+                         AND f.id_field = @id_field_bonus_team_step_2
+                    THEN N'Employees should only be assigned a combined bonus team when their role consistently and significantly supports multiple parts of the business. HRBPs will review bonus team changes.'
+                    ELSE N'' END,
+               @allow_bonus_team_details,
+               f.new_value
+        FROM (VALUES (@id_field_bonus_team_step_2, @step_2),
+                     (@id_field_bonus_team_step_3, @step_3)) AS f(id_field, new_value)
+        WHERE f.id_field IS NOT NULL;
 
 		---- Set Bonus team Name based on parameters
 		--SELECT @bonus_team_final = ISNULL(dbo._fn_get_bonus_team_ys(@idCompGroup ,@step_1_name,@step_2_name), @preassigned_bonus) ----YS 20250821
@@ -2945,7 +2972,7 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 ------------------------------------------------------- BONUS Process END------------------------------------------------------- --YS 20250724
 	---------------------------- Return the entered value if it is not already in the returned table --YS 20210901
 
-	IF NOT EXISTS (SELECT * FROM #tempTable WHERE ObjectFieldAlias = CONCAT(CAST(@PlanId AS NVARCHAR(30)), '_', CAST(@id_ind AS NVARCHAR(30)), '_', CAST(@id_field AS NVARCHAR(30))))
+	IF NOT EXISTS (SELECT 1 FROM #tempTable WHERE ObjectFieldAlias = CONCAT(CAST(@PlanId AS NVARCHAR(30)), '_', CAST(@id_ind AS NVARCHAR(30)), '_', CAST(@id_field AS NVARCHAR(30))))
 	BEGIN
 		INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)	
 		SELECT 
@@ -2999,7 +3026,13 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 
 	-- return the results
 
-	SELECT * FROM #tempTable
+	SELECT PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue
+	FROM #tempTable
+
+	END TRY
+	BEGIN CATCH
+		THROW;
+	END CATCH;
 
 END
 GO
