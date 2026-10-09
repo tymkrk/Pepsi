@@ -17,7 +17,8 @@ BEGIN
                             resolve common OU/sector for OR rules, merge repeated teams,
                             and format percentages before alphabetically sorted team names
                             with a slash separator, Corporate last, explicit 100%, and Other for unresolved setups;
-                            resolve incoming business names to codes and use CompGroup IDs as configuration keys.
+                            resolve incoming business names to codes and use CompGroup IDs as configuration keys;
+                            Corporate inherits the common sector of the other selected businesses.
 
     Workflow: count nonblank steps -> any step is_region -> configured rule.
     OR rules use a common OU first, otherwise sector_name; unresolved setups return Other.
@@ -134,15 +135,22 @@ BEGIN
         SELECT DISTINCT s.step_number, m.sector_name, NULLIF(LTRIM(RTRIM(m.org_unit_name)), N'')
         FROM @steps AS s
         INNER JOIN dbo.PEPSICO_bonus_team_business_mapping AS m
-            ON m.bt_business_code = s.bt_business_code;
+            ON m.bt_business_code = s.bt_business_code
+        WHERE LTRIM(RTRIM(REPLACE(s.business_name, NCHAR(160), N' '))) <> N'Corporate';
 
-        -- A business with several sector mappings cannot identify a common sector.
+        -- Resolve the sector from non-Corporate businesses only; none or multiple is unresolved.
         IF (SELECT COUNT(DISTINCT sector_name) FROM @mapped_steps) <> 1
         BEGIN
             RETURN N'Other';
         END;
 
         SELECT @common_sector_name = MAX(sector_name) FROM @mapped_steps;
+
+        -- Corporate has mappings in several sectors; inherit the selected common sector without an OU.
+        INSERT INTO @mapped_steps (step_number, sector_name, org_unit_name)
+        SELECT s.step_number, @common_sector_name, NULL
+        FROM @steps AS s
+        WHERE LTRIM(RTRIM(REPLACE(s.business_name, NCHAR(160), N' '))) = N'Corporate';
 
         IF (SELECT COUNT(DISTINCT org_unit_name) FROM @mapped_steps) = 1
            AND NOT EXISTS (SELECT 1 FROM @mapped_steps WHERE org_unit_name IS NULL)
