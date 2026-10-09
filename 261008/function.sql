@@ -13,8 +13,10 @@ BEGIN
     20251013 Danuta Lemma    Remove "100%" from final team name.
     20251126 Danuta Lemma    Added IB CompGroup logic.
     20251127 Danuta Lemma    Added ICC CompGroup logic.
-    20261008 Tymoteusz Kruk  Added @Step3 and a rule-driven skeleton.
-    20261008 Tymoteusz Kruk  Select setup by step count and any region step.
+    20261009 Tymoteusz Kruk  Added @Step3 and rule selection by step count and region flag;
+                            resolve common OU/sector for OR rules, merge repeated teams,
+                            and format percentages before alphabetically sorted team names
+                            with a slash separator, Corporate last, and 100% omitted.
 
     Workflow: count nonblank steps -> any step is_region -> configured rule.
     OR rules use a common OU first, otherwise sector_name; different sectors return No Team Assigned.
@@ -183,20 +185,20 @@ BEGIN
         RETURN NULL;
     END;
 
-    -- Merge repeated teams (including Corporate), omit 100%, and keep Corporate last.
+    -- Merge repeated teams, omit 100%, sort team names alphabetically, and keep Corporate last.
     IF EXISTS (SELECT 1 FROM @team_shares)
     BEGIN
         SELECT @final_bonus_team = STRING_AGG
         (
             CAST
             (
-                t.team_name + CASE WHEN t.team_pct = 100 THEN N''
-                    ELSE N' ' +
+                CASE WHEN t.team_pct = 100 THEN N''
+                    ELSE
                         CASE WHEN t.team_pct = FLOOR(t.team_pct)
                              THEN CONVERT(NVARCHAR(10), CONVERT(INT, t.team_pct))
                              ELSE CONVERT(NVARCHAR(10), CONVERT(DECIMAL(6, 1), t.team_pct))
-                        END + N'%'
-                    END AS NVARCHAR(MAX)
+                        END + N'% '
+                    END + t.team_name AS NVARCHAR(MAX)
             ), N' / '
         ) WITHIN GROUP (ORDER BY CASE WHEN t.team_name = N'Corporate' THEN 1 ELSE 0 END, t.team_name)
         FROM
