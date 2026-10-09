@@ -16,10 +16,10 @@ BEGIN
     20261009 Tymoteusz Kruk  Added @Step3 and rule selection by step count and region flag;
                             resolve common OU/sector for OR rules, merge repeated teams,
                             and format percentages before alphabetically sorted team names
-                            with a slash separator, Corporate last, and 100% omitted.
+                            with a slash separator, Corporate last, explicit 100%, and Other for unresolved setups.
 
     Workflow: count nonblank steps -> any step is_region -> configured rule.
-    OR rules use a common OU first, otherwise sector_name; different sectors return No Team Assigned.
+    OR rules use a common OU first, otherwise sector_name; unresolved setups return Other.
     */
     DECLARE @comp_group_name NVARCHAR(256),
             @number_of_businesses INT,
@@ -29,7 +29,7 @@ BEGIN
             @common_sector_name NVARCHAR(100),
             @common_ou_name NVARCHAR(100),
             @resolved_team_name NVARCHAR(100),
-            @final_bonus_team NVARCHAR(MAX) = NULL;
+            @final_bonus_team NVARCHAR(MAX) = N'Other';
 
     DECLARE @steps TABLE
     (
@@ -124,7 +124,7 @@ BEGIN
         -- A business with several sector mappings cannot identify a common sector.
         IF (SELECT COUNT(DISTINCT sector_name) FROM @mapped_steps) <> 1
         BEGIN
-            RETURN N'No Team Assigned';
+            RETURN N'Other';
         END;
 
         SELECT @common_sector_name = MAX(sector_name) FROM @mapped_steps;
@@ -174,31 +174,28 @@ BEGIN
     END
     ELSE IF @split_rule = N'Corporate'
     BEGIN
-        SET @final_bonus_team = N'Corporate';
+        INSERT INTO @team_shares (team_name, team_pct) VALUES (N'Corporate', 100);
     END
     ELSE IF @split_rule IN (N'100% OU or 100% Sector', N'100% Sector')
     BEGIN
-        SET @final_bonus_team = @resolved_team_name;
+        INSERT INTO @team_shares (team_name, team_pct) VALUES (@resolved_team_name, 100);
     END
     ELSE
     BEGIN
-        RETURN NULL;
+        RETURN N'Other';
     END;
 
-    -- Merge repeated teams, omit 100%, sort team names alphabetically, and keep Corporate last.
+    -- Merge repeated teams, retain all percentages, sort team names alphabetically, and keep Corporate last.
     IF EXISTS (SELECT 1 FROM @team_shares)
     BEGIN
         SELECT @final_bonus_team = STRING_AGG
         (
             CAST
             (
-                CASE WHEN t.team_pct = 100 THEN N''
-                    ELSE
-                        CASE WHEN t.team_pct = FLOOR(t.team_pct)
-                             THEN CONVERT(NVARCHAR(10), CONVERT(INT, t.team_pct))
-                             ELSE CONVERT(NVARCHAR(10), CONVERT(DECIMAL(6, 1), t.team_pct))
-                        END + N'% '
-                    END + t.team_name AS NVARCHAR(MAX)
+                CASE WHEN t.team_pct = FLOOR(t.team_pct)
+                     THEN CONVERT(NVARCHAR(10), CONVERT(INT, t.team_pct))
+                     ELSE CONVERT(NVARCHAR(10), CONVERT(DECIMAL(6, 1), t.team_pct))
+                END + N'% ' + t.team_name AS NVARCHAR(MAX)
             ), N' / '
         ) WITHIN GROUP (ORDER BY CASE WHEN t.team_name = N'Corporate' THEN 1 ELSE 0 END, t.team_name)
         FROM
