@@ -18,9 +18,11 @@ BEGIN
                             and format percentages before alphabetically sorted team names
                             with a slash separator, Corporate last, explicit 100%, and Other for unresolved setups;
                             resolve incoming business names to codes and use CompGroup IDs as configuration keys;
-                            Corporate inherits the common sector of the other selected businesses.
+                            Corporate inherits the common sector of the other selected businesses;
+                            require a common is_region flag across all selected steps;
+                            mixed region/non-region selections return Other.
 
-    Workflow: count nonblank steps -> any step is_region -> configured rule.
+    Workflow: count nonblank steps -> common is_region flag -> configured rule.
     OR rules use a common OU first, otherwise sector_name; unresolved setups return Other.
     */
     DECLARE @number_of_businesses INT,
@@ -84,16 +86,16 @@ BEGIN
         RETURN @final_bonus_team;
     END;
 
-    IF EXISTS
-    (
-        SELECT 1
-        FROM @steps AS s
-        INNER JOIN dbo.PEPSICO_bonus_team_business_mapping AS m
-            ON m.bt_business_code = s.bt_business_code
-        WHERE m.is_region = 1
-    )
+    -- Use the common region flag for all selected steps; mixed flags return Other.
+    SELECT @is_region = CASE WHEN COUNT(DISTINCT CONVERT(INT, m.is_region)) = 1
+                             THEN MAX(CONVERT(INT, m.is_region)) END
+    FROM @steps AS s
+    INNER JOIN dbo.PEPSICO_bonus_team_business_mapping AS m
+        ON m.bt_business_code = s.bt_business_code;
+
+    IF @is_region IS NULL
     BEGIN
-        SET @is_region = 1;
+        RETURN @final_bonus_team;
     END;
 
     SELECT @rule_count = COUNT(*),
