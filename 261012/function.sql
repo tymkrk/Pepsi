@@ -177,6 +177,13 @@ BEGIN
         SELECT business_name, 75 FROM @steps;
         INSERT INTO @team_shares (team_name, team_pct) VALUES (N'Corporate', 25);
     END
+    ELSE IF @split_rule IN (N'100% 1st Bonus Team')
+    BEGIN
+        INSERT INTO @team_shares (team_name, team_pct)
+        SELECT business_name, 100
+        FROM @steps
+        WHERE step_number = 1;
+    END
     ELSE IF @split_rule = N'50% 1st Bonus Team / 50% 2nd Bonus Team'
     BEGIN
         INSERT INTO @team_shares (team_name, team_pct)
