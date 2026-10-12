@@ -225,8 +225,8 @@ WHERE NOT EXISTS
 INSERT INTO dbo.PEPSICO_bonus_team_business_mapping
     (sector_name, org_unit_name, bt_business_code, is_region)
 SELECT DISTINCT N'North America', NULL, b.BTBusinessCode, 0
-FROM dbo.PEPSICO_Bonus_Team_Business AS b
-WHERE b.BTBusinessCode = N'not applicable for north america business design'
+FROM dbo.vPEPSICO_bonus_team_step2_business AS b
+WHERE b.BTBusinessCode = N'Not Applicable for North America Bonus Design'
   AND NOT EXISTS
   (
       SELECT 1
