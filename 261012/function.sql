@@ -20,7 +20,8 @@ BEGIN
                             resolve incoming business names to codes and use CompGroup IDs as configuration keys;
                             Corporate inherits the common sector of the other selected businesses;
                             require a common is_region flag across all selected steps;
-                            mixed region/non-region selections return Other.
+                            mixed region/non-region selections return Other;
+                            return NULL for empty selections to preserve the preassigned-team fallback in OnChange.
 
     Workflow: count nonblank steps -> common is_region flag -> configured rule.
     OR rules use a common OU first, otherwise sector_name; unresolved setups return Other.
@@ -63,7 +64,13 @@ BEGIN
     -- Count supplied steps, including repeated names; NULL/blank steps are ignored.
     SELECT @number_of_businesses = COUNT(*) FROM @steps;
 
-    IF @number_of_businesses = 0 OR NOT EXISTS
+    -- No correction selected: let OnChange fall back to the preassigned bonus team.
+    IF @number_of_businesses = 0
+    BEGIN
+        RETURN NULL;
+    END;
+
+    IF NOT EXISTS
     (
         SELECT 1 FROM dbo.PEPSICO_CompGroup AS cg WHERE cg.idCompGroup = @idCompGroup
     )
