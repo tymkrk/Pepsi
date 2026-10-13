@@ -8,7 +8,6 @@ CREATE PROCEDURE [dbo].[Kernel_SP_Process_DataOnChange]
 	@Values AS [dbo].[Kernel_Type_Process_Values] READONLY
 AS
 BEGIN
-	SET NOCOUNT ON;
 
 -- created by James Mackay ?????? to update Process fields using RTC
 -- modified by James Mackay 20210527 update ic_score range and merit_range when Performance Rating changes
@@ -2904,7 +2903,28 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 		END
 
 		
-		---- If Step 1 is the trigger, nothing to set
+		---- Clear dependent selections when Step 1 changes to Other.
+		IF @id_field = @id_field_bonus_team_step_1
+		   AND EXISTS
+		   (
+			   SELECT 1
+			   FROM dbo.PEPSICO_Bonus_Team_Business AS business
+			   WHERE business.BTBusinessCode = @inputValue
+			     AND LTRIM(RTRIM(business.BTBusinessValue)) = N'Other'
+		   )
+		BEGIN
+			SET @step_1 = @inputValue;
+			SET @step_2 = NULL;
+			SET @step_3 = NULL;
+
+			INSERT INTO #tempTable
+				(PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
+			SELECT @idStep,
+				CONCAT(@PlanId, '_', @id_ind_bonus_team, '_', field.id_field),
+				'', 1, '', 0, NULL
+			FROM dbo.k_m_fields AS field
+			WHERE field.code_field IN (N'bonus_team_step_2', N'bonus_team_step_3');
+		END
 		
 		---- If Step 2 is the trigger, nothing to set
 		IF @id_field = @id_field_bonus_team_step_2 --YS 20250821
