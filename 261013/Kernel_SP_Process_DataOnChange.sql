@@ -2930,18 +2930,6 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 		--SELECT @bonus_team_final = ISNULL(dbo._fn_get_bonus_team(@idCompGroup ,@step_1_name,@step_2_name), @preassigned_bonus) ----YS 20250826
 		SELECT @bonus_team_final = ISNULL(dbo._fn_get_bonus_team(@idCompGroup ,@step_1_name,@step_2_name,@step_3_name), @preassigned_bonus) ----TK 20261008
 
-		-- 20261013: Change involvement status only when the final Bonus Team is Other.
-		IF @bonus_team_final = N'Other'
-		BEGIN
-		INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
-		SELECT @idStep,
-			CONCAT(@PlanId, '_', i.id_ind, '_', f.id_field), '', 1, '', 1, N'REVIEW REQUIRED'
-		FROM dbo.k_m_indicators AS i
-		CROSS JOIN dbo.k_m_fields AS f
-		WHERE i.comment_ind = N'bonus_approval'
-		  AND f.code_field = N'bonus_approval_involvement_status';
-		END
-
 		INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)	
 		SELECT 
 			@idStep AS PrimaryKey, 
