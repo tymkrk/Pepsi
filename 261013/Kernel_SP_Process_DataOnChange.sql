@@ -2903,28 +2903,7 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 		END
 
 		
-		---- Clear dependent selections when Step 1 changes to Other.
-		IF @id_field = @id_field_bonus_team_step_1
-		   AND EXISTS
-		   (
-			   SELECT 1
-			   FROM dbo.PEPSICO_Bonus_Team_Business AS business
-			   WHERE business.BTBusinessCode = @inputValue
-			     AND LTRIM(RTRIM(business.BTBusinessValue)) = N'Other'
-		   )
-		BEGIN
-			SET @step_1 = @inputValue;
-			SET @step_2 = NULL;
-			SET @step_3 = NULL;
-
-			INSERT INTO #tempTable
-				(PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
-			SELECT @idStep,
-				CONCAT(@PlanId, '_', @id_ind_bonus_team, '_', field.id_field),
-				'', 1, '', 0, NULL
-			FROM dbo.k_m_fields AS field
-			WHERE field.code_field IN (N'bonus_team_step_2', N'bonus_team_step_3');
-		END
+		---- If Step 1 is the trigger, nothing to set
 		
 		---- If Step 2 is the trigger, nothing to set
 		IF @id_field = @id_field_bonus_team_step_2 --YS 20250821
@@ -2951,20 +2930,17 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 		--SELECT @bonus_team_final = ISNULL(dbo._fn_get_bonus_team(@idCompGroup ,@step_1_name,@step_2_name), @preassigned_bonus) ----YS 20250826
 		SELECT @bonus_team_final = ISNULL(dbo._fn_get_bonus_team(@idCompGroup ,@step_1_name,@step_2_name,@step_3_name), @preassigned_bonus) ----TK 20261008
 
-		-- 20261013: Other requires review; mirror PostSave when the selection is resolved.
-		DECLARE @review_status NVARCHAR(50) = CASE
-			WHEN @bonus_team_final = N'Other' THEN N'REVIEW REQUIRED'
-			WHEN @is_correct = N'CORRECT'
-			  OR (@is_correct = N'INCORRECT_TEAM' AND @step_1 IS NOT NULL) THEN N'APPROVED'
-			ELSE N'PENDING' END;
-
+		-- 20261013: Change involvement status only when the final Bonus Team is Other.
+		IF @bonus_team_final = N'Other'
+		BEGIN
 		INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)
 		SELECT @idStep,
-			CONCAT(@PlanId, '_', i.id_ind, '_', f.id_field), '', 1, '', 1, @review_status
+			CONCAT(@PlanId, '_', i.id_ind, '_', f.id_field), '', 1, '', 1, N'REVIEW REQUIRED'
 		FROM dbo.k_m_indicators AS i
 		CROSS JOIN dbo.k_m_fields AS f
 		WHERE i.comment_ind = N'bonus_approval'
 		  AND f.code_field = N'bonus_approval_involvement_status';
+		END
 
 		INSERT INTO #tempTable (PrimaryKey, ObjectFieldAlias, ObjectAttribute, IsValid, InvalidReason, AllowEdit, NewValue)	
 		SELECT 
