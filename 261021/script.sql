@@ -37,3 +37,23 @@ ORDER BY
     r.number_of_businesses,
     r.is_region,
     r.split_rule;
+
+----------
+
+SELECT
+    (
+        SELECT
+            m.sector_name,
+            m.org_unit_name,
+            m.bt_business_code AS source_business_code,
+            b.BTBusinessValue AS business_name,
+            m.is_region
+        FOR JSON PATH, INCLUDE_NULL_VALUES, WITHOUT_ARRAY_WRAPPER
+    ) AS business_mapping_json
+FROM dbo.PEPSICO_bonus_team_business_mapping AS m
+LEFT JOIN dbo.PEPSICO_Bonus_Team_Business AS b
+    ON b.BTBusinessCode = m.bt_business_code
+ORDER BY
+    m.sector_name,
+    m.org_unit_name,
+    m.bt_business_code;
