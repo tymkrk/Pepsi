@@ -3,18 +3,19 @@
   <BatchSequence>
     <Batch>
       <Statements>
-        <StmtSimple StatementCompId="1" StatementEstRows="1" StatementId="1" QueryCompilationReplay="1" StatementOptmLevel="FULL" StatementOptmEarlyAbortReason="TimeOut" CardinalityEstimationModelVersion="160" StatementSubTreeCost="958.443" StatementText="select * from vPEPSICO_send_mail_notification_bonus" StatementType="SELECT" QueryHash="0x2B8EB05355E45531" QueryPlanHash="0xE2E706E198B493DA" RetrievedFromCache="true" StatementSqlHandle="0x0900BF2CB32711A71F694E10E6F777209A490000000000000000000000000000000000000000000000000000" DatabaseContextSettingsId="8" ParentObjectId="0" StatementParameterizationType="0" SecurityPolicyApplied="false" BatchModeOnRowStoreUsed="true">
+        <StmtSimple StatementCompId="1" StatementEstRows="1" StatementId="1" QueryCompilationReplay="1" StatementOptmLevel="FULL" StatementOptmEarlyAbortReason="TimeOut" CardinalityEstimationModelVersion="160" StatementSubTreeCost="950.295" StatementText="select * from vPEPSICO_send_mail_notification_bonus" StatementType="SELECT" QueryHash="0x2B8EB05355E45531" QueryPlanHash="0x1E29F392D6B80920" RetrievedFromCache="true" StatementSqlHandle="0x0900BF2CB32711A71F694E10E6F777209A490000000000000000000000000000000000000000000000000000" DatabaseContextSettingsId="8" ParentObjectId="0" StatementParameterizationType="0" SecurityPolicyApplied="false" BatchModeOnRowStoreUsed="true">
           <StatementSetOptions ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" NUMERIC_ROUNDABORT="false" QUOTED_IDENTIFIER="true" />
-          <QueryPlan DegreeOfParallelism="0" NonParallelPlanReason="TSQLUserDefinedFunctionsNotParallelizable" MemoryGrant="2090808" CachedPlanSize="1544" CompileTime="5130" CompileCPU="4577" CompileMemory="77664">
+          <QueryPlan DegreeOfParallelism="0" NonParallelPlanReason="TSQLUserDefinedFunctionsNotParallelizable" MemoryGrant="2090808" CachedPlanSize="1536" CompileTime="4961" CompileCPU="4562" CompileMemory="77696">
             <Warnings>
               <PlanAffectingConvert ConvertIssue="Cardinality Estimate" Expression="CONVERT_IMPLICIT(int,STRING_SPLIT.[value],0)" />
               <PlanAffectingConvert ConvertIssue="Cardinality Estimate" Expression="CONVERT_IMPLICIT(int,STRING_SPLIT.[value],0)" />
               <PlanAffectingConvert ConvertIssue="Cardinality Estimate" Expression="CONVERT_IMPLICIT(int,[u].[id_external_user],0)" />
             </Warnings>
-            <MemoryGrantInfo SerialRequiredMemory="13536" SerialDesiredMemory="2090808" RequiredMemory="13536" DesiredMemory="2090808" RequestedMemory="2090808" GrantWaitTime="0" GrantedMemory="2090808" MaxUsedMemory="165720" MaxQueryMemory="16750896" LastRequestedMemory="2090808" IsMemoryGrantFeedbackAdjusted="Yes: Stable" />
-            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="544256" EstimatedPagesCached="680320" EstimatedAvailableDegreeOfParallelism="8" MaxCompileMemory="73712744" />
+            <MemoryGrantInfo SerialRequiredMemory="13536" SerialDesiredMemory="2090808" RequiredMemory="13536" DesiredMemory="2090808" RequestedMemory="2090808" GrantWaitTime="0" GrantedMemory="2090808" MaxUsedMemory="165720" MaxQueryMemory="16751200" LastRequestedMemory="0" IsMemoryGrantFeedbackAdjusted="No: First Execution" />
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="544256" EstimatedPagesCached="680320" EstimatedAvailableDegreeOfParallelism="8" MaxCompileMemory="71717864" />
             <OptimizerStatsUsage>
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[nci_wi_hm_NodelinkPublished_EEE77BB266B1AC930775A2597DB8ED3C]" ModificationCount="3777" SamplingPercent="8.54219" LastUpdate="2026-10-31T19:18:50.27" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[nc_MailQueue]" Statistics="[IX__nc_MailQueue__mailSubject_createDate]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-11-03T13:25:38.2" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_FocalPoint_EmpCurrentPayee]" Statistics="[PK_PEPSICO_FocalPoint_EmpCurrentPayee]" ModificationCount="0" SamplingPercent="2.76884" LastUpdate="2026-11-03T08:10:24.97" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_FocalPoint_EmpCurrentPayee]" Statistics="[nci_wi_PEPSICO_FocalPoint_EmpCurrentPayee_7EDAA04ED81147DA03A3E8098B0E3ACE]" ModificationCount="0" SamplingPercent="2.95632" LastUpdate="2026-11-03T08:34:48.67" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Parameters]" Statistics="[_WA_Sys_00000003_5E00C4E5]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-02-24T04:03:40.98" />
@@ -26,7 +27,7 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Statistics="[_WA_Sys_00000002_4F9D96F5]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-19T12:40:29.2" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[_WA_Sys_00000003_2610A626]" ModificationCount="3777" SamplingPercent="8.29029" LastUpdate="2026-10-31T19:18:49.52" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[_WA_Sys_00000006_2610A626]" ModificationCount="7600" SamplingPercent="8.54219" LastUpdate="2026-10-31T19:18:50.21" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_login_user]" ModificationCount="5271" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:35:06.75" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_login_user]" ModificationCount="5370" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:35:06.75" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[_WA_Sys_00000015_3E28F230]" ModificationCount="1647" SamplingPercent="18.7102" LastUpdate="2026-10-31T18:09:05.83" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_fields]" Statistics="[_WA_Sys_00000004_25DB9BFC]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-19T12:34:47.37" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_grids]" Statistics="[_WA_Sys_00000003_22751F6C]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:36:21.77" />
@@ -35,7 +36,7 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Parameters]" Statistics="[_WA_Sys_00000006_5E00C4E5]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-02-24T04:03:41.01" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[nc_MailQueue]" Statistics="[_WA_Sys_00000004_3E3D3572]" ModificationCount="64" SamplingPercent="19.4479" LastUpdate="2026-10-27T12:40:56.95" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_tables_views]" Statistics="[PK_k_referential_tables_views]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:35:36.94" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[nci_k_users_activesuer]" ModificationCount="691" SamplingPercent="36.825" LastUpdate="2026-11-03T08:00:47.48" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[nci_k_users_activesuer]" ModificationCount="790" SamplingPercent="36.825" LastUpdate="2026-11-03T08:00:47.48" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_grids]" Statistics="[PK_k_referential_grids_1]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-27T12:36:21.71" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[_WA_Sys_00000006_5EAA0504]" ModificationCount="325" SamplingPercent="1.867" LastUpdate="2026-11-03T09:14:38.47" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[nci_k_m_values_idfield]" ModificationCount="317" SamplingPercent="1.867" LastUpdate="2026-11-03T09:09:59.64" />
@@ -49,7 +50,7 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_send_mail_notification_setup]" Statistics="[_WA_Sys_00000009_32AEB491]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:40:01.55" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users_profiles]" Statistics="[_WA_Sys_00000003_7BE56230]" ModificationCount="287" SamplingPercent="100" LastUpdate="2026-10-27T12:46:01.48" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[_WA_Sys_00000008_3E28F230]" ModificationCount="1647" SamplingPercent="18.7102" LastUpdate="2026-10-31T18:09:05.88" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_firstname_user_lastname_user]" ModificationCount="5275" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:34:02.05" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_firstname_user_lastname_user]" ModificationCount="5374" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:34:02.05" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[_WA_Sys_0000001E_3E28F230]" ModificationCount="1647" SamplingPercent="19.0057" LastUpdate="2026-10-31T18:17:53.63" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[PK_k_m_values]" ModificationCount="175" SamplingPercent="1.70619" LastUpdate="2026-11-03T09:09:59.26" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[_WA_Sys_00000007_3E28F230]" ModificationCount="1732" SamplingPercent="18.7" LastUpdate="2026-10-31T18:09:04.37" />
@@ -68,7 +69,7 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[py_Payee]" Statistics="[IX_k_collaborateurs]" ModificationCount="1504" SamplingPercent="5.55862" LastUpdate="2026-10-27T12:44:05.12" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Statistics="[_WA_Sys_0000000B_607251E5]" ModificationCount="2006" SamplingPercent="10.9008" LastUpdate="2026-10-31T16:54:04.76" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Statistics="[NonClusteredIndex-PayeeStepIdPlan-WithDate]" ModificationCount="13077" SamplingPercent="13.4854" LastUpdate="2026-10-27T12:43:14.23" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000012_1C5231C2]" ModificationCount="2922" SamplingPercent="36.825" LastUpdate="2026-11-02T13:46:38.61" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000012_1C5231C2]" ModificationCount="3021" SamplingPercent="36.825" LastUpdate="2026-11-02T13:46:38.61" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[ix_hm_NodelinkPublished_idType]" ModificationCount="3777" SamplingPercent="7.32382" LastUpdate="2026-10-31T19:18:50.31" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[nci_wi_hm_NodelinkPublished_03CA99151611881E2731B285F6EB7914]" ModificationCount="3207" SamplingPercent="100" LastUpdate="2026-10-31T23:12:56.98" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_profiles]" Statistics="[_WA_Sys_00000002_7B4643B2]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-19T12:45:11.45" />
@@ -76,26 +77,25 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Statistics="[IX__PEPSICO_Process_BonusApproval__gpid_start_month_end_month]" ModificationCount="789" SamplingPercent="100" LastUpdate="2026-11-02T17:31:36.52" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[_WA_Sys_00000005_5EAA0504]" ModificationCount="454" SamplingPercent="1.867" LastUpdate="2026-11-03T09:14:36.89" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Statistics="[_WA_Sys_00000014_5C786F26]" ModificationCount="9757" SamplingPercent="16.3326" LastUpdate="2026-10-30T14:41:15.11" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[nc_MailQueue]" Statistics="[_WA_Sys_00000002_3E3D3572]" ModificationCount="60" SamplingPercent="19.4479" LastUpdate="2026-10-27T12:41:47.77" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users_profiles]" Statistics="[UC_k_users_profiles_id_user_id_profile]" ModificationCount="108" SamplingPercent="100" LastUpdate="2026-11-01T02:02:12.55" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_send_mail_notification_setup]" Statistics="[_WA_Sys_0000000A_32AEB491]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:40:01.55" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[IX_startdate_enddate]" ModificationCount="1732" SamplingPercent="18.7" LastUpdate="2026-10-31T18:09:04.63" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[nci_wi_hm_NodelinkPublished_5F8B028DA52242978B1328A7FE61B227]" ModificationCount="10878" SamplingPercent="100" LastUpdate="2026-10-31T23:12:57.34" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Statistics="[PK_k_m_plans_payees_steps]" ModificationCount="13077" SamplingPercent="14.5355" LastUpdate="2026-10-27T12:43:13.42" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[py_Payee]" Statistics="[_WA_Sys_00000003_6A50C1DA]" ModificationCount="1673" SamplingPercent="4.9963" LastUpdate="2026-10-27T12:44:05.52" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_idExternalSSO]" ModificationCount="5279" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:35:06.45" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[IX_k_users_idExternalSSO]" ModificationCount="5378" SamplingPercent="36.8482" LastUpdate="2026-11-01T19:35:06.45" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_grids]" Statistics="[_WA_Sys_00000004_22751F6C]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-27T12:36:21.81" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Statistics="[_WA_Sys_0000000F_3E28F230]" ModificationCount="1647" SamplingPercent="18.7102" LastUpdate="2026-10-31T18:17:52.74" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_grids]" Statistics="[IX__k_referential_grids__id_grid_parent]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:36:22.03" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[PK_k_users]" ModificationCount="81" SamplingPercent="36.1108" LastUpdate="2026-10-27T12:35:53.55" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[IX_hm_NodelinkPublished_idTree_idType_idParent]" ModificationCount="3207" SamplingPercent="100" LastUpdate="2026-10-31T23:12:55.69" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Statistics="[_WA_Sys_00000007_5C786F26]" ModificationCount="9776" SamplingPercent="16.4744" LastUpdate="2026-10-30T11:27:22.89" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000002_1C5231C2]" ModificationCount="5156" SamplingPercent="36.7157" LastUpdate="2026-11-01T20:20:51.98" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000002_1C5231C2]" ModificationCount="5255" SamplingPercent="36.7157" LastUpdate="2026-11-01T20:20:51.98" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[UQ_k_m_values]" ModificationCount="317" SamplingPercent="1.867" LastUpdate="2026-11-03T09:09:58.68" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[IX_hm_NodelinkPublished_idChild_idTree_idType]" ModificationCount="3207" SamplingPercent="100" LastUpdate="2026-10-31T23:12:55.39" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_values]" Statistics="[_WA_Sys_00000004_5EAA0504]" ModificationCount="317" SamplingPercent="1.70619" LastUpdate="2026-11-03T09:09:58.8" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[PEPSICO_send_mail_notification_setup]" Statistics="[_WA_Sys_00000003_32AEB491]" ModificationCount="1" SamplingPercent="100" LastUpdate="2026-10-27T12:40:01.53" />
-              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000004_1C5231C2]" ModificationCount="5275" SamplingPercent="40.4346" LastUpdate="2026-11-01T19:34:02.47" />
+              <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_users]" Statistics="[_WA_Sys_00000004_1C5231C2]" ModificationCount="5374" SamplingPercent="40.4346" LastUpdate="2026-11-01T19:34:02.47" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_referential_grid_folders]" Statistics="[_WA_Sys_00000003_53D770D6]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-27T12:42:34.37" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Statistics="[_WA_Sys_00000005_607251E5]" ModificationCount="2094" SamplingPercent="10.9008" LastUpdate="2026-10-31T16:54:04.19" />
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Statistics="[PK_hm_NodelinkPublished]" ModificationCount="2693" SamplingPercent="100" LastUpdate="2026-11-01T12:58:17.05" />
@@ -105,17 +105,16 @@
               <StatisticsInfo Database="[f7d84398-526a-43c6-ac71-ee4de648f15f]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Statistics="[IX_k_m_plans_payees_steps_id_assignment]" ModificationCount="13077" SamplingPercent="13.7363" LastUpdate="2026-10-27T12:43:14.15" />
             </OptimizerStatsUsage>
             <WaitStats>
-              <Wait WaitType="PAGEIOLATCH_SH" WaitTimeMs="12511" WaitCount="4209" />
-              <Wait WaitType="PREEMPTIVE_HTTP_REQUEST" WaitTimeMs="287" WaitCount="1364" />
-              <Wait WaitType="SOS_SCHEDULER_YIELD" WaitTimeMs="140" WaitCount="7485" />
-              <Wait WaitType="MEMORY_ALLOCATION_EXT" WaitTimeMs="136" WaitCount="99985" />
-              <Wait WaitType="RESERVED_MEMORY_ALLOCATION_EXT" WaitTimeMs="47" WaitCount="22509" />
-              <Wait WaitType="RESOURCE_GOVERNOR_IDLE" WaitTimeMs="43" WaitCount="6" />
-              <Wait WaitType="ASYNC_NETWORK_IO" WaitTimeMs="3" WaitCount="4" />
-              <Wait WaitType="PREEMPTIVE_VIRTUALALLOC" WaitTimeMs="2" WaitCount="420" />
+              <Wait WaitType="PAGEIOLATCH_SH" WaitTimeMs="24615" WaitCount="7691" />
+              <Wait WaitType="PREEMPTIVE_HTTP_REQUEST" WaitTimeMs="1243" WaitCount="6056" />
+              <Wait WaitType="MEMORY_ALLOCATION_EXT" WaitTimeMs="294" WaitCount="131509" />
+              <Wait WaitType="RESERVED_MEMORY_ALLOCATION_EXT" WaitTimeMs="41" WaitCount="22509" />
+              <Wait WaitType="PREEMPTIVE_VIRTUALALLOC" WaitTimeMs="36" WaitCount="13921" />
+              <Wait WaitType="SOS_SCHEDULER_YIELD" WaitTimeMs="25" WaitCount="827" />
+              <Wait WaitType="RESOURCE_GOVERNOR_IDLE" WaitTimeMs="9" WaitCount="1" />
             </WaitStats>
-            <QueryTimeStats CpuTime="36283" ElapsedTime="48384" />
-            <RelOp AvgRowSize="240" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Compute Scalar" NodeId="0" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="958.443">
+            <QueryTimeStats CpuTime="11915" ElapsedTime="35652" />
+            <RelOp AvgRowSize="240" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Compute Scalar" NodeId="0" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="950.295">
               <OutputList>
                 <ColumnReference Column="Union1356" />
                 <ColumnReference Column="Union1357" />
@@ -232,7 +231,7 @@
                     </ScalarOperator>
                   </DefinedValue>
                 </DefinedValues>
-                <RelOp AvgRowSize="178" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Window Aggregate" NodeId="1" Parallel="false" PhysicalOp="Window Aggregate" EstimatedTotalSubtreeCost="958.443">
+                <RelOp AvgRowSize="178" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Window Aggregate" NodeId="1" Parallel="false" PhysicalOp="Window Aggregate" EstimatedTotalSubtreeCost="950.295">
                   <OutputList>
                     <ColumnReference Column="Union1356" />
                     <ColumnReference Column="Union1357" />
@@ -252,7 +251,7 @@
                         </ScalarOperator>
                       </DefinedValue>
                     </DefinedValues>
-                    <RelOp AvgRowSize="174" EstimateCPU="0.000100174" EstimateIO="0.00375375" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Sort" NodeId="2" Parallel="false" PhysicalOp="Sort" EstimatedTotalSubtreeCost="958.443">
+                    <RelOp AvgRowSize="174" EstimateCPU="0.000100174" EstimateIO="0.00375375" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Sort" NodeId="2" Parallel="false" PhysicalOp="Sort" EstimatedTotalSubtreeCost="950.295">
                       <OutputList>
                         <ColumnReference Column="Union1355" />
                         <ColumnReference Column="Union1356" />
@@ -270,7 +269,7 @@
                             <ColumnReference Column="Union1355" />
                           </OrderByColumn>
                         </OrderBy>
-                        <RelOp AvgRowSize="174" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Compute Scalar" NodeId="3" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="958.44">
+                        <RelOp AvgRowSize="174" EstimateCPU="5E-08" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Batch" EstimateRows="1" LogicalOp="Compute Scalar" NodeId="3" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="950.291">
                           <OutputList>
                             <ColumnReference Column="Union1355" />
                             <ColumnReference Column="Union1356" />
@@ -290,7 +289,7 @@
                                 </ScalarOperator>
                               </DefinedValue>
                             </DefinedValues>
-                            <RelOp AvgRowSize="138" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Outer Join" NodeId="4" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="958.44">
+                            <RelOp AvgRowSize="138" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Outer Join" NodeId="4" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="950.291">
                               <OutputList>
                                 <ColumnReference Column="Union1355" />
                                 <ColumnReference Column="Union1356" />
@@ -298,10 +297,10 @@
                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users]" Alias="[u]" Column="mail_user" />
                               </OutputList>
                               <RunTimeInformation>
-                                <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="48377" ActualCPUms="36279" />
+                                <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35648" ActualCPUms="11911" />
                               </RunTimeInformation>
                               <NestedLoops Optimized="false">
-                                <RelOp AvgRowSize="138" EstimateCPU="4.8E-07" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Filter" NodeId="5" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="958.433">
+                                <RelOp AvgRowSize="138" EstimateCPU="4.8E-07" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Filter" NodeId="5" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="950.284">
                                   <OutputList>
                                     <ColumnReference Column="Union1355" />
                                     <ColumnReference Column="Union1356" />
@@ -309,10 +308,10 @@
                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users]" Alias="[u]" Column="mail_user" />
                                   </OutputList>
                                   <RunTimeInformation>
-                                    <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="48363" ActualCPUms="36265" />
+                                    <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35642" ActualCPUms="11906" />
                                   </RunTimeInformation>
                                   <Filter StartupExpression="false">
-                                    <RelOp AvgRowSize="142" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Outer Join" NodeId="6" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="958.433">
+                                    <RelOp AvgRowSize="142" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Outer Join" NodeId="6" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="950.284">
                                       <OutputList>
                                         <ColumnReference Column="Union1355" />
                                         <ColumnReference Column="Union1356" />
@@ -321,7 +320,7 @@
                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
                                       </OutputList>
                                       <RunTimeInformation>
-                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="48359" ActualCPUms="36262" />
+                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35641" ActualCPUms="11905" />
                                       </RunTimeInformation>
                                       <NestedLoops Optimized="false">
                                         <Predicate>
@@ -348,7 +347,7 @@
                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users]" Alias="[u]" Column="mail_user" />
                                           </OutputList>
                                           <RunTimeInformation>
-                                            <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="21462" ActualCPUms="9461" />
+                                            <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35628" ActualCPUms="11892" />
                                           </RunTimeInformation>
                                           <NestedLoops Optimized="false">
                                             <Predicate>
@@ -477,7 +476,7 @@
                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users_profiles]" Alias="[kup]" Column="id_profile" />
                                               </OutputList>
                                               <RunTimeInformation>
-                                                <RunTimeCountersPerThread Thread="0" ActualRows="1739" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="21460" ActualCPUms="9459" />
+                                                <RunTimeCountersPerThread Thread="0" ActualRows="1739" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35628" ActualCPUms="11891" />
                                               </RunTimeInformation>
                                               <NestedLoops Optimized="false">
                                                 <OuterReferences>
@@ -492,7 +491,7 @@
                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users]" Alias="[u]" Column="mail_user" />
                                                   </OutputList>
                                                   <RunTimeInformation>
-                                                    <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="20776" ActualCPUms="9409" ActualJoinType="Nested Loops" />
+                                                    <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35573" ActualCPUms="11873" ActualJoinType="Nested Loops" />
                                                   </RunTimeInformation>
                                                   <AdaptiveJoin BitmapCreator="true" Optimized="true">
                                                     <DefinedValues>
@@ -560,7 +559,7 @@
                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[py_Payee]" Alias="[pp]" Column="codePayee" />
                                                       </OutputList>
                                                       <RunTimeInformation>
-                                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="15360" ActualCPUms="9155" />
+                                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="30836" ActualCPUms="11590" />
                                                       </RunTimeInformation>
                                                       <NestedLoops Optimized="false">
                                                         <OuterReferences>
@@ -577,7 +576,7 @@
                                                           </OutputList>
                                                           <MemoryFractions Input="6.93217E-05" Output="0.967919" />
                                                           <RunTimeInformation>
-                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="15355" ActualCPUms="9149" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" InputMemoryGrant="1168" OutputMemoryGrant="2011648" UsedMemoryGrant="352" />
+                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1737" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="30831" ActualCPUms="11585" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" InputMemoryGrant="1168" OutputMemoryGrant="2011648" UsedMemoryGrant="352" />
                                                           </RunTimeInformation>
                                                           <Hash>
                                                             <DefinedValues />
@@ -610,7 +609,7 @@
                                                                 <ColumnReference Column="Union1357" />
                                                               </OutputList>
                                                               <RunTimeInformation>
-                                                                <RunTimeCountersPerThread Thread="0" ActualRows="1739" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="15179" ActualCPUms="9083" />
+                                                                <RunTimeCountersPerThread Thread="0" ActualRows="1739" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="30792" ActualCPUms="11546" />
                                                               </RunTimeInformation>
                                                               <StreamAggregate>
                                                                 <DefinedValues />
@@ -675,7 +674,7 @@
                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                           </OutputList>
                                                                           <RunTimeInformation>
-                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1636" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12145" ActualCPUms="7070" />
+                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1636" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="26780" ActualCPUms="9405" />
                                                                           </RunTimeInformation>
                                                                           <StreamAggregate>
                                                                             <DefinedValues />
@@ -691,7 +690,7 @@
                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                               </OutputList>
                                                                               <RunTimeInformation>
-                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15536" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12142" ActualCPUms="7067" />
+                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15536" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="26778" ActualCPUms="9403" />
                                                                               </RunTimeInformation>
                                                                               <StreamAggregate>
                                                                                 <DefinedValues />
@@ -711,7 +710,7 @@
                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                   </OutputList>
                                                                                   <RunTimeInformation>
-                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12131" ActualCPUms="7056" />
+                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="26766" ActualCPUms="9391" />
                                                                                   </RunTimeInformation>
                                                                                   <NestedLoops Optimized="false">
                                                                                     <Predicate>
@@ -842,7 +841,7 @@
                                                                                       </OutputList>
                                                                                       <MemoryFractions Input="0.46547" Output="0.46547" />
                                                                                       <RunTimeInformation>
-                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="26" ActualCPUms="25" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="24" ActualCPUms="24" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                       </RunTimeInformation>
                                                                                       <Sort Distinct="false">
                                                                                         <OrderBy>
@@ -873,7 +872,7 @@
                                                                                           </OutputList>
                                                                                           <MemoryFractions Input="0.000223649" Output="0.000223649" />
                                                                                           <RunTimeInformation>
-                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="8" ActualCPUms="8" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="11" ActualCPUms="10" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                           </RunTimeInformation>
                                                                                           <Hash BitmapCreator="true">
                                                                                             <DefinedValues>
@@ -913,7 +912,7 @@
                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_btac]" Column="id_step" />
                                                                                               </OutputList>
                                                                                               <RunTimeInformation>
-                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="893" ActualCPUms="893" />
+                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="29279" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12094" ActualCPUms="1772" />
                                                                                               </RunTimeInformation>
                                                                                               <Filter StartupExpression="false">
                                                                                                 <RelOp AvgRowSize="209" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Inner Join" NodeId="28" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="9.2559">
@@ -928,7 +927,7 @@
                                                                                                   </OutputList>
                                                                                                   <MemoryFractions Input="0" Output="0.000223649" />
                                                                                                   <RunTimeInformation>
-                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="875" ActualCPUms="875" InputMemoryGrant="0" OutputMemoryGrant="976" UsedMemoryGrant="720" />
+                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12049" ActualCPUms="1727" InputMemoryGrant="0" OutputMemoryGrant="976" UsedMemoryGrant="720" />
                                                                                                   </RunTimeInformation>
                                                                                                   <NestedLoops Optimized="true">
                                                                                                     <OuterReferences>
@@ -947,7 +946,7 @@
                                                                                                       </OutputList>
                                                                                                       <MemoryFractions Input="0" Output="0.000223649" />
                                                                                                       <RunTimeInformation>
-                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="789" ActualCPUms="789" InputMemoryGrant="0" OutputMemoryGrant="976" UsedMemoryGrant="720" />
+                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="889" ActualCPUms="885" InputMemoryGrant="0" OutputMemoryGrant="976" UsedMemoryGrant="720" />
                                                                                                       </RunTimeInformation>
                                                                                                       <NestedLoops Optimized="true">
                                                                                                         <OuterReferences>
@@ -966,7 +965,7 @@
                                                                                                             <ColumnReference Column="Expr1408" />
                                                                                                           </OutputList>
                                                                                                           <RunTimeInformation>
-                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="695" ActualCPUms="695" />
+                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="752" ActualCPUms="748" />
                                                                                                           </RunTimeInformation>
                                                                                                           <NestedLoops Optimized="false">
                                                                                                             <RelOp AvgRowSize="11" EstimateCPU="4.8E-07" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Assert" NodeId="34" Parallel="false" PhysicalOp="Assert" EstimatedTotalSubtreeCost="0.00867733">
@@ -1080,7 +1079,7 @@
                                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                                               </OutputList>
                                                                                                               <RunTimeInformation>
-                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="693" ActualCPUms="693" ActualJoinType="Hash Match" />
+                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="750" ActualCPUms="746" ActualJoinType="Hash Match" />
                                                                                                               </RunTimeInformation>
                                                                                                               <AdaptiveJoin BitmapCreator="true" Optimized="false">
                                                                                                                 <DefinedValues>
@@ -1138,7 +1137,7 @@
                                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                                                   </OutputList>
                                                                                                                   <RunTimeInformation>
-                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="573" ActualCPUms="573" />
+                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="34" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="583" ActualCPUms="582" />
                                                                                                                   </RunTimeInformation>
                                                                                                                   <NestedLoops Optimized="false">
                                                                                                                     <OuterReferences>
@@ -1155,7 +1154,7 @@
                                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                                                       </OutputList>
                                                                                                                       <RunTimeInformation>
-                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="521" ActualCPUms="521" />
+                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="530" ActualCPUms="530" />
                                                                                                                       </RunTimeInformation>
                                                                                                                       <NestedLoops Optimized="false">
                                                                                                                         <OuterReferences>
@@ -1171,7 +1170,7 @@
                                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                                                           </OutputList>
                                                                                                                           <RunTimeInformation>
-                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="19794" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="476" ActualCPUms="476" ActualJoinType="Hash Match" />
+                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="19794" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="485" ActualCPUms="485" ActualJoinType="Hash Match" />
                                                                                                                           </RunTimeInformation>
                                                                                                                           <AdaptiveJoin BitmapCreator="true" Optimized="false">
                                                                                                                             <DefinedValues>
@@ -1226,7 +1225,7 @@
                                                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="gpid" />
                                                                                                                               </OutputList>
                                                                                                                               <RunTimeInformation>
-                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15599" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="454" ActualCPUms="454" ActualJoinType="Hash Match" />
+                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15599" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="463" ActualCPUms="463" ActualJoinType="Hash Match" />
                                                                                                                               </RunTimeInformation>
                                                                                                                               <AdaptiveJoin Optimized="false">
                                                                                                                                 <DefinedValues>
@@ -1338,7 +1337,7 @@
                                                                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="start_date_histo" />
                                                                                                                                               </OutputList>
                                                                                                                                               <RunTimeInformation>
-                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="422" ActualCPUms="422" ActualJoinType="Hash Match" />
+                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="430" ActualCPUms="430" ActualJoinType="Hash Match" />
                                                                                                                                               </RunTimeInformation>
                                                                                                                                               <AdaptiveJoin Optimized="false">
                                                                                                                                                 <DefinedValues>
@@ -1459,7 +1458,7 @@
                                                                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_referential_grids]" Alias="[krg]" Column="id_grid_parent" />
                                                                                                                                                       </OutputList>
                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="414" ActualCPUms="414" />
+                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="421" ActualCPUms="421" />
                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                       <NestedLoops Optimized="false">
                                                                                                                                                         <OuterReferences>
@@ -1479,7 +1478,7 @@
                                                                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_referential_grids]" Alias="[krg]" Column="id_grid_parent" />
                                                                                                                                                           </OutputList>
                                                                                                                                                           <RunTimeInformation>
-                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="202" ActualCPUms="202" />
+                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="204" ActualCPUms="204" />
                                                                                                                                                           </RunTimeInformation>
                                                                                                                                                           <NestedLoops Optimized="false">
                                                                                                                                                             <OuterReferences>
@@ -1900,7 +1899,7 @@
                                                                                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_BonusApproval]" Alias="[pba]" Column="CompGroupName" />
                                                                                                                                                                       </OutputList>
                                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="82472" ActualRowsRead="126858" Batches="94" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="66" ActualCPUms="66" ActualScans="1" ActualLogicalReads="16585" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="82472" ActualRowsRead="126858" Batches="94" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="67" ActualCPUms="67" ActualScans="1" ActualLogicalReads="16585" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                                       <IndexScan Ordered="false" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                                                                         <DefinedValues>
@@ -1988,14 +1987,14 @@
                                                                                                                                                             <RelOp AvgRowSize="9" EstimateCPU="8.07107E-07" EstimateIO="0" EstimateRebinds="112.501" EstimateRewinds="17.7502" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="8.07107" LogicalOp="Concatenation" NodeId="68" Parallel="false" PhysicalOp="Concatenation" EstimatedTotalSubtreeCost="0.000207434">
                                                                                                                                                               <OutputList />
                                                                                                                                                               <RunTimeInformation>
-                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="66862" ActualExecutions="82472" ActualExecutionMode="Row" ActualElapsedms="81" ActualCPUms="81" />
+                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="66862" ActualExecutions="82472" ActualExecutionMode="Row" ActualElapsedms="82" ActualCPUms="82" />
                                                                                                                                                               </RunTimeInformation>
                                                                                                                                                               <Concat>
                                                                                                                                                                 <DefinedValues />
                                                                                                                                                                 <RelOp AvgRowSize="9" EstimateCPU="4.8E-07" EstimateIO="0" EstimateRebinds="112.501" EstimateRewinds="17.7502" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Filter" NodeId="69" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="0.000194409">
                                                                                                                                                                   <OutputList />
                                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="82472" ActualRewinds="0" ActualRows="0" Batches="0" ActualEndOfScans="82472" ActualExecutions="82472" ActualExecutionMode="Row" ActualElapsedms="10" ActualCPUms="10" />
+                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="82472" ActualRewinds="0" ActualRows="0" Batches="0" ActualEndOfScans="82472" ActualExecutions="82472" ActualExecutionMode="Row" ActualElapsedms="11" ActualCPUms="11" />
                                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                                   <Filter StartupExpression="true">
                                                                                                                                                                     <RelOp AvgRowSize="9" EstimateCPU="1.157E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="130.252" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Constant Scan" NodeId="70" Parallel="false" PhysicalOp="Constant Scan" EstimatedTotalSubtreeCost="0.000131409">
@@ -2100,7 +2099,7 @@
                                                                                                                                                         <RelOp AvgRowSize="9" EstimateCPU="8.07107E-07" EstimateIO="0" EstimateRebinds="127.673" EstimateRewinds="2.57886" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="8.07107" LogicalOp="Concatenation" NodeId="74" Parallel="false" PhysicalOp="Concatenation" EstimatedTotalSubtreeCost="0.000207434">
                                                                                                                                                           <OutputList />
                                                                                                                                                           <RunTimeInformation>
-                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="201" ActualCPUms="201" />
+                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="206" ActualCPUms="206" />
                                                                                                                                                           </RunTimeInformation>
                                                                                                                                                           <Concat>
                                                                                                                                                             <DefinedValues />
@@ -2136,7 +2135,7 @@
                                                                                                                                                             <RelOp AvgRowSize="9" EstimateCPU="2.4E-05" EstimateIO="0" EstimateRebinds="127.673" EstimateRewinds="2.57886" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="7.07107" LogicalOp="Filter" NodeId="77" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="0.00137373">
                                                                                                                                                               <OutputList />
                                                                                                                                                               <RunTimeInformation>
-                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="194" ActualCPUms="194" />
+                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="15610" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="199" ActualCPUms="199" />
                                                                                                                                                               </RunTimeInformation>
                                                                                                                                                               <Filter StartupExpression="false">
                                                                                                                                                                 <RelOp AvgRowSize="2011" EstimateCPU="5.0157E-05" EstimateIO="0" EstimateRebinds="127.673" EstimateRewinds="2.57886" EstimatedExecutionMode="Row" EstimateRows="7.07107" EstimateRowsWithoutRowGoal="50" LogicalOp="Table-valued function" NodeId="78" Parallel="false" PhysicalOp="Table-valued function" EstimatedTotalSubtreeCost="0.000928246">
@@ -2145,7 +2144,7 @@
                                                                                                                                                                   </OutputList>
                                                                                                                                                                   <MemoryFractions Input="0" Output="0" />
                                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="15610" ActualRewinds="0" ActualRows="912747" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="124" ActualCPUms="124" />
+                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="15610" ActualRewinds="0" ActualRows="912747" Batches="0" ActualEndOfScans="0" ActualExecutions="15610" ActualExecutionMode="Row" ActualElapsedms="126" ActualCPUms="126" />
                                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                                   <TableValuedFunction>
                                                                                                                                                                     <DefinedValues>
@@ -2446,7 +2445,7 @@
                                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_plans_payees_steps]" Alias="[pps]" Column="id_payee" />
                                                                                                                           </OutputList>
                                                                                                                           <RunTimeInformation>
-                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="19794" ActualExecutions="19794" ActualExecutionMode="Row" ActualElapsedms="39" ActualCPUms="39" ActualScans="19794" ActualLogicalReads="59626" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="19794" ActualExecutions="19794" ActualExecutionMode="Row" ActualElapsedms="40" ActualCPUms="40" ActualScans="19794" ActualLogicalReads="59626" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                           </RunTimeInformation>
                                                                                                                           <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                             <DefinedValues>
@@ -2543,7 +2542,7 @@
                                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[py_Payee]" Alias="[py]" Column="idPayee" />
                                                                                                                   </OutputList>
                                                                                                                   <RunTimeInformation>
-                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="15588" ActualRowsRead="1044757" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="103" ActualCPUms="103" ActualScans="1" ActualLogicalReads="9119" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="15588" ActualRowsRead="1044757" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="148" ActualCPUms="144" ActualScans="1" ActualLogicalReads="9119" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                   </RunTimeInformation>
                                                                                                                   <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                     <DefinedValues>
@@ -2638,7 +2637,7 @@
                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_btac]" Column="id_step" />
                                                                                                           </OutputList>
                                                                                                           <RunTimeInformation>
-                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="29432" ActualExecutions="29432" ActualExecutionMode="Row" ActualElapsedms="57" ActualCPUms="57" ActualScans="29432" ActualLogicalReads="88613" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="29432" ActualExecutions="29432" ActualExecutionMode="Row" ActualElapsedms="85" ActualCPUms="85" ActualScans="29432" ActualLogicalReads="88613" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                           </RunTimeInformation>
                                                                                                           <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                             <DefinedValues>
@@ -2683,7 +2682,7 @@
                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_btac]" Column="input_value" />
                                                                                                       </OutputList>
                                                                                                       <RunTimeInformation>
-                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="0" ActualExecutions="29432" ActualExecutionMode="Row" ActualElapsedms="51" ActualCPUms="51" ActualScans="0" ActualLogicalReads="117728" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="29432" ActualRowsRead="29432" Batches="0" ActualEndOfScans="0" ActualExecutions="29432" ActualExecutionMode="Row" ActualElapsedms="11096" ActualCPUms="778" ActualScans="0" ActualLogicalReads="117728" ActualPhysicalReads="2427" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                       </RunTimeInformation>
                                                                                                       <IndexScan Lookup="true" Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                         <DefinedValues>
@@ -2736,7 +2735,7 @@
                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_bais]" Column="id_step" />
                                                                                               </OutputList>
                                                                                               <RunTimeInformation>
-                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="19706" Batches="23" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="11199" ActualCPUms="6124" />
+                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="19706" Batches="23" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="14632" ActualCPUms="7579" />
                                                                                               </RunTimeInformation>
                                                                                               <Filter StartupExpression="false">
                                                                                                 <RelOp AvgRowSize="4043" EstimateCPU="8.14911" EstimateIO="124.61" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="7408140" EstimatedRowsRead="7408140" LogicalOp="Clustered Index Scan" NodeId="104" Parallel="false" PhysicalOp="Clustered Index Scan" EstimatedTotalSubtreeCost="132.759" TableCardinality="7408140">
@@ -2746,7 +2745,7 @@
                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_bais]" Column="input_value" />
                                                                                                   </OutputList>
                                                                                                   <RunTimeInformation>
-                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="7408136" ActualRowsRead="7408136" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="9299" ActualCPUms="4224" ActualScans="1" ActualLogicalReads="170712" ActualPhysicalReads="0" ActualReadAheads="30701" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="7408136" ActualRowsRead="7408136" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="12604" ActualCPUms="5552" ActualScans="1" ActualLogicalReads="170712" ActualPhysicalReads="0" ActualReadAheads="99431" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                   </RunTimeInformation>
                                                                                                   <IndexScan Ordered="false" ForcedIndex="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                     <DefinedValues>
@@ -2830,7 +2829,7 @@
                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="gpid" />
                                                                           </OutputList>
                                                                           <RunTimeInformation>
-                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1396" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3033" ActualCPUms="2011" />
+                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="1396" Batches="2" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="4010" ActualCPUms="2139" />
                                                                           </RunTimeInformation>
                                                                           <StreamAggregate>
                                                                             <DefinedValues />
@@ -3190,7 +3189,7 @@
                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_ci]" Column="input_value_int" />
                                                                                               </OutputList>
                                                                                               <RunTimeInformation>
-                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3022" ActualCPUms="2000" />
+                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3999" ActualCPUms="2128" />
                                                                                               </RunTimeInformation>
                                                                                               <NestedLoops Optimized="false">
                                                                                                 <OuterReferences>
@@ -3211,7 +3210,7 @@
                                                                                                   </OutputList>
                                                                                                   <MemoryFractions Input="0.0581956" Output="0.0581956" />
                                                                                                   <RunTimeInformation>
-                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="2" ActualCPUms="2" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="1" ActualCPUms="1" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                   </RunTimeInformation>
                                                                                                   <Sort Distinct="false">
                                                                                                     <OrderBy>
@@ -3234,7 +3233,7 @@
                                                                                                       </OutputList>
                                                                                                       <MemoryFractions Input="0.00797199" Output="0.00797199" />
                                                                                                       <RunTimeInformation>
-                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="2" ActualCPUms="2" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="1" ActualCPUms="1" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                       </RunTimeInformation>
                                                                                                       <Hash>
                                                                                                         <DefinedValues />
@@ -3266,7 +3265,7 @@
                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_merit]" Column="input_value_numeric" />
                                                                                                           </OutputList>
                                                                                                           <RunTimeInformation>
-                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8376" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="2" ActualCPUms="2" />
+                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8376" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="1" ActualCPUms="1" />
                                                                                                           </RunTimeInformation>
                                                                                                           <NestedLoops Optimized="false">
                                                                                                             <OuterReferences>
@@ -3426,7 +3425,7 @@
                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="gpid" />
                                                                                                           </OutputList>
                                                                                                           <RunTimeInformation>
-                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="2800" ActualCPUms="1778" />
+                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3779" ActualCPUms="1908" />
                                                                                                           </RunTimeInformation>
                                                                                                           <NestedLoops Optimized="false" WithUnorderedPrefetch="true">
                                                                                                             <OuterReferences>
@@ -3552,7 +3551,7 @@
                                                                                                                           </OutputList>
                                                                                                                           <MemoryFractions Input="0.0824928" Output="0.0824928" />
                                                                                                                           <RunTimeInformation>
-                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="12" ActualCPUms="12" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="11" ActualCPUms="11" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                           </RunTimeInformation>
                                                                                                                           <Hash BitmapCreator="true">
                                                                                                                             <DefinedValues>
@@ -3625,7 +3624,7 @@
                                                                                                                               </OutputList>
                                                                                                                               <MemoryFractions Input="0.0637297" Output="0.0637297" />
                                                                                                                               <RunTimeInformation>
-                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="12" ActualCPUms="12" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="18" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="10" ActualCPUms="10" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                               </RunTimeInformation>
                                                                                                                               <Hash BitmapCreator="true">
                                                                                                                                 <DefinedValues>
@@ -3661,7 +3660,7 @@
                                                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[hm_NodelinkPublished]" Alias="[n]" Column="idParent" />
                                                                                                                                   </OutputList>
                                                                                                                                   <RunTimeInformation>
-                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="105297" ActualRowsRead="105374" Batches="119" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="224" ActualCPUms="49" ActualScans="1" ActualLogicalReads="2902" ActualPhysicalReads="1" ActualReadAheads="1171" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="105297" ActualRowsRead="105374" Batches="119" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="22" ActualCPUms="22" ActualScans="1" ActualLogicalReads="2902" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                   </RunTimeInformation>
                                                                                                                                   <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                                     <DefinedValues>
@@ -3745,7 +3744,7 @@
                                                                                                                                           </OutputList>
                                                                                                                                           <MemoryFractions Input="0.0493609" Output="0.0493609" />
                                                                                                                                           <RunTimeInformation>
-                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="7" ActualCPUms="7" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="6" ActualCPUms="6" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                           </RunTimeInformation>
                                                                                                                                           <Sort Distinct="false">
                                                                                                                                             <OrderBy>
@@ -3764,7 +3763,7 @@
                                                                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="gpid" />
                                                                                                                                               </OutputList>
                                                                                                                                               <RunTimeInformation>
-                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="1881" ActualCPUms="1591" />
+                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="10" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3574" ActualCPUms="1768" />
                                                                                                                                               </RunTimeInformation>
                                                                                                                                               <NestedLoops Optimized="false">
                                                                                                                                                 <OuterReferences>
@@ -3781,7 +3780,7 @@
                                                                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="LevelCode" />
                                                                                                                                                   </OutputList>
                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="1703" ActualCPUms="1413" />
+                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3382" ActualCPUms="1576" />
                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                   <NestedLoops Optimized="false">
                                                                                                                                                     <OuterReferences>
@@ -3801,7 +3800,7 @@
                                                                                                                                                       </OutputList>
                                                                                                                                                       <MemoryFractions Input="0" Output="0.352955" />
                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="105120" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="1547" ActualCPUms="1257" InputMemoryGrant="0" OutputMemoryGrant="733688" UsedMemoryGrant="75792" />
+                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="105120" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="3218" ActualCPUms="1412" InputMemoryGrant="0" OutputMemoryGrant="733688" UsedMemoryGrant="75792" />
                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                       <NestedLoops Optimized="true" WithUnorderedPrefetch="true">
                                                                                                                                                         <OuterReferences>
@@ -3848,7 +3847,7 @@
                                                                                                                                                               </OutputList>
                                                                                                                                                               <MemoryFractions Input="0" Output="0.351962" />
                                                                                                                                                               <RunTimeInformation>
-                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="588" ActualCPUms="584" InputMemoryGrant="0" OutputMemoryGrant="731632" UsedMemoryGrant="75792" />
+                                                                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="603" ActualCPUms="574" InputMemoryGrant="0" OutputMemoryGrant="731632" UsedMemoryGrant="75792" />
                                                                                                                                                               </RunTimeInformation>
                                                                                                                                                               <NestedLoops Optimized="true" WithUnorderedPrefetch="true">
                                                                                                                                                                 <OuterReferences>
@@ -3866,7 +3865,7 @@
                                                                                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="LevelCode" />
                                                                                                                                                                   </OutputList>
                                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="35" ActualCPUms="35" />
+                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="37" ActualCPUms="37" />
                                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                                   <NestedLoops Optimized="false">
                                                                                                                                                                     <RelOp AvgRowSize="4526" EstimateCPU="0.0001713" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="13" LogicalOp="Table Scan" NodeId="147" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0032963" TableCardinality="13">
@@ -3966,7 +3965,7 @@
                                                                                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="LevelCode" />
                                                                                                                                                                       </OutputList>
                                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="115770" ActualRowsRead="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="26" ActualCPUms="26" ActualScans="1" ActualLogicalReads="3770" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="115770" ActualRowsRead="115770" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="27" ActualCPUms="27" ActualScans="1" ActualLogicalReads="3770" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                                       <IndexScan Ordered="false" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                                                                         <DefinedValues>
@@ -3990,7 +3989,7 @@
                                                                                                                                                                     <ColumnReference Column="Bmk1334" />
                                                                                                                                                                   </OutputList>
                                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="115770" ActualRowsRead="115770" Batches="0" ActualEndOfScans="0" ActualExecutions="115770" ActualExecutionMode="Row" ActualElapsedms="139" ActualCPUms="139" ActualScans="0" ActualLogicalReads="332822" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="115770" ActualRowsRead="115770" Batches="0" ActualEndOfScans="0" ActualExecutions="115770" ActualExecutionMode="Row" ActualElapsedms="135" ActualCPUms="135" ActualScans="0" ActualLogicalReads="332822" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                                   <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                                                                     <DefinedValues>
@@ -4028,7 +4027,7 @@
                                                                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_FocalPoint_EmpCurrentPayee]" Alias="[emp]" Column="idCompGroup" />
                                                                                                                                                           </OutputList>
                                                                                                                                                           <RunTimeInformation>
-                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="105120" ActualRowsRead="115770" Batches="0" ActualEndOfScans="10650" ActualExecutions="115770" ActualExecutionMode="Row" ActualElapsedms="212" ActualCPUms="212" ActualScans="0" ActualLogicalReads="115770" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="105120" ActualRowsRead="115770" Batches="0" ActualEndOfScans="10650" ActualExecutions="115770" ActualExecutionMode="Row" ActualElapsedms="242" ActualCPUms="242" ActualScans="0" ActualLogicalReads="115770" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                                                           </RunTimeInformation>
                                                                                                                                                           <IndexScan Lookup="true" Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                                                             <DefinedValues>
@@ -4116,7 +4115,7 @@
                                                                                                                                                     <RelOp AvgRowSize="9" EstimateCPU="8.07107E-07" EstimateIO="0" EstimateRebinds="99880.8" EstimateRewinds="14267.7" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="8.07107" LogicalOp="Concatenation" NodeId="152" Parallel="false" PhysicalOp="Concatenation" EstimatedTotalSubtreeCost="0.180356">
                                                                                                                                                       <OutputList />
                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="113" ActualCPUms="113" />
+                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="117" ActualCPUms="117" />
                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                       <Concat>
                                                                                                                                                         <DefinedValues />
@@ -4152,7 +4151,7 @@
                                                                                                                                                         <RelOp AvgRowSize="9" EstimateCPU="2.4E-05" EstimateIO="0" EstimateRebinds="99880.8" EstimateRewinds="14267.7" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="7.07107" LogicalOp="Filter" NodeId="155" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="1.27531">
                                                                                                                                                           <OutputList />
                                                                                                                                                           <RunTimeInformation>
-                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="63" ActualCPUms="63" />
+                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="67" ActualCPUms="67" />
                                                                                                                                                           </RunTimeInformation>
                                                                                                                                                           <Filter StartupExpression="false">
                                                                                                                                                             <RelOp AvgRowSize="11" EstimateCPU="5E-06" EstimateIO="0" EstimateRebinds="99880.8" EstimateRewinds="14267.7" EstimatedExecutionMode="Row" EstimateRows="7.07107" EstimateRowsWithoutRowGoal="50" LogicalOp="Compute Scalar" NodeId="156" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.887874">
@@ -4180,7 +4179,7 @@
                                                                                                                                                                   </OutputList>
                                                                                                                                                                   <MemoryFractions Input="0" Output="0" />
                                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="105120" ActualRewinds="0" ActualRows="105120" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="37" ActualCPUms="37" />
+                                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="105120" ActualRewinds="0" ActualRows="105120" Batches="0" ActualEndOfScans="97050" ActualExecutions="105120" ActualExecutionMode="Row" ActualElapsedms="39" ActualCPUms="39" />
                                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                                   <TableValuedFunction>
                                                                                                                                                                     <DefinedValues>
@@ -4228,7 +4227,7 @@
                                                                                                                                                 <RelOp AvgRowSize="9" EstimateCPU="8.07107E-07" EstimateIO="0" EstimateRebinds="112073" EstimateRewinds="2075.5" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="8.07107" LogicalOp="Concatenation" NodeId="158" Parallel="false" PhysicalOp="Concatenation" EstimatedTotalSubtreeCost="0.180356">
                                                                                                                                                   <OutputList />
                                                                                                                                                   <RunTimeInformation>
-                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="170" ActualCPUms="170" />
+                                                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="183" ActualCPUms="183" />
                                                                                                                                                   </RunTimeInformation>
                                                                                                                                                   <Concat>
                                                                                                                                                     <DefinedValues />
@@ -4264,7 +4263,7 @@
                                                                                                                                                     <RelOp AvgRowSize="9" EstimateCPU="2.4E-05" EstimateIO="0" EstimateRebinds="112073" EstimateRewinds="2075.5" EstimatedExecutionMode="Row" EstimateRows="1" EstimateRowsWithoutRowGoal="7.07107" LogicalOp="Filter" NodeId="161" Parallel="false" PhysicalOp="Filter" EstimatedTotalSubtreeCost="1.19459">
                                                                                                                                                       <OutputList />
                                                                                                                                                       <RunTimeInformation>
-                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="166" ActualCPUms="166" />
+                                                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8070" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="179" ActualCPUms="179" />
                                                                                                                                                       </RunTimeInformation>
                                                                                                                                                       <Filter StartupExpression="false">
                                                                                                                                                         <RelOp AvgRowSize="2011" EstimateCPU="5.0157E-05" EstimateIO="0" EstimateRebinds="112073" EstimateRewinds="2075.5" EstimatedExecutionMode="Row" EstimateRows="7.07107" EstimateRowsWithoutRowGoal="50" LogicalOp="Table-valued function" NodeId="162" Parallel="false" PhysicalOp="Table-valued function" EstimatedTotalSubtreeCost="0.807159">
@@ -4273,7 +4272,7 @@
                                                                                                                                                           </OutputList>
                                                                                                                                                           <MemoryFractions Input="0" Output="0" />
                                                                                                                                                           <RunTimeInformation>
-                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRebinds="8070" ActualRewinds="0" ActualRows="740974" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="103" ActualCPUms="103" />
+                                                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRebinds="8070" ActualRewinds="0" ActualRows="740974" Batches="0" ActualEndOfScans="0" ActualExecutions="8070" ActualExecutionMode="Row" ActualElapsedms="113" ActualCPUms="113" />
                                                                                                                                                           </RunTimeInformation>
                                                                                                                                                           <TableValuedFunction>
                                                                                                                                                             <DefinedValues>
@@ -4368,7 +4367,7 @@
                                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[PEPSICO_Process_FocalPoint]" Alias="[pfp]" Column="is_merit_eligible" />
                                                                                                                           </OutputList>
                                                                                                                           <RunTimeInformation>
-                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="115770" Batches="19" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="596" ActualCPUms="48" ActualScans="1" ActualLogicalReads="3795" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="115770" Batches="19" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="27" ActualCPUms="27" ActualScans="1" ActualLogicalReads="3795" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                           </RunTimeInformation>
                                                                                                                           <IndexScan Ordered="false" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                             <DefinedValues>
@@ -4477,7 +4476,7 @@
                                                                                                             <RelOp AvgRowSize="61" EstimateCPU="0.0001581" EstimateIO="0.003125" EstimateRebinds="33420.7" EstimateRewinds="18.2859" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="1" LogicalOp="Clustered Index Seek" NodeId="165" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="7.38167" TableCardinality="1614300">
                                                                                                               <OutputList />
                                                                                                               <RunTimeInformation>
-                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="8038" Batches="0" ActualEndOfScans="0" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="17" ActualCPUms="17" ActualScans="0" ActualLogicalReads="23092" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="8038" Batches="0" ActualEndOfScans="0" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="19" ActualCPUms="19" ActualScans="0" ActualLogicalReads="23092" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                               </RunTimeInformation>
                                                                                                               <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                 <DefinedValues />
@@ -4527,7 +4526,7 @@
                                                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_ci]" Column="input_value_int" />
                                                                                                   </OutputList>
                                                                                                   <RunTimeInformation>
-                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="8038" ActualRewinds="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="204" ActualCPUms="204" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRebinds="8038" ActualRewinds="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="203" ActualCPUms="203" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                   </RunTimeInformation>
                                                                                                   <Spool>
                                                                                                     <RelOp AvgRowSize="11" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="87.3978" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Inner Join" NodeId="167" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.412797">
@@ -4536,7 +4535,7 @@
                                                                                                       </OutputList>
                                                                                                       <MemoryFractions Input="0" Output="1.54048E-05" />
                                                                                                       <RunTimeInformation>
-                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="198" ActualCPUms="198" InputMemoryGrant="0" OutputMemoryGrant="544" UsedMemoryGrant="0" />
+                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="196" ActualCPUms="196" InputMemoryGrant="0" OutputMemoryGrant="544" UsedMemoryGrant="0" />
                                                                                                       </RunTimeInformation>
                                                                                                       <NestedLoops Optimized="true">
                                                                                                         <OuterReferences>
@@ -4547,7 +4546,7 @@
                                                                                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_ci]" Column="id_value" />
                                                                                                           </OutputList>
                                                                                                           <RunTimeInformation>
-                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="195" ActualCPUms="195" />
+                                                                                                            <RunTimeCountersPerThread Thread="0" ActualRows="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="193" ActualCPUms="193" />
                                                                                                           </RunTimeInformation>
                                                                                                           <NestedLoops Optimized="false">
                                                                                                             <OuterReferences>
@@ -4558,7 +4557,7 @@
                                                                                                                 <ColumnReference Column="Expr1414" />
                                                                                                               </OutputList>
                                                                                                               <RunTimeInformation>
-                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="179" ActualCPUms="179" />
+                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="177" ActualCPUms="177" />
                                                                                                               </RunTimeInformation>
                                                                                                               <Assert StartupExpression="false">
                                                                                                                 <RelOp AvgRowSize="19" EstimateCPU="1.1E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="87.3978" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Aggregate" NodeId="171" Parallel="false" PhysicalOp="Stream Aggregate" EstimatedTotalSubtreeCost="0.0338614">
@@ -4567,7 +4566,7 @@
                                                                                                                     <ColumnReference Column="Expr1414" />
                                                                                                                   </OutputList>
                                                                                                                   <RunTimeInformation>
-                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="176" ActualCPUms="176" />
+                                                                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="8038" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="174" ActualCPUms="174" />
                                                                                                                   </RunTimeInformation>
                                                                                                                   <StreamAggregate>
                                                                                                                     <DefinedValues>
@@ -4595,7 +4594,7 @@
                                                                                                                         <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_fields]" Column="id_field" />
                                                                                                                       </OutputList>
                                                                                                                       <RunTimeInformation>
-                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="1061016" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="172" ActualCPUms="172" ActualScans="8038" ActualLogicalReads="80380" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                        <RunTimeCountersPerThread Thread="0" ActualRows="8038" ActualRowsRead="1061016" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="171" ActualCPUms="171" ActualScans="8038" ActualLogicalReads="80380" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                                       </RunTimeInformation>
                                                                                                                       <IndexScan Ordered="false" ForcedIndex="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                         <DefinedValues>
@@ -4659,7 +4658,7 @@
                                                                                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_m_values]" Alias="[kmv_ci]" Column="id_value" />
                                                                                                               </OutputList>
                                                                                                               <RunTimeInformation>
-                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="2" ActualRowsRead="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="14" ActualCPUms="14" ActualScans="8038" ActualLogicalReads="24114" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                                                                <RunTimeCountersPerThread Thread="0" ActualRows="2" ActualRowsRead="2" Batches="0" ActualEndOfScans="8038" ActualExecutions="8038" ActualExecutionMode="Row" ActualElapsedms="13" ActualCPUms="13" ActualScans="8038" ActualLogicalReads="24114" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                                                               </RunTimeInformation>
                                                                                                               <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                                                                 <DefinedValues>
@@ -4898,7 +4897,7 @@
                                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users]" Alias="[u]" Column="mail_user" />
                                                                   </OutputList>
                                                                   <RunTimeInformation>
-                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="24780" ActualRowsRead="65702" Batches="28" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="170" ActualCPUms="61" ActualScans="1" ActualLogicalReads="3723" ActualPhysicalReads="0" ActualReadAheads="1769" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                                    <RunTimeCountersPerThread Thread="0" ActualRows="24780" ActualRowsRead="65702" Batches="28" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Batch" ActualElapsedms="34" ActualCPUms="34" ActualScans="1" ActualLogicalReads="3723" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                                   </RunTimeInformation>
                                                                   <IndexScan Ordered="false" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                                     <DefinedValues>
@@ -5030,7 +5029,7 @@
                                                     <RelOp AvgRowSize="9" EstimateCPU="0.0001581" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="1" LogicalOp="Index Seek" NodeId="184" Parallel="false" PhysicalOp="Index Seek" EstimatedTotalSubtreeCost="0.0032831" TableCardinality="1044370">
                                                       <OutputList />
                                                       <RunTimeInformation>
-                                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" ActualRowsRead="1737" Batches="0" ActualEndOfScans="0" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="5398" ActualCPUms="237" ActualScans="0" ActualLogicalReads="5211" ActualPhysicalReads="551" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                        <RunTimeCountersPerThread Thread="0" ActualRows="1737" ActualRowsRead="1737" Batches="0" ActualEndOfScans="0" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="4728" ActualCPUms="274" ActualScans="0" ActualLogicalReads="5211" ActualPhysicalReads="996" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                       </RunTimeInformation>
                                                       <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                         <DefinedValues />
@@ -5062,7 +5061,7 @@
                                                     <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[k_users_profiles]" Alias="[kup]" Column="id_profile" />
                                                   </OutputList>
                                                   <RunTimeInformation>
-                                                    <RunTimeCountersPerThread Thread="0" ActualRows="1739" ActualRowsRead="1739" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="681" ActualCPUms="47" ActualScans="1737" ActualLogicalReads="3492" ActualPhysicalReads="74" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                                    <RunTimeCountersPerThread Thread="0" ActualRows="1739" ActualRowsRead="1739" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="53" ActualCPUms="16" ActualScans="1737" ActualLogicalReads="3492" ActualPhysicalReads="8" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
                                                   </RunTimeInformation>
                                                   <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
                                                     <DefinedValues>
@@ -5095,71 +5094,111 @@
                                             </RelOp>
                                           </NestedLoops>
                                         </RelOp>
-                                        <RelOp AvgRowSize="234" EstimateCPU="0.0747832" EstimateIO="8.0209" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="67842" LogicalOp="Clustered Index Scan" NodeId="186" Parallel="false" PhysicalOp="Clustered Index Scan" EstimatedTotalSubtreeCost="8.09569" TableCardinality="67842">
+                                        <RelOp AvgRowSize="96" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Inner Join" NodeId="186" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.00657038">
                                           <OutputList>
                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
                                             <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="sentTo" />
                                           </OutputList>
                                           <RunTimeInformation>
-                                            <RunTimeCountersPerThread Thread="0" ActualRows="0" ActualRowsRead="117841554" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="26894" ActualCPUms="26798" ActualScans="1" ActualLogicalReads="18841239" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                            <RunTimeCountersPerThread Thread="0" ActualRows="0" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="11" ActualCPUms="11" />
                                           </RunTimeInformation>
-                                          <IndexScan Ordered="false" ForcedIndex="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
-                                            <DefinedValues>
-                                              <DefinedValue>
+                                          <NestedLoops Optimized="false">
+                                            <OuterReferences>
+                                              <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
+                                            </OuterReferences>
+                                            <RelOp AvgRowSize="11" EstimateCPU="0.0001581" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="1" LogicalOp="Index Seek" NodeId="187" Parallel="false" PhysicalOp="Index Seek" EstimatedTotalSubtreeCost="0.0032831" TableCardinality="67842">
+                                              <OutputList>
                                                 <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
-                                              </DefinedValue>
-                                              <DefinedValue>
-                                                <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="sentTo" />
-                                              </DefinedValue>
-                                            </DefinedValues>
-                                            <Object Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Index="[PK_nc_MailQueue]" Alias="[mq]" IndexKind="Clustered" Storage="RowStore" />
-                                            <Predicate>
-                                              <ScalarOperator ScalarString="[peptest].[dbo].[nc_MailQueue].[createDate] as [mq].[createDate]&gt;dateadd(hour,(-12),getdate()) AND [peptest].[dbo].[nc_MailQueue].[mailSubject] as [mq].[mailSubject]=N'ACTION REQUIRED: Complete Your Year-End Actions and Bonus Validation'">
-                                                <Logical Operation="AND">
-                                                  <ScalarOperator>
-                                                    <Compare CompareOp="GT">
-                                                      <ScalarOperator>
-                                                        <Identifier>
-                                                          <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="createDate" />
-                                                        </Identifier>
-                                                      </ScalarOperator>
-                                                      <ScalarOperator>
-                                                        <Identifier>
-                                                          <ColumnReference Column="ConstExpr1404">
-                                                            <ScalarOperator>
-                                                              <Intrinsic FunctionName="dateadd">
-                                                                <ScalarOperator>
-                                                                  <Const ConstValue="(6)" />
-                                                                </ScalarOperator>
-                                                                <ScalarOperator>
-                                                                  <Const ConstValue="(-12)" />
-                                                                </ScalarOperator>
-                                                                <ScalarOperator>
-                                                                  <Intrinsic FunctionName="getdate" />
-                                                                </ScalarOperator>
-                                                              </Intrinsic>
-                                                            </ScalarOperator>
-                                                          </ColumnReference>
-                                                        </Identifier>
-                                                      </ScalarOperator>
-                                                    </Compare>
-                                                  </ScalarOperator>
-                                                  <ScalarOperator>
-                                                    <Compare CompareOp="EQ">
-                                                      <ScalarOperator>
-                                                        <Identifier>
+                                              </OutputList>
+                                              <RunTimeInformation>
+                                                <RunTimeCountersPerThread Thread="0" ActualRows="0" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="10" ActualCPUms="10" ActualScans="1737" ActualLogicalReads="6948" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                              </RunTimeInformation>
+                                              <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                                                <DefinedValues>
+                                                  <DefinedValue>
+                                                    <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
+                                                  </DefinedValue>
+                                                </DefinedValues>
+                                                <Object Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Index="[IX__nc_MailQueue__mailSubject_createDate]" Alias="[mq]" IndexKind="NonClustered" Storage="RowStore" />
+                                                <SeekPredicates>
+                                                  <SeekPredicateNew>
+                                                    <SeekKeys>
+                                                      <Prefix ScanType="EQ">
+                                                        <RangeColumns>
                                                           <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="mailSubject" />
-                                                        </Identifier>
-                                                      </ScalarOperator>
-                                                      <ScalarOperator>
-                                                        <Const ConstValue="N'ACTION REQUIRED: Complete Your Year-End Actions and Bonus Validation'" />
-                                                      </ScalarOperator>
-                                                    </Compare>
-                                                  </ScalarOperator>
-                                                </Logical>
-                                              </ScalarOperator>
-                                            </Predicate>
-                                          </IndexScan>
+                                                        </RangeColumns>
+                                                        <RangeExpressions>
+                                                          <ScalarOperator ScalarString="N'ACTION REQUIRED: Complete Your Year-End Actions and Bonus Validation'">
+                                                            <Const ConstValue="N'ACTION REQUIRED: Complete Your Year-End Actions and Bonus Validation'" />
+                                                          </ScalarOperator>
+                                                        </RangeExpressions>
+                                                      </Prefix>
+                                                      <StartRange ScanType="GT">
+                                                        <RangeColumns>
+                                                          <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="createDate" />
+                                                        </RangeColumns>
+                                                        <RangeExpressions>
+                                                          <ScalarOperator ScalarString="dateadd(hour,(-12),getdate())">
+                                                            <Identifier>
+                                                              <ColumnReference Column="ConstExpr1404">
+                                                                <ScalarOperator>
+                                                                  <Intrinsic FunctionName="dateadd">
+                                                                    <ScalarOperator>
+                                                                      <Const ConstValue="(6)" />
+                                                                    </ScalarOperator>
+                                                                    <ScalarOperator>
+                                                                      <Const ConstValue="(-12)" />
+                                                                    </ScalarOperator>
+                                                                    <ScalarOperator>
+                                                                      <Intrinsic FunctionName="getdate" />
+                                                                    </ScalarOperator>
+                                                                  </Intrinsic>
+                                                                </ScalarOperator>
+                                                              </ColumnReference>
+                                                            </Identifier>
+                                                          </ScalarOperator>
+                                                        </RangeExpressions>
+                                                      </StartRange>
+                                                    </SeekKeys>
+                                                  </SeekPredicateNew>
+                                                </SeekPredicates>
+                                              </IndexScan>
+                                            </RelOp>
+                                            <RelOp AvgRowSize="4035" EstimateCPU="0.0001581" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Clustered Index Seek" NodeId="189" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="0.0032831" TableCardinality="67842">
+                                              <OutputList>
+                                                <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="sentTo" />
+                                              </OutputList>
+                                              <RunTimeInformation>
+                                                <RunTimeCountersPerThread Thread="0" ActualRows="0" Batches="0" ActualEndOfScans="0" ActualExecutions="0" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                              </RunTimeInformation>
+                                              <IndexScan Lookup="true" Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                                                <DefinedValues>
+                                                  <DefinedValue>
+                                                    <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="sentTo" />
+                                                  </DefinedValue>
+                                                </DefinedValues>
+                                                <Object Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Index="[PK_nc_MailQueue]" Alias="[mq]" TableReferenceId="-1" IndexKind="Clustered" Storage="RowStore" />
+                                                <SeekPredicates>
+                                                  <SeekPredicateNew>
+                                                    <SeekKeys>
+                                                      <Prefix ScanType="EQ">
+                                                        <RangeColumns>
+                                                          <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
+                                                        </RangeColumns>
+                                                        <RangeExpressions>
+                                                          <ScalarOperator ScalarString="[peptest].[dbo].[nc_MailQueue].[id] as [mq].[id]">
+                                                            <Identifier>
+                                                              <ColumnReference Database="[peptest]" Schema="[dbo]" Table="[nc_MailQueue]" Alias="[mq]" Column="id" />
+                                                            </Identifier>
+                                                          </ScalarOperator>
+                                                        </RangeExpressions>
+                                                      </Prefix>
+                                                    </SeekKeys>
+                                                  </SeekPredicateNew>
+                                                </SeekPredicates>
+                                              </IndexScan>
+                                            </RelOp>
+                                          </NestedLoops>
                                         </RelOp>
                                       </NestedLoops>
                                     </RelOp>
@@ -5179,19 +5218,19 @@
                                     </Predicate>
                                   </Filter>
                                 </RelOp>
-                                <RelOp AvgRowSize="9" EstimateCPU="0.0001001" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Lazy Spool" NodeId="187" Parallel="false" PhysicalOp="Row Count Spool" EstimatedTotalSubtreeCost="0.00672168">
+                                <RelOp AvgRowSize="9" EstimateCPU="0.0001001" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Lazy Spool" NodeId="190" Parallel="false" PhysicalOp="Row Count Spool" EstimatedTotalSubtreeCost="0.00672168">
                                   <OutputList />
                                   <RunTimeInformation>
                                     <RunTimeCountersPerThread Thread="0" ActualRebinds="1" ActualRewinds="1736" ActualRows="1737" Batches="0" ActualEndOfScans="1737" ActualExecutions="1737" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" />
                                   </RunTimeInformation>
                                   <RowCountSpool>
-                                    <RelOp AvgRowSize="9" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Semi Join" NodeId="188" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.00662158">
+                                    <RelOp AvgRowSize="9" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Semi Join" NodeId="191" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.00662158">
                                       <OutputList />
                                       <RunTimeInformation>
                                         <RunTimeCountersPerThread Thread="0" ActualRows="1" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" />
                                       </RunTimeInformation>
                                       <NestedLoops Optimized="false">
-                                        <RelOp AvgRowSize="44" EstimateCPU="0.0001735" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="15" LogicalOp="Table Scan" NodeId="189" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0032985" TableCardinality="15">
+                                        <RelOp AvgRowSize="44" EstimateCPU="0.0001735" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="15" LogicalOp="Table Scan" NodeId="192" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0032985" TableCardinality="15">
                                           <OutputList />
                                           <RunTimeInformation>
                                             <RunTimeCountersPerThread Thread="0" ActualRows="1" ActualRowsRead="15" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="1" ActualLogicalReads="1" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
@@ -5215,7 +5254,7 @@
                                             </Predicate>
                                           </TableScan>
                                         </RelOp>
-                                        <RelOp AvgRowSize="65" EstimateCPU="0.0001735" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="15" LogicalOp="Table Scan" NodeId="190" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0032985" TableCardinality="15">
+                                        <RelOp AvgRowSize="65" EstimateCPU="0.0001735" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="15" LogicalOp="Table Scan" NodeId="193" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0032985" TableCardinality="15">
                                           <OutputList />
                                           <RunTimeInformation>
                                             <RunTimeCountersPerThread Thread="0" ActualRows="1" ActualRowsRead="8" Batches="0" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="1" ActualLogicalReads="1" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
