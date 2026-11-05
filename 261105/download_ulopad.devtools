@@ -1,0 +1,3188 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 34127
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "I",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937772
+                },
+                {
+                  "functionName": "E",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 45484
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 59116
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "handleSave",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 332860
+                },
+                {
+                  "functionName": "onSave",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 63255
+                },
+                {
+                  "functionName": "De",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 16758
+                },
+                {
+                  "functionName": "Be",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 16912
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 36755
+                },
+                {
+                  "functionName": "Ir",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 36849
+                },
+                {
+                  "functionName": "Ur",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 37262
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 42677
+                },
+                {
+                  "functionName": "cs",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 105787
+                },
+                {
+                  "functionName": "Te",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 15891
+                },
+                {
+                  "functionName": "Wr",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 38545
+                },
+                {
+                  "functionName": "qn",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 22972
+                },
+                {
+                  "functionName": "$n",
+                  "scriptId": "2516",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 22756
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Data/CheckLineItemDataGridValidation?idGrid=446&idTableView=2694",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Data/CheckLineItemDataGridValidation?idGrid=446&idTableView=2694"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "content-length",
+              "value": "688"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "idGrid",
+              "value": "446"
+            },
+            {
+              "name": "idTableView",
+              "value": "2694"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 688,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"dataGridChangeRecordsJson\":\"%5B%7B%22PrimaryKeyValue%22:-2101144279,%22ChangeType%22:2,%22ColumnValuePairs%22:%5B%7B%22ColumnName%22:%22GPID%22,%22ColumnValue%22:%2281250865%22%7D,%7B%22ColumnName%22:%22isNew%22,%22ColumnValue%22:true%7D,%7B%22ColumnName%22:%22StartDate%22,%22ColumnValue%22:%222026-02-01%22%7D,%7B%22ColumnName%22:%22EndDate%22,%22ColumnValue%22:%222026-03-31%22%7D,%7B%22ColumnName%22:%22idCompGroup%22,%22ColumnValue%22:%2253%22%7D,%7B%22ColumnName%22:%22idBonusTeam%22,%22ColumnValue%22:%225567%22%7D,%7B%22ColumnName%22:%22Comments%22,%22ColumnValue%22:%22test123%22%7D,%7B%22ColumnName%22:%22CompGroupBonusTeamMismatchFlag%22,%22ColumnValue%22:false%7D%5D%7D%5D\"}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:15 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115815Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000074ge"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 4,
+            "mimeType": "text/plain",
+            "text": "null"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 129,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:15.085Z",
+        "time": 306.3720000209287,
+        "timings": {
+          "blocked": 119.59500001810491,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.22399999999999998,
+          "wait": 183.46700002039225,
+          "receive": 3.085999982431531,
+          "_blocked_queueing": 119.31500001810491,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "preflight",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Data/CheckLineItemDataGridValidation?idGrid=446&idTableView=2694",
+          "requestId": "37824.14188"
+        },
+        "_priority": "High",
+        "_resourceType": "preflight",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "OPTIONS",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Data/CheckLineItemDataGridValidation?idGrid=446&idTableView=2694",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "OPTIONS"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Data/CheckLineItemDataGridValidation?idGrid=446&idTableView=2694"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "access-control-request-headers",
+              "value": "authorization,cache-control,content-type,expires,pragma"
+            },
+            {
+              "name": "access-control-request-method",
+              "value": "POST"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "idGrid",
+              "value": "446"
+            },
+            {
+              "name": "idTableView",
+              "value": "2694"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 204,
+          "statusText": "No Content",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-headers",
+              "value": "authorization,cache-control,content-type,expires,pragma"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "POST"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-max-age",
+              "value": "86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=86400"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:15 GMT"
+            },
+            {
+              "name": "pragma",
+              "value": "public"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115815Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000074f2"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:15.086Z",
+        "time": 118.38999997944012,
+        "timings": {
+          "blocked": -0.791,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.151,
+          "wait": 117.63300002167001,
+          "receive": 0.6059999577701092,
+          "_blocked_queueing": -1,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 34127
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "I",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937772
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 54400
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 54570
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "dispatch",
+                  "scriptId": "2524",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5812
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 59325
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "2532",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 102435
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 577034
+                  },
+                  {
+                    "functionName": "handleSave",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 332860
+                  },
+                  {
+                    "functionName": "onSave",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 63255
+                  },
+                  {
+                    "functionName": "De",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 16758
+                  },
+                  {
+                    "functionName": "Be",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 16912
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 36755
+                  },
+                  {
+                    "functionName": "Ir",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 36849
+                  },
+                  {
+                    "functionName": "Ur",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 37262
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 42677
+                  },
+                  {
+                    "functionName": "cs",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 105787
+                  },
+                  {
+                    "functionName": "Te",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 15891
+                  },
+                  {
+                    "functionName": "Wr",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 38545
+                  },
+                  {
+                    "functionName": "qn",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 22972
+                  },
+                  {
+                    "functionName": "$n",
+                    "scriptId": "2516",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 22756
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/CheckAndAddServiceMethodCall?itemId=446&serviceId=4&serviceMethodId=195",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Kernel/CheckAndAddServiceMethodCall?itemId=446&serviceId=4&serviceMethodId=195"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "content-length",
+              "value": "0"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "itemId",
+              "value": "446"
+            },
+            {
+              "name": "serviceId",
+              "value": "4"
+            },
+            {
+              "name": "serviceMethodId",
+              "value": "195"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:16 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115815Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000074pr"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 6,
+            "mimeType": "text/plain",
+            "text": "413766"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 151,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:15.787Z",
+        "time": 306.490000046324,
+        "timings": {
+          "blocked": 102.31200001232699,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.15500000000000003,
+          "wait": 203.6380000128001,
+          "receive": 0.3850000211969018,
+          "_blocked_queueing": 102.06100001232699,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "preflight",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/CheckAndAddServiceMethodCall?itemId=446&serviceId=4&serviceMethodId=195",
+          "requestId": "37824.14189"
+        },
+        "_priority": "High",
+        "_resourceType": "preflight",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "OPTIONS",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/CheckAndAddServiceMethodCall?itemId=446&serviceId=4&serviceMethodId=195",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "OPTIONS"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Kernel/CheckAndAddServiceMethodCall?itemId=446&serviceId=4&serviceMethodId=195"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "access-control-request-headers",
+              "value": "authorization,cache-control,expires,pragma"
+            },
+            {
+              "name": "access-control-request-method",
+              "value": "POST"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "itemId",
+              "value": "446"
+            },
+            {
+              "name": "serviceId",
+              "value": "4"
+            },
+            {
+              "name": "serviceMethodId",
+              "value": "195"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 204,
+          "statusText": "No Content",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-headers",
+              "value": "authorization,cache-control,expires,pragma"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "POST"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-max-age",
+              "value": "86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=86400"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:15 GMT"
+            },
+            {
+              "name": "pragma",
+              "value": "public"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115815Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000074nu"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:15.788Z",
+        "time": 101.24499999634922,
+        "timings": {
+          "blocked": -0.79,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.144,
+          "wait": 100.62200001608953,
+          "receive": 0.4789999802596867,
+          "_blocked_queueing": -1,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 34127
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "I",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937772
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 54720
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 54986
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "2532",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 102435
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 577034
+                  },
+                  {
+                    "functionName": "dispatch",
+                    "scriptId": "2524",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 5812
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 59325
+                  }
+                ],
+                "parent": {
+                  "description": "await",
+                  "callFrames": [
+                    {
+                      "functionName": "",
+                      "scriptId": "2532",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 102435
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 577034
+                    },
+                    {
+                      "functionName": "handleSave",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 332860
+                    },
+                    {
+                      "functionName": "onSave",
+                      "scriptId": "2562",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 63255
+                    },
+                    {
+                      "functionName": "De",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 16758
+                    },
+                    {
+                      "functionName": "Be",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 16912
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 36755
+                    },
+                    {
+                      "functionName": "Ir",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 36849
+                    },
+                    {
+                      "functionName": "Ur",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 37262
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 42677
+                    },
+                    {
+                      "functionName": "cs",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 105787
+                    },
+                    {
+                      "functionName": "Te",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 15891
+                    },
+                    {
+                      "functionName": "Wr",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 38545
+                    },
+                    {
+                      "functionName": "qn",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 22972
+                    },
+                    {
+                      "functionName": "$n",
+                      "scriptId": "2516",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 22756
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Data/ApplyGridRecordChanges",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Data/ApplyGridRecordChanges"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "content-length",
+              "value": "764"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 764,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"idGrid\":\"446\",\"jsonChangeRecords\":\"%5B%7B%22PrimaryKeyValue%22:-2101144279,%22ChangeType%22:2,%22ColumnValuePairs%22:%5B%7B%22ColumnName%22:%22GPID%22,%22ColumnValue%22:%2281250865%22%7D,%7B%22ColumnName%22:%22isNew%22,%22ColumnValue%22:true%7D,%7B%22ColumnName%22:%22StartDate%22,%22ColumnValue%22:%222026-02-01%22%7D,%7B%22ColumnName%22:%22EndDate%22,%22ColumnValue%22:%222026-03-31%22%7D,%7B%22ColumnName%22:%22idCompGroup%22,%22ColumnValue%22:%2253%22%7D,%7B%22ColumnName%22:%22idBonusTeam%22,%22ColumnValue%22:%225567%22%7D,%7B%22ColumnName%22:%22Comments%22,%22ColumnValue%22:%22test123%22%7D,%7B%22ColumnName%22:%22CompGroupBonusTeamMismatchFlag%22,%22ColumnValue%22:false%7D%5D%7D%5D\",\"isStaging\":false,\"idParentGrid\":0,\"selectedRowId\":0,\"CallId\":413766}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "accept-ranges",
+              "value": "bytes"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-length",
+              "value": "0"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:16 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115816Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000074ve"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "text/plain",
+            "text": ""
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 77,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:16.446Z",
+        "time": 150.1949999947101,
+        "timings": {
+          "blocked": 0.8730000295192003,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.19999999999999998,
+          "wait": 148.81299999882654,
+          "receive": 0.3089999663643539,
+          "_blocked_queueing": 0.6460000295192003,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33976
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "u",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937356
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 55219
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 55382
+                }
+              ],
+              "parent": {
+                "description": "setInterval",
+                "callFrames": [
+                  {
+                    "functionName": "K.data",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 55149
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2532",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 102435
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 577034
+                  },
+                  {
+                    "functionName": "dispatch",
+                    "scriptId": "2524",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 5812
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 55116
+                  }
+                ],
+                "parent": {
+                  "description": "await",
+                  "callFrames": [
+                    {
+                      "functionName": "",
+                      "scriptId": "2532",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 102435
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 577034
+                    },
+                    {
+                      "functionName": "dispatch",
+                      "scriptId": "2524",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 5812
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2562",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 59325
+                    }
+                  ],
+                  "parent": {
+                    "description": "await",
+                    "callFrames": [
+                      {
+                        "functionName": "",
+                        "scriptId": "2532",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 102435
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2533",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 577034
+                      },
+                      {
+                        "functionName": "handleSave",
+                        "scriptId": "2533",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 332860
+                      },
+                      {
+                        "functionName": "onSave",
+                        "scriptId": "2562",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 63255
+                      },
+                      {
+                        "functionName": "De",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 16758
+                      },
+                      {
+                        "functionName": "Be",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 16912
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 36755
+                      },
+                      {
+                        "functionName": "Ir",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 36849
+                      },
+                      {
+                        "functionName": "Ur",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 37262
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 42677
+                      },
+                      {
+                        "functionName": "cs",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 105787
+                      },
+                      {
+                        "functionName": "Te",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 15891
+                      },
+                      {
+                        "functionName": "Wr",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 38545
+                      },
+                      {
+                        "functionName": "qn",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 22972
+                      },
+                      {
+                        "functionName": "$n",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 22756
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/GetServiceMethodCallResponse?callId=413766",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Kernel/GetServiceMethodCallResponse?callId=413766"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "callId",
+              "value": "413766"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:17 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115817Z-1749df4f94fh4nrghC1AMSczbn0000000vng000000007588"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 209,
+            "mimeType": "text/plain",
+            "text": "{\"AddedCount\":1,\"DataValidationResult\":[],\"DeletedCount\":0,\"GridRecordErrorList\":[],\"GridRecordSuccessAddList\":[{\"NewPrimaryKeyId\":107551,\"TempPrimaryKeyId\":\"ADD_-2101144279\"}],\"TotalCount\":1,\"UpdatedCount\":0}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 250,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:17.546Z",
+        "time": 304.4530000188388,
+        "timings": {
+          "blocked": 109.96899996938556,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.14800000000000002,
+          "wait": 193.9170000021942,
+          "receive": 0.4190000472590327,
+          "_blocked_queueing": 109.47799996938556,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "preflight",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/GetServiceMethodCallResponse?callId=413766",
+          "requestId": "37824.14191"
+        },
+        "_priority": "High",
+        "_resourceType": "preflight",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "OPTIONS",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Kernel/GetServiceMethodCallResponse?callId=413766",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "OPTIONS"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Kernel/GetServiceMethodCallResponse?callId=413766"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "*/*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "access-control-request-headers",
+              "value": "authorization,cache-control,expires,pragma"
+            },
+            {
+              "name": "access-control-request-method",
+              "value": "GET"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "callId",
+              "value": "413766"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 204,
+          "statusText": "No Content",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-headers",
+              "value": "authorization,cache-control,expires,pragma"
+            },
+            {
+              "name": "access-control-allow-methods",
+              "value": "GET"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-max-age",
+              "value": "86400"
+            },
+            {
+              "name": "cache-control",
+              "value": "public, max-age=86400"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:17 GMT"
+            },
+            {
+              "name": "pragma",
+              "value": "public"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115817Z-1749df4f94fh4nrghC1AMSczbn0000000vng00000000756u"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 0,
+            "mimeType": "x-unknown"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 0,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:17.548Z",
+        "time": 108.58399997962638,
+        "timings": {
+          "blocked": -0.785,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.6900000000000001,
+          "wait": 107.4710000183247,
+          "receive": 0.4229999613016844,
+          "_blocked_queueing": -1,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 34127
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "I",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937772
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 48657
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 49179
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "dispatch",
+                  "scriptId": "2524",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5812
+                },
+                {
+                  "functionName": "n.gridId",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 53494
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "dispatch",
+                  "scriptId": "2524",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5812
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 53122
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "dispatch",
+                  "scriptId": "2524",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5812
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 55476
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2562",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 55418
+                }
+              ],
+              "parent": {
+                "description": "setInterval",
+                "callFrames": [
+                  {
+                    "functionName": "K.data",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 55149
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2532",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                    "lineNumber": 1,
+                    "columnNumber": 102435
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 577034
+                  },
+                  {
+                    "functionName": "dispatch",
+                    "scriptId": "2524",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 5812
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "2562",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 55116
+                  }
+                ],
+                "parent": {
+                  "description": "await",
+                  "callFrames": [
+                    {
+                      "functionName": "",
+                      "scriptId": "2532",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 102435
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 577034
+                    },
+                    {
+                      "functionName": "dispatch",
+                      "scriptId": "2524",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 5812
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2562",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 59325
+                    }
+                  ],
+                  "parent": {
+                    "description": "await",
+                    "callFrames": [
+                      {
+                        "functionName": "",
+                        "scriptId": "2532",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 102435
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2533",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 577034
+                      },
+                      {
+                        "functionName": "handleSave",
+                        "scriptId": "2533",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 332860
+                      },
+                      {
+                        "functionName": "onSave",
+                        "scriptId": "2562",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/197.733f8eb3fd2fabdb8d04.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 63255
+                      },
+                      {
+                        "functionName": "De",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 16758
+                      },
+                      {
+                        "functionName": "Be",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 16912
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 36755
+                      },
+                      {
+                        "functionName": "Ir",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 36849
+                      },
+                      {
+                        "functionName": "Ur",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 37262
+                      },
+                      {
+                        "functionName": "",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 42677
+                      },
+                      {
+                        "functionName": "cs",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 105787
+                      },
+                      {
+                        "functionName": "Te",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 15891
+                      },
+                      {
+                        "functionName": "Wr",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 38545
+                      },
+                      {
+                        "functionName": "qn",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 22972
+                      },
+                      {
+                        "functionName": "$n",
+                        "scriptId": "2516",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.react-dom.405449a3fa77d6afcbd1.bundle.js",
+                        "lineNumber": 1,
+                        "columnNumber": 22756
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/Data/GetDatabaseTablesValueWithPaging",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "POST"
+            },
+            {
+              "name": ":path",
+              "value": "/api/Data/GetDatabaseTablesValueWithPaging"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "content-length",
+              "value": "202"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 202,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"gridId\":\"446\",\"parentGridId\":\"0\",\"parentSelectedRowId\":\"\",\"isPreview\":false,\"isStaging\":false,\"pageNum\":1,\"pageSize\":50,\"queryFilter\":{\"Block\":{\"FilterGroup\":[],\"LogicalOperator\":1},\"Operation\":null}}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:18 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115818Z-1749df4f94fh4nrghC1AMSczbn0000000vng0000000075fz"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 49032,
+            "mimeType": "application/json",
+            "text": "{\"totalRows\":242,\"records\":[{\"idOvrdBonusTeam\":\"107229\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202604\",\"EndDate_id\":\"2026-04-30\",\"GPID\":\"40116588\",\"idBonusTeam\":\"2026 - Pakistan BU (AMESA PLP)\",\"idBonusTeam_id\":\"3232\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/21/2026 1:54:18 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"10/21/2026 1:08:52 PM\",\"UpdateUser\":\"gabriel.wisniewski@beqom.com\",\"token\":\"N2mMoLMAtwiVrWW9EyssIkqybPzAmk/SExwhYiSeDXjHPhDQ33f11AyD2MWXi3bZCp2VrF/QgAk874Nf9DszEXE+Kzc3cfboj4BVS9WdOMFbyfzNH1olTszB1A4kyY4dCm4PdwIakSU4TpQCvyRLdjDhk4n98SCt+gO7SGv9VokXBeVWl+EPNqnOjEjwBAkYp4lU3EiHLc9QFPjwSFy3jXhl37UwgbMlpD8qYiac33eCePd/6wVW0xdvC8gQjJbs7uy64I+uiJ5TKIDBFTvSYA2sCCgQMW80XDMxTkz36cG2988UHO6NDbQo5V/SQqMa+HfHzNUdZ5Uq+mLQtYqmsE+bvyR7Bp1umBnVrV0V1WXfCK0+22Sys6kL3OlqkdEw\",\"InsertTime_iso\":\"2026-09-21T13:54:18.26\",\"UpdateTime_iso\":\"2026-10-21T13:08:52.153\"},{\"idOvrdBonusTeam\":\"107230\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80259138\",\"idBonusTeam\":\"2026 - Middle East BU (AMESA PLP)\",\"idBonusTeam_id\":\"3312\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/22/2026 2:36:48 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"G7jWY74aMwRZ3GFYTRjcd5SJA/xsjduJPucb3lMGyDlX0fq8ShsPK2/dQpoWdhYWGnf4Uem01J/4w8GDKPLXoZD6qjyoO9EI+B2J9wWhhM5WRaPE4kaAR6bVNWNnDtW5NsMs651Q8Ne+x9kyb10jD7v1xn4hqI5PBuWaunqY/3Zz4UxjWFlcAZuWUev2GU2jEqGHpYJH8vCVZzwzTR9Hc3F+q7ZRsriTmf19K1UiiBQioqI/gid5pdDerACXy+m3tXshf66uUac9BG4cnzTF0Q3OQykcvuB3u0YTPZqljYt4ME0Vr/NBA2qeLLZXZxBI7aYYHeLvmO2m6F+KlkZPcpCAT//YwtyGAYTeMDLFQ9ybbfTYExs0VFcX3XBvUaXh\",\"InsertTime_iso\":\"2026-09-22T14:36:48.263\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107232\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80988253\",\"idBonusTeam\":\"2026 - Pakistan BU (AMESA PLP)\",\"idBonusTeam_id\":\"3232\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/22/2026 2:47:31 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"9/24/2026 12:38:29 PM\",\"UpdateUser\":\"tymoteusz.kruk@beqom.com\",\"token\":\"k67z/qKf74pOMO4KRgJCbD3mZizDSiDIxUcPaVrprYQcXk+oTgM5xmaEr5x8E8UWWv4h/hMKhDYKtC7WrtRyO8HnNjDyHVw014dzEkKARtoIpqqn2JERbF37fq6lrM7aGleIZZ0SSO91AKkvdPD0NWOcEC/FFbL/adiwbEJXOkkltIlyu39+8FrDpaTn1Dg/iuFQtDQMSg/oPzMyjTUIg1hXzkJUVT6Xh+Vk+6mMu7vBY9PbD3kYqL62sUi4o5IrytRxqmEPs09YU+velePH4bJHa2aP+ZmVWyorSJriqZ9JVQ5/1gTxUu+hyIl5FvPz7dO5zVmzz+KLSQIfbe6/SwN/gKDnp85QVpMvkZMYgP2xgEV85wkDX/YKrydZwpou\",\"InsertTime_iso\":\"2026-09-22T14:47:31.98\",\"UpdateTime_iso\":\"2026-09-24T12:38:29.69\"},{\"idOvrdBonusTeam\":\"107233\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202603\",\"EndDate_id\":\"2026-03-31\",\"GPID\":\"00019378\",\"idBonusTeam\":\"2026 -  Asia BU HQ (APAC Foods)\",\"idBonusTeam_id\":\"3771\",\"idCompGroup\":\"2026 - AMESA Sector\",\"idCompGroup_id\":\"22\",\"InsertTime\":\"9/23/2026 2:14:13 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"oxC9Z2IPllFFuOlwlkmWPzV4YOAyUwFbQYCAT+zY98lIVjCBtQEjFcqQp2OhyWbdHRjx56EtkalxDn9VQjc5n50UJ3F5cBL3SisLel8bsbtiKYOnF7f6A/KaCMSRnd9DbvAue7yNKbwpB5mxfPjrwoKL/5W2Pl/aYCfljjrpKQf9bUgh1CEIYVpO6C1hfPcj57g+2TJB30lE4bRoAdL7kEWr+nXC3+imB8xloYoTnMfE1O71xzwsd+EYYBWVO5oaJXMUcSeaeI9j2R/nOvSYGJNq9A19p47ehzDeAgi9dHJEyWHy1m58FmvBvtGZbl2IPCT4h/YztgXGH7yB5j9SPZWaGljSnwgM27+SLWgWR3VZNMw43aJYnGCEo0RsqfMY\",\"InsertTime_iso\":\"2026-09-23T14:14:13.3\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107234\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"20000235\",\"idBonusTeam\":\"2026 - Middle East BU (AMESA PLP)\",\"idBonusTeam_id\":\"3312\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 10:38:11 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"0Q0v93RNrkK6s49riHL9Wr30bCKkPlZLtZuWS7W2TtKCau8tl2FSNG9rAWXoouMDIJuRkxeTW5PWpauziTnBruovaLwRdSamFZh6OOvSVTYsQGJjZCPAdbSyddpQr3YFzrJGxV96UFJfDli9AOOztmFleCWmd4S6WDInywYLGYGeaV/Cz/LD/KYnwTtdH0d2EAwIakt1ATxzSdcAnz9P1outLh9cNBgV1pERrzKz2qWmps5bsOJsRlLP4DlsAnB0cwcLvgqk3Qqbz3CzUtSMSBDVTOUGUkoinDznua/+4JgLfRbxH+f6U0cV1+PP6+J6NHZB5L+JcP/6UrXiTdvtMJF79Im4e1YkNX0ZMYsg+kJQaUhdzUklcWEb/XXqgcvb\",\"InsertTime_iso\":\"2026-09-24T10:38:11.76\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107235\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"20000369\",\"idBonusTeam\":\"2026 - Middle East BU (AMESA PLP)\",\"idBonusTeam_id\":\"3312\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 10:47:08 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"SsDaShWvNAUWXWAhCTI8kRRhR2Xi+kKivBS14jsL1RC7d3WUu3aiNRxqS7IWlnVhevMwl92melLnRKHqFXpMQ6gIevXO46eXty69urY+dGNrpoFj6Q/CuN+jN3AIfBpbebBZkaQqhVW8mCO4PAN04TbY7xpNAQJoc6HZ6g+mQ1ArG5o0hZHNuim/zRQjbNeKnToYfWQIw4RRHuM+ebP4q9UlGg0hDMwe4tTcwwiPp6q+vDH7CyNACAyw0eRDcgKCQYQITDfpGneTvzRvkb1UJFE/QbP/yr3yEJC0CUtjwS71gqkJB91ffJM6wRqbEIo3tRlTFStLenXn4RezBl4WL/60T5iVO7F6lBJF0VM0NkbXP+XTqUoyQr+CEkyvyeT6\",\"InsertTime_iso\":\"2026-09-24T10:47:08.827\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107236\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80225868\",\"idBonusTeam\":\"2026 - APAC Sector HQ (AMESA PLP)\",\"idBonusTeam_id\":\"3475\",\"idCompGroup\":\"2026 - 2026 Enterprise Teams\",\"idCompGroup_id\":\"41\",\"InsertTime\":\"9/24/2026 11:15:38 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"rpSyk2xSBHXwnfD5WXjmbuM+FUXvIkRX10z4ANGpiwdEM4SJnreuIoRq5Ng9jPfBMeI53K4gBN0J3VLVqP3lkSGgpiqKXytiFljTiqwCPAPcT9JlUJ+/0GY9Ezlt+dub/9oHscqhzz0RteRm9DO3tPORRqDLk5sDjoPZTq/AT4WaDNp8V93OdPV4f8iJ64YvHy9eoMWFg1+7Yo7aMWBIeBEyNnwgt9Hu5f/qFtYYpxeQqPpy//s+mT5ODOR9O9a/oYE5pTr7oYc1JLvdedtz8OBGX6NICvIZKSv6+gXM4Rdu461uhKHi6QiudTdzuyOHr8ic1ceMl6o7Gy7G2QcKjSpUOkIhzzQZhj9wLFG5JVUo0hHvCPkjUJao8kNwApQP\",\"InsertTime_iso\":\"2026-09-24T11:15:38.79\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107237\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40000558\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:29:13 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"RkZJB8hqljKSL4dWOplMVgZQvVjYs1RPXL1mxDtQFk84WM/E3GDb6MEcXIn+qgVO3D4Lp+FoAMnxRemc31ZczKkBXEr1wql/gXe1jmkY4c06rdcVFLwpGF3h08EXRyu0bQYyv3ve6XCKv44lVgKgNAzgUBjnrwKGw8sQWS4ISVnmoW4IM2m7ouYcdSE62SLhcckIudj068CLlMnqEZVGdhibbXo9/Vukk2OXvNWMNLFy/Dmr7/QOCzmPD4egLVl3o6mIwUngLV+AlGmSQS/vOorgMM+Iwinxl97LM70wjZ5v9/s94pkglvNphzO5F+icmz9sACvHLXhiy9EGixCjrIRj6zJdFWBHcJjgxNJrnYIDJH0gGWfBZuqHP9oTPWA0\",\"InsertTime_iso\":\"2026-09-24T11:29:13.573\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107238\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80159474\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:31:04 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"s3WStFHucL5OS2LvuVTAO+wGVM8QlsjXAqHBS9CZskPmLR1QhsKORWbj3lT4SPgY5vMuL4a//kHYKSYcZa7tEv6wSrzVJwnlDuoLbnGT2bi8jqh6dndrmhpTbXRCI8GYUom7SeRPT2TRtVuQy4yobfn/qcsT+IUy7++JmtbhGETNrW6T65szfqYX1MtTivjpGAJj2bt7zucIULrJSD3MVvW/F3ZQ2JOF8fnKJthY92Hyi2diHh34VhXvBSMHjl605DPNnhrQD6tZk4Z1z9vRWuvRJOEW/f5+e/0IbJCQrsAYLHAQpXqLOw8SVVRcaZuAqtTl/Rx/vX3xyqKuKzEPa2yEf6aO3t5s50AEvGgwcU9ATT6Od+zWP0ql7gFDmayr\",\"InsertTime_iso\":\"2026-09-24T11:31:04.653\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107239\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"81239256\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:33:32 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"vvRnmh36E/Qeh+3a6s/yCaxf1yzDwOqna0ymamoWXcA7o6B+aFIO+1HIc/bTUb7z/+SNx8Johx80qUB8k9XcjmSIDovB0TFZ1tvEbC7X14J4ZrA6KtYiXbWtLBDDAplCn6svAJgUJPvblkc/jxI4EuK2/B/7HG11OvlvEcjia7DqajV5ASamJ8zyt1jqZKdJECAjqZtXIDGqCGU5H6mRxkKDnm4FRJFExHCI5Ffbu01pFd1D6PwGHYkZpTcD3mhEXFZ2AYRJO99kBtXR1UKXkvyK2rwQd14HbQoNpOy3Bth81GQouQdpgQvnB+MPnzgg72eDR6bb5FEuVDjGMWbsgcGZon8sGPRpdKeY0Y/Uhio+kp9HD+fnq9dGAKDbZ3nS\",\"InsertTime_iso\":\"2026-09-24T11:33:32.627\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107240\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"81253974\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:35:22 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"+02EJnQlajEtOewNLOnogbnUdi43GdtibmKeH9tCqUe2skwxLssTsUtMRnzmcvTOlLgdFcMBDUsWdt+F2g5xjdm9rCOLrY8sfiVW5zdnxuwjPhF/yfeqwDWabwRk5m+PpdbBsR/vHQh16B8cpiwoZegato6rmFZizDeRkErLmK4Ud9t/djzjnlbTtTVOSF3ltInisGubjnMJCtcZRHmMj+krmN55AMtyZvYr7EOTvEJU4R8mJTNnPy571w7vhwraSsIdamS0Ev6q+tosCNbUHAH8btq55kVwQJDmlKpUtMDG3XKwdKcas957ULYQQPGxC+uhupV/M6nah8DDm2YY9E1lhSfR0aj9DZTkhabAB258QbVx68tQ39fUWzae82fI\",\"InsertTime_iso\":\"2026-09-24T11:35:22.857\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107241\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80239062\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:38:37 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"K+MoPemNLaaHdLCQ8TVuxy2dz0GnoFn3ewO+RkSuuAnQRiLz/BrxqWYOPfCavsKeoKNXYBPM9LoDqGZKCzttbqiZ2QlgA7RtMUTFL3th7IKdLsUfnrWMdriCE/OhXLOQXKqH/hQ5iZ39GjwiE7xV59gqTeFQEa4zFd2QxC4jOoCawIED29XTpjLMa9/yV+7Gl4LBimQWTQSGUzUYiL0mpIKdVLh+PispPLvWXGSAFpN7Rfk9VlS3pSWo1KWJgViXx4APVMyvylbTq34+jwmjpLg7vKRK1AGSxfzPMP+qOKcsfS5quT1iwbNOSVM3udr3ix+nezKsB1iMXecsM7PMEFNnxCmAXabSn/WCHpN3JStEZyRdqMLfJpUzF7yJ8ab7\",\"InsertTime_iso\":\"2026-09-24T11:38:37.94\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107242\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40223001\",\"idBonusTeam\":\"2026 - AMESA PLP (AMESA PLP)\",\"idBonusTeam_id\":\"3787\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/24/2026 11:41:27 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"JRM9JDEpAnQXCuJ6btnAcBylPrJsq7qhNpQBaOcAS2f0zfn3l/M5HPTomuuRyD65zC5b37fp6hWtq1bLuPJI1h3/4jlpsxddj/qUSNxOpcavo+7OMiS2/mKbIexFmjvhyeGT6QSYPjuduIrt3u5NBWFe4CtUM1AgsNzztQc/MNDF+L/PMjikYG0D2A5YNkq4NWtvv5J0tRKS+BJ3A8vNqtnzZpBNdokBig1sienK7nLAfxclohJ0URx1u7BcAwEIflS/J9fNEWjwGZn3VRXuKgaT81/tjbebBDBv0DC/0WbN/AN+seWrb8eiPTY5+mEcmGZXnnosB5xcEk4UHvdTxkMkcdhry/FORdZx+LbnRjyEsvY49XGuAfUSIgED+TwI\",\"InsertTime_iso\":\"2026-09-24T11:41:27.727\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107244\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40230757\",\"idBonusTeam\":\"2026 - Pepsi Lipton Global (AMESA PLP)\",\"idBonusTeam_id\":\"3789\",\"idCompGroup\":\"2026 - EMEA Foods\",\"idCompGroup_id\":\"15\",\"InsertTime\":\"9/24/2026 1:55:20 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"nyONFYFVS3auYro0h22sSI24GGVuCYEx3hOL0jak7UPzNII3RHaX13pC81NrKIkjqTbUZ6n65EPvnfOiCe3IrZAQAVXrZ5aJdZpL+UPPxc3eGg1mddHSFqBdmPVqom8jtBghVnGgEL+aQqLc2kcKr+H625cFr14PKNkJU6S6ruCcx0hIroZez0R+kNVXpx73fcbS9dcLyPWafwKJNblhwxouUmyD68gTDERF1l3Ta8an3U9JfkS2sqM7INWxDX8N9bDbsFKcBj0V2J8/hRUQbOEQfvQCSoIN7qHP1vSk4ZG5NR4B7tEHtI3sENF0BmdPwpMc4OE9b57IXNUr5/q7W5eEcaUsszs2/bKS1dPo+2JsmcBVOu9oU4oYhtpFWTdc\",\"InsertTime_iso\":\"2026-09-24T13:55:20.083\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107245\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"00010079\",\"idBonusTeam\":\"2026 - 75%  PMF / 25% Corporate (AMESA Sector)\",\"idBonusTeam_id\":\"3739\",\"idCompGroup\":\"2026 - Andean\",\"idCompGroup_id\":\"33\",\"InsertTime\":\"9/28/2026 3:33:05 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"VvRX+GCHFCUPecGsZlQwCA/X6kbE2fN+A8OjxqP/oLgl4a6ksRV4dridkevx4zUmvnKWSP741zAjBGVlwejU20d7kKL1H52s7BLgYA6xRBMAH6swd4TLeAex+v9zzLlDngTFpYtjNS2xUrWKZNgXVkjjAenqq7kww+gfLxUttC1R5QOI0AFIgHpmchMQUiwZA+wtxj5dGT4AHBMx+9cSIWtJCKN1swCBvCnkXSMdSGBWRfiQhD01iDsPK7QIZ2MvbzhBMl+dcwc2y6pv6trqvfueliU2BtkNQL1dvw3LNUwH20g8X/rEsMzeyrdDUB/VqtqzKmi8j3deS4cRqL3NikFvrCIeAkXovRO0ns4Z89lxJc6/oQnzBbXJbxo8ECsD\",\"InsertTime_iso\":\"2026-09-28T15:33:05.14\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107246\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40002247\",\"idBonusTeam\":\"2026 - International Beverages (AMESA Sector)\",\"idBonusTeam_id\":\"4060\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"9/28/2026 3:35:47 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"9/28/2026 3:36:50 PM\",\"UpdateUser\":\"gabriel.wisniewski@beqom.com\",\"token\":\"15+/8skRTtNmSJ5dgIGfTADrvVTrgRP9BO4ub3jSU5IbOeQN9db9T1ZU5Ycrw4T2IyuaC0tz/rXmwWDGeUyYG7e+YNIIABGB4bKNavCiJ3jseCYMWqvZuiNK0WHr64pTW8chysxx27FPh7As6vx5BDwXdkGCPIxRXk3Q2S3a1WEvbHPtp1oHpTXqiA2rD4CYHP8KYyqulFWo0ldq0trJHaZkedUdhViN2y0yDKv5t1CCyRtKkI3gEnkNZ9kYkAFTHTevgLkoUp2bMp8Mkx5WuZM5k/u7CmTofWfMJWLb3EiuUBPnRyn5SeHoTLymBg1Zgm4mIja2yIIy9bTUCF0PWw/u6xa+Ric4kdpXCcAybdDqLp2YlKA//NkqDysKFNvS\",\"InsertTime_iso\":\"2026-09-28T15:35:47.09\",\"UpdateTime_iso\":\"2026-09-28T15:36:50.827\"},{\"idOvrdBonusTeam\":\"107247\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"81134325\",\"idBonusTeam\":\"2026 - APAC Sector HQ (AMESA PLP)\",\"idBonusTeam_id\":\"3475\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"10/6/2026 12:30:13 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"yr62FBkmZUdHPUxWHq7c5+i3ZKD7aqKh0wLYyfPnJtSDab42zWjuDdRR0JXI4EI3ib5g1Ar7s1FayCWrgu1Fev11nsLqnd7tlw3ypW9j/sds6f7KXIZwBbYxwhoN2056DG8sIqK41rN25tESN9YW+f6i6riUjZ/y1zwiznyYd1OSeQoiG0IvXCc972e+v4hrTAJv/ZH2I78Vn7ipXW+MKBwXG2mpXIAegVxgIacPyw7F8UXA3nkFLbEyk+JDLyfVbgYNqlPWSASLFZ+0beFUh4wVfaA0Cl3J4EdkALvzC+8ft4cuOITx72lQYfF/Q6y6HYtZSj7gfZKU7YGAGTkH3fNaRrtDok4OPrpg4IyusrAbC9ROcXBi03mj3iCRf5mB\",\"InsertTime_iso\":\"2026-10-06T12:30:13.733\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107248\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40121751\",\"idBonusTeam\":\"2026 - 30% APAC Sector / 70% GCR Incl B&C  (APAC Foods)\",\"idBonusTeam_id\":\"3535\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"10/6/2026 1:13:27 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"10/7/2026 9:16:09 AM\",\"UpdateUser\":\"gabriel.wisniewski@beqom.com\",\"token\":\"lFesZcAuwaTUdOMbhbGvV3bBJztpDy6dbAbXMUqdPS2IWGAbGe+xTOOkrAgl/m6MsWD0GeWT4hmPQMTrbSGdsgUBPKWkH6GhjL2XbbVtbDNxT1yo/B+2It8d1l0f7IDTayYeKLS3pZCmrS145u43aqIsWBhVX7/CIasfBAKHQB4Db5N9iVP2HJi6ymSw+LOZsmcwyQldEezuyDtHUgh3PRt1AJ59JspkswfEq0eC6Ojty/13frnzkMwOVsIEEkHK/q7+6n0DkhxErFSCLtsBw9TeWLlL1l1gFupkLkoK+I9i9+T+nYq5PUvr9hVU7VQUnYvF3AE2Z5vsu3SMR8ha6nlCzHe+vL+CRab3rxXEGG06v83U/MkeAt4R3hVNnPfS\",\"InsertTime_iso\":\"2026-10-06T13:13:27.2\",\"UpdateTime_iso\":\"2026-10-07T09:16:09.303\"},{\"idOvrdBonusTeam\":\"107250\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"81169184\",\"idBonusTeam\":\"2026 - 30% APAC Sector / 70% Greater China PO1 (APAC Foods)\",\"idBonusTeam_id\":\"3786\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"10/6/2026 1:35:14 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"10/7/2026 9:34:04 AM\",\"UpdateUser\":\"gabriel.wisniewski@beqom.com\",\"token\":\"cgmW9dcQGL87naKD4kitD6nAJt+kWzuxK6r6nH2c/gHF/YmTBbt4aumBZnmDDNghB4Kl9FWtptTxHMKlgMlisINxhzzQ6BBOIC5jaG5dZhb5ZAgbDPVC4uHuM9ARp1RlKENF5fDCxFDBiLXLplEqpp4cWv6ErP9fQE2IJjByEzWBx32sNGM4Tf/o3gzqYsmWTTD9IXdcDCqG6Y+4QU+ykZbmiXydDNKzIl0KBHuJm7cWs/01kY828FxKY2sFPQtv/hlUe3Asu+4U/s6lF4KsePmYT0vhghd9U0AZSCNCPnjFu7PyRfC2xMFe53zF1QcfHBRMgg5c+cpZQn5gQHd5737LvDGqaM2u7+7RfanwtDp6Orhj6VWWJ1mH7miZSGgB\",\"InsertTime_iso\":\"2026-10-06T13:35:14.893\",\"UpdateTime_iso\":\"2026-10-07T09:34:04.55\"},{\"idOvrdBonusTeam\":\"107251\",\"Comments\":\"override from Bonus Team Upload grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"81003763\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (India BU)\",\"idBonusTeam_id\":\"3549\",\"idCompGroup\":\"2026 - AMESA Sector\",\"idCompGroup_id\":\"22\",\"InsertTime\":\"10/7/2026 9:56:49 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"50vNKT9gYOKGHWksWZxs5MyY+sxOraiQaUYPsU41WoMyGZunu0LYpXPceeRUaehivglANaS9aZBPewch/TDxjEjlaAK8h9hYaLXSUmr7tlc6fmrhNkN6NHtRN1cEL5vCzgs8xfRT01ArslieU52p0EPOXMELqs8PCbypP9xKYQY+c8y3wXSwBmA49UVRqEIYwW+2fkl2jqPbteeixZ8OQvJ81I8CgH1VT95R61oZ904uAmrh32/GeGDs7qnkP73B3VYz2yXRF3lcWG/tijdft4/aUhr+0ZgKg2oFQ0K8kaBTo6q9VRaLN7Frnf7PjZgXiGNvhK14QUNhDW7O9fM1C4XLYz+c+tEd3eRqjNdupkaYXujct1D/KGgFPaXi3x3G\",\"InsertTime_iso\":\"2026-10-07T09:56:49.16\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107252\",\"Comments\":\"from Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202603\",\"EndDate_id\":\"2026-03-31\",\"GPID\":\"71096293\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Teams\",\"idCompGroup_id\":\"41\",\"InsertTime\":\"10/7/2026 1:44:19 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"FvxjrK6dCJLmdxZS3KxpuPiXbtMPhhVFqZEYdkmEOXNeN981WhOq7BUXS73F3B9kwnVME8Qb6Gkr+qHm0eOXOjAxjNgi8gN1T0/cHlb8wq4rf7JQ0bpa8LGt4v5c5YrmcWVYwiTK6pegXQ98A8smGM5vuPWRdA1unqaQvkjhBVHxJm4RcCkfncxAl22p2QYQmeP/+oRWnRTQHw4ONA1/bnC+21cDpIrmLO0WGE7XocwjR8t3i3/NncW9Iqk5Mc2QWe9IYq2kkZ/FMIdA2vnerdqmemO7+6maeUWsBaoyPZAezhqIwS9xCkqD5Tbkx49TY2+/Zf0PUdbdE0DAeJEhXjRCxpiCZ+z0WJn8TFCS1UjxlFcnMAD7zYbvKCM82Wuq\",\"InsertTime_iso\":\"2026-10-07T13:44:19.223\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107253\",\"Comments\":\"added in Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202608\",\"EndDate_id\":\"2026-08-31\",\"GPID\":\"81144562\",\"idBonusTeam\":\"2026 - 50% AMESA / 50% APAC (APAC Foods)\",\"idBonusTeam_id\":\"2726\",\"idCompGroup\":\"2026 - 2026 Enterprise Teams\",\"idCompGroup_id\":\"41\",\"InsertTime\":\"10/7/2026 1:51:05 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202604\",\"StartDate_id\":\"2026-04-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"lDfAnEWRA+UB8fmfYRVJA5It3GCjsoLNEPhvqa71XEV3EMEOs4oNdfVa3v340fBpDZh1RFl9VwPKUVxOg9/Lo44cJ139IWLnRjzIa7tV+UyX9TcOwSztTG3JremLla7cvTnAaIrxCh84ECMafHEF4gjNz+MKLIBme4+77a5+x89oq6ZFqh+OukyBG3wIiBrlbfbHNFrWePfBGab1XV9j2Ecgrs+5Jri+y8WgGHNpdewxKzsqk3PE16lk3Os40IAyRPtVh3zzuucg8xiog2kqoEg91qFBmFGP4YsG+V0XtsgbHGl0RNXn5lKoJkowOGY6JCjoOw0ZOXPKIiCoF3FeQCt5m8GesnFhV/pluyxuzdUOFJMyEKHK6rfvoPzDrkoY\",\"InsertTime_iso\":\"2026-10-07T13:51:05.34\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107254\",\"Comments\":\"added in Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202611\",\"EndDate_id\":\"2026-11-30\",\"GPID\":\"80922234\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"10/7/2026 1:56:15 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202602\",\"StartDate_id\":\"2026-02-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"As/W8FZHZ/yuImEynBMKYGBFIIpXKFmZsYcuH2n5DApoa7Gvriu80w4vPbSsXfgSGuewPac479rMqWRix5fk75HMzNTgVDhuOFqGbEXWcvNpy35N0d6sRKtgUgjh16YrWBRgENCHRDfrKzRlg0IrFmOHlm7iWANYwstsPi51sVTSYG1yEud6mrihBEIXapKT9pxpfPe8uHddw610K99eSuJQajCswNdNh295F1ys2kajFNMoJdPQ0jVGU2lbIIDpZRYjp9gI4TFiMrmldVgCr7BZS1YQaDY9TMJlaWz1zNkgo7eIugOiQqzXTCGF9Eq1cOsK36bl/OW8I51HZkEQOA/2GK62CEpQEMI5HO1QZAb9arQCfcXH2bmYLON/6w2H\",\"InsertTime_iso\":\"2026-10-07T13:56:15.697\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107256\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"80217001\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - AMESA PLP\",\"idCompGroup_id\":\"51\",\"InsertTime\":\"10/7/2026 2:21:00 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"P/fBBKxLosghNL2saFQ/25maJpy4jvh2xnTSBrD9DYH5sEkKqnHlnlD+5gmhVUsSwHfG+WBaYigrm9VSjM6m0y5KjIXkXTljTcdW4bDGN/k93GiJvnaoAonG+5njCFUatxda3BYkDwvUA5JhguOWw5uyLwt9e6a27eLhvqYSLvCYYqaDD0RleeJNtIfWH+j7RiBXc8rLSYzADlCok9OI5NuVFaSkvk4d+/76JyAcbqHFTplCojv8f+S6rKeO7ODGxaYMPOoxjfT7y/3aZ8cbOD1race0A6ImKhOEAspVW1U9QVCAGUIhSA/hHjE7BKkYcJ1mfWtKyGBSqbbTq66C+c4KXXGKFLD0Db05bqlo8l1ekGvlRj8gkYMaejLF/ZtY\",\"InsertTime_iso\":\"2026-10-07T14:21:00.13\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107257\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202604\",\"EndDate_id\":\"2026-04-30\",\"GPID\":\"81249289\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Teams\",\"idCompGroup_id\":\"41\",\"InsertTime\":\"10/7/2026 2:26:32 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"sId6E07JniRjDWJ+OYxNtt3kpGUyHr9WZESR7nC0oZWRaM4hsA7fGqsIw+MZiZohnLfIj/Yz3z+lK6ku7B+Js6wEPedZh5wtP7xkVDhqmpt9TQ96BT8eosvHJuKhSVrcV7V51CdEWcYazyJSBUPa08OSRCu94zf4JfkduyrFyNx8FxkMANoKTGYIyFzMlqSDXt8lXOSKWmCKzTg2BdmBVYI7elFzAOggRtlvdbA220XMkqrWBB8bgtKg+WLxWpjmdJwZovzl83+3+KyNBOY5POE+bIq5cwC+ii/w4pAi6yj0woOGzKcZpKvOV2Wnfvm54pWi1iSVibKXtiSTuYyJB49cUusObplzvjIlpTuOOLOD7aVHt7pQbxvnKMNSEkvf\",\"InsertTime_iso\":\"2026-10-07T14:26:32.603\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107258\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202611\",\"EndDate_id\":\"2026-11-30\",\"GPID\":\"40240978\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/7/2026 2:32:40 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202604\",\"StartDate_id\":\"2026-04-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"qNC17WwhDPWUpu2FpkEerwVze0nSW4RAn8uvtnrg+XDplIKb+2jr2Mk4sc8/4bMqBcpGvvi4p9G4Es+Csyyhnun9VKikpHcRh6TxAvBAiV6YgzSmQKdmyGZsy085I332f0fBwqS3oHQSqCK6XD/004cCAfjoNDhVC0eaUeqAQ4XT7h9Qp8PKEQK1K4vdml+tkkz/2vrVEpBTXCAS+aBNWIj7uy3uFgT/yOObcX6qxR/EwWD6kHbTNMC/fJPt0UykbgLna9XarRIXHhCQzyH6Pbe5HjI6iynVAeLllGYUBCwMH+Kbh8Nc6GlDaBMi1stRo7xF/JH0DkKWYlT7xftmQW9iJYfZJwmPli2dklZf85lkK0HK+0FjZSEnqr8tfzFM\",\"InsertTime_iso\":\"2026-10-07T14:32:40.763\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107259\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202611\",\"EndDate_id\":\"2026-11-30\",\"GPID\":\"40243549\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/7/2026 2:35:41 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202604\",\"StartDate_id\":\"2026-04-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"prqGm6i4+e+wlrmNiN9zNltY9XFUIATbrEttoCSRja/8WBCrTdN5IpG2AWzUqlf6zT55ERjjbtk738z0omzlIJtoZQKDjUkN2M8mOAFjkFEp1TFbnfj9l3KRFudUvcEtjB9wiGJ7WNP0xaWg6ERLcnwGedd0UDSujWaVAQ6Wk1yAz063ifZiddqoudpbtbIw67jCdVcwltV2lo5EGRE8AFmsxBxVAJUiW3+GXqRYAZF4mDox4S/vGlqoeWdfYPLdz3RR2jYUPJ3/F+JR8UEUADfnmzl2FOwagMlYUYP1SIYRE4lOWA16LlfaJ8oYoxTZ4PqQi4qZjMScxUSapOfm5uARDYFekcGCzR5utrjEN9HTRQE8xF4A/28o8hi7auw2\",\"InsertTime_iso\":\"2026-10-07T14:35:41.083\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107260\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40228371\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 8:28:14 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":\"10/8/2026 8:30:09 AM\",\"UpdateUser\":\"gabriel.wisniewski@beqom.com\",\"token\":\"OH9/BCF1WB3c+A3EcIM5gU7PJoSTv29hFfrzbts7VRTh6E6VNpi5IvsMp1gPCtBlALYVdVmK5uoUS2MVD8HDHq2laFAXbGyStRTW0bClCMAfRgWPHPb+0JnWyBKN41M6PFooI9vu1oNE7VDGA7ytqTmfh1aPG6gpAO2HPtoMHkU9zAAP0UifX2GKg2yrlHzweYu+pLxBJC/Y5kXKYMNh1PDZwiDsoykF8J+18kYLEEU2XQ49I65JFcPTfeCQDy2BJLw+M0ZCXI8TQQLQ1y0Im2x5UHNE7trfQBiinl90C4fuB7ZfnRzckTfTAGiK6djiSTHny9Tuih/LZSXsht0++ShrDHz77dAFbwB6hIVol8CX+iehipFgSKMGjBmW6l9x\",\"InsertTime_iso\":\"2026-10-08T08:28:14.137\",\"UpdateTime_iso\":\"2026-10-08T08:30:09.24\"},{\"idOvrdBonusTeam\":\"107261\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40239289\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 8:33:13 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"MBKPvwgosUtGoyNdu7Q4xetd8GMF5n39+ikGIVQwdeyybiXQvCONQkjXFahT5RLf0XoiVUh1p/xv7ANKGZHEpKEIrer6DQRcJ/yb/dqiPUgoFab6qSi1UuCFAUrNtyUAzrLWhpvNc+Mn6GxGH1VEj5Zc+LdzJfYilsr7MRWalGvssGIUM/JQ9hRJ+r0yRegHjzRVwByal7CK83XDpnS6PxmnmnthW9q2R9UhdpwOOe1KOREmFRlHMUWFPCOknmlLSUViqCCPvyAShVEmiFO73e9Pal6tlOB+DqniyqwAPKWs6/LIcccuafTA5DlsEPV0fFMezdTN9pa3oKWBcOun6OB/qVokbCIfEHmJ9ipff+a1WpC8Ag/kaBxVedoNXjgg\",\"InsertTime_iso\":\"2026-10-08T08:33:13.897\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107262\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40240980\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 9:01:08 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"zz1ObjAlh5niHFWMKRFqAX5Ik+TKc4SrorEjVwImPPF5NIf8iJi4oy7F0lgGzmq8QfGN6+ETPffGRjFss8xng5q4O3eVw4cZtufOEnKl9GCe6OogwckjQldQuSdOE/8eP33aq59QmGwzqOCC+3QALrvgrBRbAy+b6jnNmMI9fVl8Fl/wzCRKJvIKzCaPKopr3/RTtAPQl09+vNURkvroA2bhyVfr1kAU9gWkjVtNAPzZixAKf5LvtYHsNFGPUEfWtGOE5DFekOZWmG6DiYOPyKgzMEHvuCCyG2UVy5YM2eDYUOLT53FlYjn56Wq4wGuuMLyLJkOCafSjJmypeCllhOsnibVX/yOj6oyOp0UKG4z2ugLORvggu7tTyrfmDNbp\",\"InsertTime_iso\":\"2026-10-08T09:01:08.38\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107263\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202612\",\"EndDate_id\":\"2026-12-26\",\"GPID\":\"40227690\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 9:06:37 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"qJ6qM75fMxX1MxSISftiR506YxIlJqUoz8lBzhO6Mi20SrirfL2H+UA3u9dqad2VBdpGQY60porbqJCbW7670yc84Q3F9i4NV+XEj150dYCPvQy0ep/CqhGpar/BnY3Dn6pcglmUZrSzLrv9HxwLndbuqm6fKvkLgQRKPi+yCpvpb41d6Ah1n2oNHU4x7Ouq9g6ucvQrSDN9zAuQxIxp/nukMy+2KZlDTwgSfXfa73HssbUwO3EkH4JxXGxQFlcwGjQqS9U62X91UR2Rb/9T+/oEcMQBpu4HcZLiro7u2uR/Ly0aiJhALmN2IgQT++y2ulRT1dIsWhPbfaDxavEA23exltISnoJBsar6mNLWpdlqwOWP0fQIh7uozzxvcWSN\",\"InsertTime_iso\":\"2026-10-08T09:06:37.36\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107264\",\"Comments\":\"Bonus Team Upload, DOUBLE HAT !!!!\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"40206983\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 10:15:46 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"ihT+zBxmrmNgHwbeYCpRvI7I84Ef30dktT+WDFdIGaC+xk380hvsSdo22Dk+LZUGW0QWa9BGyfXx5jCBbPYD+BFzyOEquCzA7wNNX6I+67f47NFVywSWijFRYLF24GnGXADrQKlprXtQt/gXLvUH0ZLcnlMqC8Ln8WbhXY3sBPAhW0QRlpwT0VZfZWwhlb+6kFpyV6YHib3BJuhfI/7pa1HFKaKXIuziRhfIyysRun/Ouqdt7K932JVPSQ3paej6W6Zgs5wpHDo+TMTVMbEiqvpzYsc9AHv3y4vTZFbpxnuIiBcYAvgqQs+9RugnJzGw85hMXP1lxHUyCKJVhBS84goDmbtHBu3STPh8KTwWQ7bId5pm/H3BRA4P8PCQfQp7\",\"InsertTime_iso\":\"2026-10-08T10:15:46.34\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107265\",\"Comments\":\"Bonus Team Upload, DOUBLE HAT !!!!\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"30090179\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 10:20:44 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"chdwbl9eN4GxS+I5s1GTyS8nvnegpiKFyKjUvXMHc4CQAxqtr33KO5aieltPZGVFP7ackzGnsG2xhsI4r8i/eMwQ/fQ4gZ46SDv+MIx4DSCHchKKnKPraywj8hK42aEsFdKSVhop1maDJddws+J6Fy8OsOhxouEQQTL5UDsGx0/7qTK+RqniT38+iWq/smW8/rzo50q/ps9mKJFL76TtiAPj0CZaikeOtdMrVBc7EXcY8V6wglCL0SWk3tx5we4KVu9E5aS3RI8QY3vkwgSpWiY0VTAk+8iIcBXEPcOC11Pa3oWrdjS6DYcqZW0O/gcldjXmyEhqnNPYKglA9cR/uFOxAI9oWc/mv3KVAfwX9ueup0IAcT1+8a3y6hI1xfRJ\",\"InsertTime_iso\":\"2026-10-08T10:20:44.387\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107266\",\"Comments\":\"Bonus Team Upload, DOUBLE HAT !!!!\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202603\",\"EndDate_id\":\"2026-03-31\",\"GPID\":\"40235240\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 10:32:19 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"I/C9biUohkazAfQEgd19VodLN1fQsFf94FanQVwZMzk+TzX2x92i9wvJu+zOEZP6T2k5KKEXq3OQAeoN+St3kaDVLF+fMe5COSD09ClbOjOF3c5x8oMqpZ/tHCO0ycWlRI8w5Mw+A6CtuSpMCrAKtPW9ApkSLD6/W3czngRA09yQhl2I5wfqrcIk1cQhlo25Lto2X09icCkyYMksjAG8Ngz0rNiW8t++NQvu8F+yGSRR9ZhH5Q3kEzrUk7+HUiTtS/dGlLPEG9bgrk4HVbDN/nH6rFnYM229DeECIHfWHavQQ0zOTvJxQZ63afB9oM81FwMHCB8Ei11eXouNJPX91sTkDuykrBTykp4r8UZUrTDSEaBIpYAmbbiGeX5UxdEn\",\"InsertTime_iso\":\"2026-10-08T10:32:19.203\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107267\",\"Comments\":\"Bonus Team Upload, DOUBLE HAT !!!!\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202603\",\"EndDate_id\":\"2026-03-31\",\"GPID\":\"40238891\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 10:49:40 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"LHyMvFO18CcnU195z9yhDQHx+dhGTg3VE3NtoxhgEN4rDkf4XusRAeMKGQNL3hp/wSGHgA5TI6Oyoaz6STWWJzi4HHfx9biRY1VYeuomVdFbqf/liijh5M+Wl5tKp48ge4fDvXdFSTFreSZrBrKACIUj8q9p6Pp3XclhNL0xI3Qq+43iGjy0T+sTXPXAmhfqXK2PQikEUShdTrDHPDnLhfmTpE6T0v7F84qwnyF3q/o1Wd705LNiT5CofFs8Him49IiBs1ATFcXlRx+baxuX9dNvStZuSMjANs4jFl2l0Khs9PxkppP6lxRrXAqF3HlD/G9qeVcUeA1kOyvdn44aNCuHYQb/zaYYi/SNXug6LjYTv7KmwvJ4B09Dp5o44MDt\",\"InsertTime_iso\":\"2026-10-08T10:49:40.37\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107269\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202605\",\"EndDate_id\":\"2026-05-31\",\"GPID\":\"40240186\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 11:44:30 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"oRH/aGm0vCzZwg93JlQtGOyEl6NBfu2d0KGBGFvc2DJH9eSfk42ud+1Edh/T3BTYCIh+MRT/RZrqdJHVrMJ4big4P4yO27oGVe5a6Zwv8tRne0hiu7edMuUuOJvsmrh79knDU3opO/GvJ8Ht2dQfpuH9I4+i/p060VzutlorbjmMTvyvsPvOAyK4uvCh4o3EsKzBUchKmHay0zCvGUxv0lSZVF2NAaGO+/pSKpTgSEzCe6qIVQjjtKXNscfp5D7/i4icoLH+vj3SBrkLuUlFWmqWHprWdBKGX/B+12852s05As6tuPXsYgbJqwBVylFaM7JoKuUDCpmCnDdDoxq+gaKEfC8+I1JVcLeomPAdoQ40B2blx4ZLik0aITYHBIfG\",\"InsertTime_iso\":\"2026-10-08T11:44:30.857\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107270\",\"Comments\":\"Bonus Team Upload\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202605\",\"EndDate_id\":\"2026-05-31\",\"GPID\":\"40245806\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/8/2026 11:51:16 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"mSCFJ3DQlSDyl4owFpzLyhYwhtnahCoKIrU9xGNrPEiy41McSlzHqqMI6rYq0nfmfqX5MJ28npFm6EJKe6NHR7Mzsv2/JUvNw1CNT4NmyFWZd9N7VsrrZMAzb6ZcAIHHBoTV/t42st4vSSx9i+PXQPZ+vooFUaL9fVvjGPXVIDuDiNurkRVjS/s1rhtaZp/5VfcvHtSWdcGtdri2Z7w3aWfx+MSKTlds2iyY7h0lhDT53iZUhdvcZoGfD1MUIqD8e9BURgDA0TkUAowvatiy1Y6f5DkS2yL2lnoO4rtpEOG6ZlZZVmD5Hs48Aduab3CYX48qjvNcwq+xsIoBZjmlvyuCPDoFc8IiRI9iz6yumjUHiNqye2HP6fpdjQZ/MWjX\",\"InsertTime_iso\":\"2026-10-08T11:51:16.09\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107271\",\"Comments\":\"override from Bonus Team Override grid\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202605\",\"EndDate_id\":\"2026-05-31\",\"GPID\":\"81070819\",\"idBonusTeam\":\"2026 - ANZ Beverages 75% / Corporate 25% (Global S&T)\",\"idBonusTeam_id\":\"5402\",\"idCompGroup\":\"2026 - Global S&T\",\"idCompGroup_id\":\"65\",\"InsertTime\":\"10/9/2026 6:03:04 AM\",\"InsertUser\":\"przemyslaw.kot@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"0FX3dPwmF2iapIrRm9In9V20cHmRjgHI+eD2tG6CnQd4dwECMLWW57y86Ru2rADAKGQ1qf7g0KHJFpjiKSsD7ppSQ4fnKhAS9IrnCahNCTmPOs/3rZPikcW0I+sxwjlJvQjfT1tJNMHXxlp+onNZbu6ZRLejfpxiSrTbxOq9ReScTo9WbQAiy/+axQGKR54vgL8FnHPkpcboXH6RQGb9m1FV9bWbqBHimbWjvsdTE0YKCaB+V3HQ/CElE7FOL1dz6wlD7LnUuEW6JEtNaCZ5h35E1AUDgrRhoIXyBcEfXxH1AC8nj2KHj/x2TViU2S9gcYBpXsC/ZnfgUuCy1BNh2T0azOM6guQR2cps2iEbd2FLA5iJLeAJ7tKoM/CVcoKW\",\"InsertTime_iso\":\"2026-10-09T06:03:04.157\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107272\",\"Comments\":\"Bonus Team Upload, DOUBLE HAT !!!!\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"40227870\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/9/2026 9:48:40 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202605\",\"StartDate_id\":\"2026-05-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"JGN9sWlEpQ3InyHM+r+zo9GK/otLmRCCaKylInvv2Kf+cah0ZcNkprdue4h1ze18Hiv55EY/8sQ0wWrhlvA56s+Zoaa+9HVzOXdYL6iEc7T/7KXufKECtydToBTUB2wvkaUpfEDwnJ2l39MzR3E7lIsFk3DcofHMJQ0Hse1lGHEiE+61ZAJpV/9rANDg2W3pE9rT1XFWvCePQShN6VxNBFzGXFr8MBqASBsQtSECgatV39DXinwJIgByUaK6sVQHA4FJwkJfHxShe5gE9sGA/niiOD3LZQpTWoKjoTxeWsXUxs9w08N8VTwTo6R7+9Fw/x+eETQ+p6VNSBaeSudWLl04TmXKesWvaJNSiTN5gF08NBe3AXeo6Qr5KbKf08xd\",\"InsertTime_iso\":\"2026-10-09T09:48:40.987\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107273\",\"Comments\":\"Bonus Team Upload double hat\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"30110694\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/9/2026 9:51:24 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202605\",\"StartDate_id\":\"2026-05-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"ZihATATGJI9BaopX6FgqwS9dmXYmGUQKE3SGRLRnWyDL9E+fiQYpMdKEyvibfP3HH0ASvcID99wtIK4yfpbQgV5sucYVlELBbQXEo/U9E4bOKp2yYJ3sEsOkQ7mBOJ0AmHJiVLH1CDhS9RYLNBMUFBaosnXdr4hNXbkHiS9oB2piCIcSnrJiwnwOWXPVEpqvJH55qZtKB2WWRd1ZSUoFeCkbPEXlDnmh/ivjN2VQCOzzay7zY2USpEEJe/xTWzIiJQRPvMB/4Uizc2MOAnwL3lY83MaMYA64QJsrGQ4M7vyZ9xnHMKmoGfmhLeertHefGVPq7I9LfXkqLTmYRUPPsBIDX01JUTu4uNYj27hT03w/a8v6zWgm4AVzvoUpGNM6\",\"InsertTime_iso\":\"2026-10-09T09:51:24.517\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107274\",\"Comments\":\"double hat\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"71003987\",\"idBonusTeam\":\"2026 -  Asia BU HQ (APAC Foods)\",\"idBonusTeam_id\":\"3771\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/9/2026 9:56:41 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"WO8R0fqJghCaGYfH2JmZUgIqWkaZz0pAMbfHyNJ2WgtoNiPay8IAU72QsN2rfsDpdgblbiYZxfLRzX9CPhCq2SxsO0ONCy0NBRRuPBh99QcldFWqsrjLmE+py4ORzf2kHVzrxEy+70qUIxvZ4G+mHW6gEi9OANyCrIlgrZgK4BKtLrXYofGzBiBGVdRrzfrTxxw2lwTfaEtcbfS7AcIc+A6+UXuHX5/mV0hLnKqMpcGhrERe8bqxihqZjiA1UTxOR65pHLTmmOOYEOK9s4GI2Bu7xwFU0pzpbGWanHh9ixgFLBQH0gXFBP+hB+Q5zd1KR2uvIVaRqfhHm7kqDivBnU8dTWrHFYjGvpkkP6CVQzOFNJokipagzdLZxueWCUbS\",\"InsertTime_iso\":\"2026-10-09T09:56:41.703\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107275\",\"Comments\":\"DH\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"81252224\",\"idBonusTeam\":\"2026 - 25 AMESA/75 India BU (Global S&T)\",\"idBonusTeam_id\":\"5420\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/9/2026 9:59:19 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202602\",\"StartDate_id\":\"2026-02-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"UJnKoBsGsn5ETvlqrCcWUWBak9yKaYRmBSDwlntahtIFjyHc0BQeMg6C38JF1fYANIYMY5a11NKL2LpcqnAULPuj/X8jBpBDQuDz2ZtMHvMNQaKNzeEOqqB8Q9Dy0X+nhp/rWLk89uFHjUgkYX+A9fRK2i+lZP9DAd2wCqNdLGyZbBzhGmDmu/hvIsAjEmBfS2iDcRi5pxn3cWX0vtEyuSQo6YbnHk7/cGhwcyG+KgP0rfX26HSTPZU/gULjvyN6ihCdDiyTzPfqdfEa9vBNXgPAexHT+Hm9V5nHnRqYnDR4FClpoNDm+BStE4ABRAMYbITrhR/1lpNve7eDSoLkwWoMqVNh9Ke6HwydrccQHTL47430P5BAWJAYyjkQCDFm\",\"InsertTime_iso\":\"2026-10-09T09:59:19.63\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107276\",\"Comments\":\"dh\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"40244221\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:05:08 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202605\",\"StartDate_id\":\"2026-05-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"eq4TVRJjuHDFAyMbshMxmqwoSFDd6YztY9QlbaqJaOTaA0/HIdjuyNK69V0KenhuE/zn/HznsGb49Y1BU/BqdLb1w92+CwnZ8smSwBk2SaIbMaix8/4lu5AVzxnWcLh9ItM7IuN7oL/0qMkEZVM6ORw+ypE53sCcsT0oz3bAcQPxYt+X3hVMxaiTMw73ayXb1u4w5VSK+fnhNU5VPPLWY6uXAT074WQXrBQKvlCE8bFSWNxvHOmJtJE5S9/rrOvjEoJi/Ia5aU5jz8nVecXeudDSTJuGGhdMu+kP3zbNEFRxJ+wfv/p4XdX8sGHQmz6/1cvjYDkMg81vygrgx6ohFmBAzYVmhUKQWVsOX7S5WoDlr6QajFHr4fuazS8v8Oq0\",\"InsertTime_iso\":\"2026-10-12T14:05:08.163\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107278\",\"Comments\":\"sff\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"40236641\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:19:51 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"YHjOvFcWcsdyYOHG22YZ70QG3Ay04/1V5W5Zu5HGfM0Ozl91tkjPjjGyG+NwrfnMuZxQEaRgVWMnszL5S5v0bywiRvZU9orw/OatHXLq999nxaZ+4ApWl8InxnTRwmZsds7Xm4xPvB7Hy0Kk18ulZtUTkUCakdFDQXXGoKHVQV3kvGrghXYgzkf4DuOJZQ6/z1K1EAJjuJyY1l9/Grxnv4xJxDSz8HHYoiQP6zutRxKo/gGNN5s6vEN4l8FZ6eVMkM/kFHEtgzh6MGHN5q5LwaaT0Z0jRUWmoq3R/VE2lNmXnBsK9PXqpmMoLKe5A2bjZ9rOKvWWlLFkW82qG3ePRbe9zVzy8BGU/sErRh0YQhCaDE7XDcxOogiiA8aEPxlC\",\"InsertTime_iso\":\"2026-10-12T14:19:51.837\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107279\",\"Comments\":\"sss\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"40243848\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:22:04 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202602\",\"StartDate_id\":\"2026-02-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"upCiYGMo1h2wxsA58QsI3duZUrUCN2SFQ/m3VK9VnuptQQXwJSo8QTjk2unxYUWz6QhV51r6JVFn33vtWQoncGkKKNOArrGHtQSKzpDgtOa24Xg9xW9i5KJmUQBOS6y1PRs3i/0EBLVrT2+r6Eed+MaQSpCt59vI2wzwOjBNNeAyffKcYGKHF5bR8kzd0vYO0HDYI4M1csaXyds1+3dWLMUQJ1OvGKWJxeaVPQI/8P7osN7r2//NRGyoDiw4FoRFR/jPsFCMOQN9Cqfx/31+PFF++2jYSFIh/XVCQYUJx4s9TjU2bJXRZI3HmnzZg+W0UaWl66g5/2mkvpEStQY9SSVa8a8yKDr/MjHfY+cQBPs5MfyrVGfHrT3uuOWb4lx0\",\"InsertTime_iso\":\"2026-10-12T14:22:04.09\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107280\",\"Comments\":\"sss\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202611\",\"EndDate_id\":\"2026-11-30\",\"GPID\":\"80133311\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:23:42 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"9G3WZVkiDf5l/0PSFF82bLa6xUtf0cHj7DumiMx7JlI668j2GcikYbSqNT2nhiH0S3E2V16tg42W1DyEkQ3U4znCrsI3ylyq4PRGzkEdYTs8B4oCHsaFpyZfvReUbCjCy+wkj+6BZ0rZbz7MCr8tgad7VvTTgwzPyZwTkw4gmjj0HQyoFgoOLev2hkE6f/ZNCriDJDuwcht2PcfFltGs+U/nGZMENm1szViex1F3VoFej1czXKqaGdUUCNBSJgEV+rrH0G2/3v1OXmG30+jl6eE0BB1Q2zaCAfz2poMttJtG1xwlQQyk9aF26q6BHcPtMz3pYOsud+Pa09qR5lQBPUcGNFRYhEUmmcSq0nztmkwYQJGqt3mTSXFPg8y7CcoO\",\"InsertTime_iso\":\"2026-10-12T14:23:42.06\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107281\",\"Comments\":\"sss\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202610\",\"EndDate_id\":\"2026-10-31\",\"GPID\":\"80975596\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:25:28 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202601\",\"StartDate_id\":\"2026-01-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"XmlKYtAcF/SnV56aGNb4sfhMbZ+qpWcP91WwaCSPkrszPhjoOGjpBeBPt1Va6F2FseIB3EmLboCcgeJXDn/PlT6m6PhhD4sjxaei1OtlwwLpCeRItUzakkqR0IzZ1SC4JXVTIVNPP433ROfFlgvbJA4JLisZXuCALsgsGnTv4ZmgLaaCuc9pCN5a9FqGOwWTAoRoarNhdg//RyzVQvTEo1xcEr40l1FmeslYIUp0tzPOr+EPPO6dRsopAhOW9vISpNQMvJUZmIk84NurpSQQ6bIx1DtvVGmowwiLPzH8bfnivYCAyJKPdXzPsJBHeAdTadXffPYLrDtCIwzBArF/96XJEpPNpZalXTS939c3ZXvoJmbPFfvpNB/zUbz+vbpw\",\"InsertTime_iso\":\"2026-10-12T14:25:28.977\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107282\",\"Comments\":\"sss\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202604\",\"EndDate_id\":\"2026-04-30\",\"GPID\":\"81117194\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:27:36 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"HjRGI1zOuLcTtilduom/Rv2dLE7XjDIqPyR3gVVyDb/nrZWrJmJiioCpo6h9m4nR4h84L6WPVQs0pT+ZbfEvxapl4iIEt7P45fs2j2H5FObv9oR1MpoOFtuOswk2F/WrxWKheGjRJVoSPMdadJvKrM83zJU2Mu0bkTQd4rlk9pvxNwmz8P8xj6+GKhlN2FH9Hf6g1xpVO97jqE2aCxTwqqyAc4+HptjP/SUWWXOSa1uvWg4+WaHzK4lN+sBd1/pCq7NjCthZ6K633t/1hRXsQMfgS1H5OqGrtjVF9prCgHiT1nmh6j+5Rzz0br6tdfLAms33xjjh8YfnDMQE3Zb7yBLcNmj/AT6cgGrWWpZCMEFX+WX7MuP25Jvy8mDBziOM\",\"InsertTime_iso\":\"2026-10-12T14:27:36.623\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107283\",\"Comments\":\"ssss\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202604\",\"EndDate_id\":\"2026-04-30\",\"GPID\":\"81066200\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/12/2026 2:29:00 PM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202603\",\"StartDate_id\":\"2026-03-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"gUs2gUvhwPKbLPNhN895PY1zKDl3l8mN3fjnspQ0TKb5+5BQx5ojBQCERPkZU7QPP8mZ/gx3C9UUNk5UXVUl8DvpOpS/it2ejFFPDjBBml5zcjomR6pi5VDzGke7t31QNeNkU1PK44yaLE6RTf0OhR771Hh96HBh6SvXaUqAV+67LL5KoJ0A+d+b7O+GIY9WGXPeOLEMTKu6NPiBG401HSQ6wH+puMdltTFtWOyDth4WCe72HTHWukVTKZ8u0X0xjKQaHeQ+2R/lr4P9S9JY3VD+KzfuDps8bUiC6/fsA2F0KdK8m5TclSdJmT8/NfI/reTy4asXyI9SI3F89HCfaep7+xS4NM6Y5aOOUB2XHtNtkAKScwqvt6SrcrNyJ68W\",\"InsertTime_iso\":\"2026-10-12T14:29:00.327\",\"UpdateTime_iso\":null},{\"idOvrdBonusTeam\":\"107284\",\"Comments\":\"sfdffdg\",\"CompGroupBonusTeamMismatchFlag\":null,\"EndDate\":\"202611\",\"EndDate_id\":\"2026-11-30\",\"GPID\":\"80923827\",\"idBonusTeam\":\"2026 -  75% LATAM / 25% Corporate (GBS)\",\"idBonusTeam_id\":\"3790\",\"idCompGroup\":\"2026 - 2026 Enterprise Components\",\"idCompGroup_id\":\"43\",\"InsertTime\":\"10/14/2026 11:49:33 AM\",\"InsertUser\":\"gabriel.wisniewski@beqom.com\",\"Messages\":null,\"NewTeamName\":null,\"StartDate\":\"202605\",\"StartDate_id\":\"2026-05-01\",\"UpdateTime\":null,\"UpdateUser\":null,\"token\":\"CoOgPTqOAX/Tw/s6584VbrdVPtP0nOnbQedJ9Amsp0QpxIBpHXCj85q1oMNk72ijNwb9lx9zOn7YvGqw2DBoRYZEd8H/dPNbwA9yZ7BwS/YLEkoEDG2nNIK6aCiDsG7505VK7bw/kULqTlGSJqiitq5F8UF0jR0MqDKSYpU8n/K1jVpBOqnAqGm4PN6e3hw1bfmU3aSpA2qwaP2Aidwgys3si9j73kcaqIl2HlozijpksRuFtbiOanSozW0arncBJDUqIadaihV6DCQg+J+mkYTxXHxKx9xgwSSm57WygrB00QC7oc7Qr+1/igEhRI3psBZpn7uLgU/NiXFt1K0hNKC+dDaAZlToYr1bZouUK3Qh5rXK1CUQDYDvUMIa0Eqi\",\"InsertTime_iso\":\"2026-10-14T11:49:33.517\",\"UpdateTime_iso\":null}]}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 18212,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:18.484Z",
+        "time": 350.382000033278,
+        "timings": {
+          "blocked": 1.4410000151954592,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.36100000000000004,
+          "wait": 347.68299999817833,
+          "receive": 0.8970000199042261,
+          "_blocked_queueing": 1.1410000151954591,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 24781
+              },
+              {
+                "functionName": "xhr",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 22723
+              },
+              {
+                "functionName": "it",
+                "scriptId": "2505",
+                "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                "lineNumber": 0,
+                "columnNumber": 30219
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "_request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33528
+                },
+                {
+                  "functionName": "request",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 31673
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 33976
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2505",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.axios.20e19817cda95dbc374a.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 448
+                },
+                {
+                  "functionName": "u",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 937356
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 594528
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2532",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                  "lineNumber": 1,
+                  "columnNumber": 102435
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 577034
+                },
+                {
+                  "functionName": "dispatch",
+                  "scriptId": "2524",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 5812
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "2533",
+                  "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                  "lineNumber": 0,
+                  "columnNumber": 594675
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "2533",
+                    "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                    "lineNumber": 0,
+                    "columnNumber": 594659
+                  }
+                ],
+                "parent": {
+                  "description": "Promise.then",
+                  "callFrames": [
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 594609
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2532",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                      "lineNumber": 1,
+                      "columnNumber": 102435
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 577034
+                    },
+                    {
+                      "functionName": "dispatch",
+                      "scriptId": "2524",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 5812
+                    },
+                    {
+                      "functionName": "",
+                      "scriptId": "2533",
+                      "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                      "lineNumber": 0,
+                      "columnNumber": 594675
+                    }
+                  ],
+                  "parent": {
+                    "description": "setTimeout",
+                    "callFrames": [
+                      {
+                        "functionName": "",
+                        "scriptId": "2533",
+                        "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                        "lineNumber": 0,
+                        "columnNumber": 594659
+                      }
+                    ],
+                    "parent": {
+                      "description": "Promise.then",
+                      "callFrames": [
+                        {
+                          "functionName": "",
+                          "scriptId": "2533",
+                          "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                          "lineNumber": 0,
+                          "columnNumber": 594609
+                        },
+                        {
+                          "functionName": "",
+                          "scriptId": "2532",
+                          "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/3096.ee2865aa9d1825f415e8.bundle.js",
+                          "lineNumber": 1,
+                          "columnNumber": 102435
+                        },
+                        {
+                          "functionName": "",
+                          "scriptId": "2533",
+                          "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                          "lineNumber": 0,
+                          "columnNumber": 577034
+                        },
+                        {
+                          "functionName": "dispatch",
+                          "scriptId": "2524",
+                          "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/npm.redux.bd6a2ad7d46e5b504fa1.bundle.js",
+                          "lineNumber": 0,
+                          "columnNumber": 5812
+                        },
+                        {
+                          "functionName": "",
+                          "scriptId": "2533",
+                          "url": "https://bqm-eus-v10cust5-prd-app.beqom.com/js/app.f7cc2603d753bb234233.bundle.js",
+                          "lineNumber": 0,
+                          "columnNumber": 594675
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "xhr",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://bqm-eus-v10cust5-prd-gateway.beqom.com/api/SSO/GetUserRemainingSeconds",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": ":authority",
+              "value": "bqm-eus-v10cust5-prd-gateway.beqom.com"
+            },
+            {
+              "name": ":method",
+              "value": "GET"
+            },
+            {
+              "name": ":path",
+              "value": "/api/SSO/GetUserRemainingSeconds"
+            },
+            {
+              "name": ":scheme",
+              "value": "https"
+            },
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br, zstd"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "cache-control",
+              "value": "no-cache"
+            },
+            {
+              "name": "expires",
+              "value": "-1"
+            },
+            {
+              "name": "origin",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com"
+            },
+            {
+              "name": "pragma",
+              "value": "no-cache"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://bqm-eus-v10cust5-prd-app.beqom.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Microsoft Edge\";v=\"156\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-site"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "content-encoding",
+              "value": "gzip"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "date",
+              "value": "Thu, 05 Nov 2026 11:58:27 GMT"
+            },
+            {
+              "name": "request-context",
+              "value": "appId=cid-v1:83603ded-b8de-4b33-b856-9f80cfe684a4"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000;includeSubDomainsmax-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "name": "x-azure-ref",
+              "value": "20261105T115827Z-1749df4f94fh4nrghC1AMSczbn0000000vng00000000786w"
+            },
+            {
+              "name": "x-cache",
+              "value": "CONFIG_NOCACHE"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1;mode=block"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 3,
+            "mimeType": "application/json",
+            "text": "872"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 132,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "150.171.109.34",
+        "startedDateTime": "2026-11-05T11:58:27.515Z",
+        "time": 181.36099999537691,
+        "timings": {
+          "blocked": 1.5209999528639018,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.22399999999999987,
+          "wait": 178.87800001095235,
+          "receive": 0.7380000315606594,
+          "_blocked_queueing": 0.6129999528639019,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "382718"
+      }
+    ]
+  }
+}
