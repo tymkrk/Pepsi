@@ -19,9 +19,9 @@ SET QUOTED_IDENTIFIER ON;
 GO
 IF @@TRANCOUNT <> 0
     THROW 51400, 'Run the deployment outside an existing transaction.', 1;
-IF EXISTS
-(
-    SELECT 1 FROM (VALUES
+DECLARE @required_procedures TABLE (object_name NVARCHAR(256) NOT NULL);
+INSERT INTO @required_procedures (object_name)
+VALUES
         (N'dbo._sp_sync_k_modules_data_merge'),
         (N'dbo._sp_sync_k_modules_rights_data_merge'),
         (N'dbo._sp_sync_k_profiles_modules_rights_data_merge'),
@@ -51,10 +51,21 @@ IF EXISTS
         (N'dbo.sp_client_std_synchronize'),
         (N'dbo.PEPSICO_SP_Refresh_Translations'),
         (N'dbo.Kernel_SP_Process_DataOnChange')
-    ) AS required_procedure(object_name)
+;
+IF EXISTS
+(
+    SELECT 1 FROM @required_procedures AS required_procedure
     WHERE OBJECT_ID(required_procedure.object_name, N'P') IS NULL
 )
-    THROW 51406, 'Required beqom sync/translation/OnChange procedures are missing.', 1;
+BEGIN
+    SELECT DB_NAME() AS database_name,
+           required_procedure.object_name AS missing_or_inaccessible_procedure
+    FROM @required_procedures AS required_procedure
+    WHERE OBJECT_ID(required_procedure.object_name, N'P') IS NULL
+    ORDER BY required_procedure.object_name;
+
+    THROW 51406, 'Required beqom sync/translation/OnChange procedures are missing or inaccessible. See the preceding result set for database and procedure names.', 1;
+END;
 IF TYPE_ID(N'dbo.Kernel_Type_Process_Values') IS NULL
     OR TYPE_ID(N'dbo.PEPSICO_EmpPayComponentIncrease_param') IS NULL
     THROW 51407, 'Required Kernel table types are missing.', 1;
