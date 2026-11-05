@@ -1,5 +1,5 @@
 /*
-PepsiCo Bonus Team - complete branch upgrade - revised 2026-11-05
+PepsiCo Bonus Team - task1.3_part3 branch upgrade - revised 2026-11-05
 Run numbered sections in order in the intended existing PepsiCo/beqom database.
 Use one SSMS session; include every GO belonging to the selected section.
 Plain SQL with GO: no dynamic SQL, SQLCMD mode or external files required.
@@ -7,7 +7,9 @@ There is NO global transaction: completed batches remain committed after later f
 On any error STOP, inspect the failed section and correct it before continuing.
 For unattended execution use sqlcmd -b -f 65001 to stop on the first SQL error.
 Individual configuration scripts retain their own local transactions.
-Includes the complete Bonus metadata wrapper and supplied Kernel OnChange snapshot.
+Requires Step 3 process metadata already deployed by the previous PR.
+Does not replay the Bonus metadata wrapper, Step 3 installation or translations.
+Includes targeted Step 2/3 editability updates and the branch Kernel OnChange snapshot.
 Includes one initial Division-cache refresh; no refresh schedule is added.
 OPEN BUSINESS QUESTION: Lipton JV North America belongs only to IB (working assumption).
 The source manifest at the end records embedded repository definitions.
@@ -22,34 +24,6 @@ IF @@TRANCOUNT <> 0
 DECLARE @required_procedures TABLE (object_name NVARCHAR(256) NOT NULL);
 INSERT INTO @required_procedures (object_name)
 VALUES
-        (N'dbo._sp_sync_k_modules_data_merge'),
-        (N'dbo._sp_sync_k_modules_rights_data_merge'),
-        (N'dbo._sp_sync_k_profiles_modules_rights_data_merge'),
-        (N'dbo._sp_sync_process_k_m_fields_data_merge'),
-        (N'dbo._sp_sync_process_k_m_indicators_data_merge'),
-        (N'dbo._sp_sync_process_k_m_indicators_fields_data_merge'),
-        (N'dbo._sp_sync_process_k_m_period_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plan_display_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plan_display_field_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plan_display_information_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plan_display_tab_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plan_profile_status_group_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_field_validation_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_field_validation_formula_items_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_form_report_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_indicators_data_merge'),
-        (N'dbo._sp_sync_process_k_m_plans_informations_data_merge'),
-        (N'dbo._sp_sync_process_k_m_type_plan_data_merge'),
-        (N'dbo._sp_sync_process_k_m_workflow_data_merge'),
-        (N'dbo._sp_sync_process_k_m_workflow_step_data_merge'),
-        (N'dbo._sp_sync_process_k_m_workflow_step_group_data_merge'),
-        (N'dbo._sp_sync_process_k_m_workflow_step_group_detail_data_merge'),
-        (N'dbo._sp_sync_process_k_m_workflow_step_group_profile_data_merge'),
-        (N'dbo._sp_sync_process_k_referential_grids_data_merge'),
-        (N'dbo._sp_sync_process_k_referential_grids_fields_data_merge'),
-        (N'dbo.sp_client_std_synchronize'),
-        (N'dbo.PEPSICO_SP_Refresh_Translations'),
         (N'dbo.Kernel_SP_Process_DataOnChange')
 ;
 IF EXISTS
@@ -64,36 +38,17 @@ BEGIN
     WHERE OBJECT_ID(required_procedure.object_name, N'P') IS NULL
     ORDER BY required_procedure.object_name;
 
-    THROW 51406, 'Required beqom sync/translation/OnChange procedures are missing or inaccessible. See the preceding result set for database and procedure names.', 1;
+    THROW 51406, 'Required OnChange procedure is missing or inaccessible. See the preceding result set.', 1;
 END;
+IF OBJECT_ID(N'dbo.PEPSICO_bonus_team_business_mapping', N'U') IS NULL
+    OR NOT EXISTS (SELECT 1 FROM dbo.k_m_fields WHERE code_field = N'bonus_team_step_3')
+    THROW 51409, 'Previous PR prerequisites are missing: business mapping table or Bonus Team Step 3 metadata.', 1;
 IF TYPE_ID(N'dbo.Kernel_Type_Process_Values') IS NULL
     OR TYPE_ID(N'dbo.PEPSICO_EmpPayComponentIncrease_param') IS NULL
     THROW 51407, 'Required Kernel table types are missing.', 1;
 GO
 
--- SECTION 01: Objects/Tables/dbo.PEPSICO_bonus_team_business_mapping.sql
-PRINT N'Objects/Tables/dbo.PEPSICO_bonus_team_business_mapping.sql';
-GO
-
-IF OBJECT_ID(N'dbo.PEPSICO_bonus_team_business_mapping', N'U') IS NULL
-BEGIN
-CREATE TABLE [dbo].[PEPSICO_bonus_team_business_mapping](
-	[sector_name] [nvarchar](100) NOT NULL,
-	[org_unit_name] [nvarchar](100) NULL,
-	[bt_business_code] [nvarchar](50) NOT NULL,
-	[is_region] [bit] NOT NULL,
- CONSTRAINT [UQ_PEPSICO_bonus_team_business_mapping] UNIQUE CLUSTERED
-(
-	[sector_name] ASC,
-	[org_unit_name] ASC,
-	[bt_business_code] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-ALTER TABLE [dbo].[PEPSICO_bonus_team_business_mapping] ADD CONSTRAINT [DF_PEPSICO_bonus_team_business_mapping_is_region] DEFAULT ((0)) FOR [is_region]
-END;
-GO
-
--- SECTION 02: Objects/Tables/dbo.PEPSICO_bonus_team_allocation_rule.sql
+-- SECTION 01: Objects/Tables/dbo.PEPSICO_bonus_team_allocation_rule.sql
 PRINT N'Objects/Tables/dbo.PEPSICO_bonus_team_allocation_rule.sql';
 GO
 
@@ -119,7 +74,7 @@ ALTER TABLE [dbo].[PEPSICO_bonus_team_allocation_rule] WITH CHECK ADD CONSTRAINT
 END;
 GO
 
--- SECTION 03: Objects/Tables/dbo.PEPSICO_CompRoundExtendedRule.sql
+-- SECTION 02: Objects/Tables/dbo.PEPSICO_CompRoundExtendedRule.sql
 PRINT N'Objects/Tables/dbo.PEPSICO_CompRoundExtendedRule.sql';
 GO
 
@@ -140,7 +95,7 @@ CREATE TABLE dbo.PEPSICO_CompRoundExtendedRule
 END;
 GO
 
--- SECTION 04: Objects/Tables/dbo.PEPSICO_EmployeeCompRoundException.sql
+-- SECTION 03: Objects/Tables/dbo.PEPSICO_EmployeeCompRoundException.sql
 PRINT N'Objects/Tables/dbo.PEPSICO_EmployeeCompRoundException.sql';
 GO
 
@@ -160,7 +115,7 @@ CREATE TABLE dbo.PEPSICO_EmployeeCompRoundException
 END;
 GO
 
--- SECTION 05: Upgrade pre-existing allocation table: corporate_override
+-- SECTION 04: Upgrade pre-existing allocation table: corporate_override
 PRINT N'Upgrade pre-existing allocation table: corporate_override';
 GO
 
@@ -169,7 +124,7 @@ IF COL_LENGTH(N'dbo.PEPSICO_bonus_team_allocation_rule', N'corporate_override') 
     ADD corporate_override BIT NOT NULL CONSTRAINT DF_PEPSICO_bonus_team_allocation_rule_corporate_override DEFAULT (0);
 GO
 
--- SECTION 06: Migrate allocation keys from Comp Group IDs to names
+-- SECTION 05: Migrate allocation keys from Comp Group IDs to names
 PRINT N'Migrate allocation keys from Comp Group IDs to names';
 GO
 
@@ -209,7 +164,7 @@ WHERE r.comp_round_extended IS NULL;
 ALTER TABLE dbo.PEPSICO_bonus_team_allocation_rule ALTER COLUMN comp_round_extended NVARCHAR(256) NOT NULL;
 GO
 
--- SECTION 07: Identity and business keys: PEPSICO_CompRoundExtendedRule
+-- SECTION 06: Identity and business keys: PEPSICO_CompRoundExtendedRule
 PRINT N'Identity and business keys: PEPSICO_CompRoundExtendedRule';
 GO
 
@@ -238,7 +193,7 @@ IF OBJECT_ID(N'dbo.UQ_PEPSICO_CompRoundExtendedRule_business_key', N'UQ') IS NUL
     ALTER TABLE dbo.PEPSICO_CompRoundExtendedRule ADD CONSTRAINT UQ_PEPSICO_CompRoundExtendedRule_business_key UNIQUE NONCLUSTERED (id_comp_group, division_code);
 GO
 
--- SECTION 08: Identity and business keys: PEPSICO_EmployeeCompRoundException
+-- SECTION 07: Identity and business keys: PEPSICO_EmployeeCompRoundException
 PRINT N'Identity and business keys: PEPSICO_EmployeeCompRoundException';
 GO
 
@@ -267,7 +222,7 @@ IF OBJECT_ID(N'dbo.UQ_PEPSICO_EmployeeCompRoundException_business_key', N'UQ') I
     ALTER TABLE dbo.PEPSICO_EmployeeCompRoundException ADD CONSTRAINT UQ_PEPSICO_EmployeeCompRoundException_business_key UNIQUE NONCLUSTERED (id_step, id_comp_group);
 GO
 
--- SECTION 09: Identity and business keys: PEPSICO_bonus_team_allocation_rule
+-- SECTION 08: Identity and business keys: PEPSICO_bonus_team_allocation_rule
 PRINT N'Identity and business keys: PEPSICO_bonus_team_allocation_rule';
 GO
 
@@ -296,7 +251,7 @@ IF OBJECT_ID(N'dbo.UQ_PEPSICO_bonus_team_allocation_rule_business_key', N'UQ') I
     ALTER TABLE dbo.PEPSICO_bonus_team_allocation_rule ADD CONSTRAINT UQ_PEPSICO_bonus_team_allocation_rule_business_key UNIQUE NONCLUSTERED (comp_round_extended, number_of_businesses, is_region, split_rule);
 GO
 
--- SECTION 10: Remove migrated legacy allocation ID column
+-- SECTION 09: Remove migrated legacy allocation ID column
 PRINT N'Remove migrated legacy allocation ID column';
 GO
 
@@ -304,7 +259,7 @@ IF COL_LENGTH(N'dbo.PEPSICO_bonus_team_allocation_rule', N'id_comp_group') IS NO
     ALTER TABLE dbo.PEPSICO_bonus_team_allocation_rule DROP COLUMN id_comp_group;
 GO
 
--- SECTION 11: Objects/Functions/dbo._ufn_get_comp_round_extended.sql
+-- SECTION 10: Objects/Functions/dbo._ufn_get_comp_round_extended.sql
 PRINT N'Objects/Functions/dbo._ufn_get_comp_round_extended.sql';
 GO
 
@@ -332,7 +287,7 @@ BEGIN
 END;
 GO
 
--- SECTION 12: Objects/Functions/dbo._fn_get_bonus_team.sql
+-- SECTION 11: Objects/Functions/dbo._fn_get_bonus_team.sql
 PRINT N'Objects/Functions/dbo._fn_get_bonus_team.sql';
 GO
 
@@ -793,7 +748,7 @@ BEGIN
 END;
 GO
 
--- SECTION 13: Objects/Functions/dbo._ufn_get_employee_bonus_team.sql
+-- SECTION 12: Objects/Functions/dbo._ufn_get_employee_bonus_team.sql
 PRINT N'Objects/Functions/dbo._ufn_get_employee_bonus_team.sql';
 GO
 
@@ -813,7 +768,7 @@ BEGIN
 END;
 GO
 
--- SECTION 14: Objects/Stored Procedures/dbo.SP_RefreshEmployeeCompRoundException.sql
+-- SECTION 13: Objects/Stored Procedures/dbo.SP_RefreshEmployeeCompRoundException.sql
 PRINT N'Objects/Stored Procedures/dbo.SP_RefreshEmployeeCompRoundException.sql';
 GO
 
@@ -883,7 +838,7 @@ BEGIN
 END;
 GO
 
--- SECTION 15: Objects/Views/dbo.vPEPSICO_bonus_team_step1_business.sql
+-- SECTION 14: Objects/Views/dbo.vPEPSICO_bonus_team_step1_business.sql
 PRINT N'Objects/Views/dbo.vPEPSICO_bonus_team_step1_business.sql';
 GO
 
@@ -901,7 +856,7 @@ AS
 	OFFSET 0 ROWS;
 GO
 
--- SECTION 16: Objects/Views/dbo.vPEPSICO_bonus_team_step2_business.sql
+-- SECTION 15: Objects/Views/dbo.vPEPSICO_bonus_team_step2_business.sql
 PRINT N'Objects/Views/dbo.vPEPSICO_bonus_team_step2_business.sql';
 GO
 
@@ -936,7 +891,7 @@ CROSS JOIN dbo.PEPSICO_Bonus_Team_Business AS b
 WHERE cg.CompGroupName = N'North America';
 GO
 
--- SECTION 17: Objects/Views/dbo.vPEPSICO_bonus_team_step3_business.sql
+-- SECTION 16: Objects/Views/dbo.vPEPSICO_bonus_team_step3_business.sql
 PRINT N'Objects/Views/dbo.vPEPSICO_bonus_team_step3_business.sql';
 GO
 
@@ -987,1485 +942,7 @@ CROSS JOIN dbo.PEPSICO_Bonus_Team_Business AS b
 WHERE cg.CompGroupName = N'North America';
 GO
 
--- SECTION 18: Scripts/PostDeploy/30_Wrappers/Process/Bonus.sql
-PRINT N'Scripts/PostDeploy/30_Wrappers/Process/Bonus.sql';
-GO
-
-/* ----------------------------------------------------------------------------- */
-	/* PROCESS NAME: Bonus                                                              */
-	/* ----------------------------------------------------------------------------- */
-
-	exec sp_client_std_synchronize 'PEPSICO_Process_BonusApproval', 'table', -14;
-	GO
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_referential_grids                                                   */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'PEPSICO_Process_BonusApproval', 'ND_Grid', 'Bonus Verification', '-4', '#NULL#', '20', '0', '#NULL#', '#NULL#', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '0', '0', '-1', '0', '0', '53', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '0', '1', '0', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#', '0', '#NULL#')
-	) s ( rn, ref_name_table_view, ref_name_parent_folder, name_grid, type_grid, comments, page_size, is_addable, form_id, url, is_deletable, is_searchable, is_exportable, date_grid, grouping_field, frozen_column, active_trace, filtering_field, is_simulated, is_importable, idOwner, is_auto_resize, is_track_change, sort_grid, width, fit_to_screen, id_source_tenant, id_source, id_change_set, sp_grid_add_pre, sp_grid_add_post, sp_grid_save_pre, sp_grid_save_post, sp_grid_delete_pre, sp_grid_delete_post, is_bulk_insert, is_tree, ref_name_field_master, ref_name_field_child, ref_name_field_parent, is_staging_area_enabled, is_export_template_enabled, show_default_security_view, use_attached_objects, tree_collapse_after_save, is_password_protection_enabled, apply_user_filter, wrap_header, header_tooltip, sp_grid_import_pre, sp_grid_import_post, allow_attached_file, uid_object) ;
-
-
-	exec [dbo].[_sp_sync_process_k_referential_grids_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_referential_grids_fields                                            */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus Verification', 'id', 'pr_inf_bon_id', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('2', 'Bonus Verification', 'id_histo', 'pr_inf_bon_id_histo', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('3', 'Bonus Verification', 'idPayee', 'pr_inf_bon_idPayee', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('4', 'Bonus Verification', 'codePayee', 'pr_inf_bon_codePayee', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('5', 'Bonus Verification', 'gpid', 'pr_inf_bon_gpid', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('6', 'Bonus Verification', 'start_date_histo', 'pr_inf_bon_start_date_histo', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('7', 'Bonus Verification', 'end_date_histo', 'pr_inf_bon_end_date_histo', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('8', 'Bonus Verification', 'fullname', 'pr_inf_bon_fullname', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('9', 'Bonus Verification', 'BonusTeamName', 'pr_inf_bon_BonusTeamName', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('10', 'Bonus Verification', 'LevelCode', 'pr_inf_bon_LevelCode', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('11', 'Bonus Verification', 'AnnualBonusPct', 'pr_inf_bon_annualBonusPct', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '2', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('12', 'Bonus Verification', 'PremBonusPct', 'pr_inf_bon_PremBonusPct', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('13', 'Bonus Verification', 'BDIShortTermTarget', 'pr_inf_bon_BDIShortTermTarget', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('14', 'Bonus Verification', 'salary', 'pr_inf_bon_salary', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '2', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('15', 'Bonus Verification', 'currency', 'pr_inf_bon_currency', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('16', 'Bonus Verification', 'start_month', 'pr_inf_bon_start_month', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('17', 'Bonus Verification', 'end_month', 'pr_inf_bon_end_month', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('18', 'Bonus Verification', 'overall_status', 'pr_inf_bon_overall_status', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '', '', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('19', 'Bonus Verification', 'login_user_status', 'pr_inf_bon_login_user_status', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('20', 'Bonus Verification', 'login_user_status', 'GF_login_user_status', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('21', 'Bonus Verification', 'CompGroupName', 'pr_inf_bon_CompGroupName', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('22', 'Bonus Verification', 'CompGroupName', 'GF_CompGroupName', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('23', 'Bonus Verification', 'SalaryPlan', 'pr_inf_fp_SalaryPlan', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('24', 'Bonus Verification', 'SalaryPlan', 'GF_SalaryPlan', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('25', 'Bonus Verification', 'is_red_circle', 'Red Circle', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('26', 'Bonus Verification', 'is_red_circle', 'GF_is_red_circle', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('27', 'Bonus Verification', 'LOAProration', 'pr_inf_bon_loa_proration', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '2', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('28', 'Bonus Verification', 'LOAProration', 'GF_LOAProration', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('29', 'Bonus Verification', 'changed_date', 'pr_inf_bon_changed_date', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('30', 'Bonus Verification', 'changed_date', 'GF_changed_date', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('31', 'Bonus Verification', 'idCompGroup', 'idCompGroup', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('32', 'Bonus Verification', 'idCompGroup', 'GF_idCompGroup', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('33', 'Bonus Verification', 'IsDoubleHat', 'pr_inf_bon_IsDoubleHat', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('34', 'Bonus Verification', 'IsDoubleHat', 'GF_IsDoubleHat', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('35', 'Bonus Verification', 'IsDoubleHat_Text', 'pr_inf_bon_IsDoubleHat_Text', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('36', 'Bonus Verification', 'IsDoubleHat_Text', 'GF_IsDoubleHat_Text', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-, 	('37', 'Bonus Verification', 'BonusTeamNameProcess', 'pr_inf_bon_BonusTeamNameProcess', '0', '0', '#NULL#', '0', '#NULL#', '#NULL#', '100', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '0', '0', '0', '0', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_grid, ref_name_field, name_column, order_column, is_editable, regular_expression, is_sortable, error_message, url, width, combo_datasource_name, combo_datavaluefield_name, combo_datatextfield_name, combo_defaultfield_value, combo_page_size, combo_filtered_column_name, combo_filtered_pattern, combo_allow_custom_text, group_index, is_frozen, thousand_separator, decimal_precision, filter_field, sort_order, column_align, is_flex_used, flex, id_source_tenant, id_source, id_change_set, is_mandatory, defaultfield_value, sort_direction, is_percentage_used, ref_name_combotype, combo_dataparentvaluefield_name, is_bulk_apply_used, enable_row_validation, is_uid_reference, hyperlink_enabled, ref_name_field_display, hyperlink_default_display_text) ;
-
-
-	exec [dbo].[_sp_sync_process_k_referential_grids_fields_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_type_plan                                                         */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus Verification', '#NULL#', 'Bonus Verification', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '0')
-	) s ( rn, name_type_plan, sort, ref_name_grid, id_source_tenant, id_source, id_change_set, is_estimator_enabled, post_crediting_stored_procedure, estimator_data_formatter_stored_procedure, estimator_result_producer_stored_procedure, use_cte_in_process_load) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_type_plan_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_period                                                            */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus Approval 2026', 'Jan  1 2026 12:00AM', '#NULL#', '12', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'Dec 31 2026 12:00AM', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, name_period, start_date, status_period, length_period, sort, id_user_create, date_create_period, id_user_update, date_update_period, end_date, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_period_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_workflow                                                          */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'WFL_Bonus Verification', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, name_workflow, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_workflow_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_fields                                                            */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus Approval Involvement Status', 'pr_col_bonus_approval_involvement_status', 'bonus_approval_involvement_status', '205', 'N/A', 'GV_Other', 'type_saisie_list', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Mar 27 2018  7:06AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('2', 'Bonus Approval Overall Status', 'pr_col_bonus_approval_overall_status', 'bonus_approval_overall_status', '129', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Mar 27 2018  7:09AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('3', 'Bonus Approval Reason', 'pr_col_bonus_approval_reason', 'bonus_approval_reason', '257', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Mar 27 2018  7:08AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('4', 'Bonus Team Assignment Correct', 'pr_col_bonus_team_assignment_correct', 'bonus_team_assignment_correct', '220', 'N/A', 'GV_Other', 'type_list_tableView', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:13AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('5', 'Bonus Team Comment', 'pr_col_bonus_team_comment', 'bonus_team_comment', '292', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:14AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('6', 'Bonus Team Comment Check', 'pr_col_bonus_team_comment_check', 'bonus_team_comment_check', '100', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:16AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('7', 'Bonus Team Final', 'pr_col_bonus_team_final', 'bonus_team_final', '278', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:16AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('8', 'Bonus Team PRT Message', 'pr_col_bonus_team_prt_message', 'bonus_team_prt_message', '326', 'N/A', 'GV_Other', 'type_saisie_free', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:13AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('9', 'Bonus Team Step 1', 'pr_col_bonus_team_step_1', 'bonus_team_step_1', '272', 'N/A', 'GV_Other', 'type_list_tableView', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:14AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('10', 'Bonus Team Step 2', 'pr_col_bonus_team_step_2', 'bonus_team_step_2', '275', 'N/A', 'GV_Other', 'type_list_tableView', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct 28 2025  7:15AM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-, 	('11', 'Bonus Team Step 3', 'pr_col_bonus_team_step_3', 'bonus_team_step_3', '200', 'N/A', 'GV_Other', 'type_list_tableView', 'GV_List', 'String', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '#NULL#', 'Oct  1 2026  1:42PM', '#NULL#', '#NULL#', '1', '1', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'GV_None', '0', '#NULL#', '0', '#NULL#', '0', '0', '0', '0', '1')
-	) s ( rn, name_field, label_field, code_field, width, ref_name_unit, ref_name_field_type, ref_name_control_type, ref_name_value_type, ref_name_value_type_format_name, default_type, default_value, min_type, min_value, max_type, max_value, percentage_type, percentage_value, percentage_mode, is_olap, olap_aggregate_function, id_user_create, date_create_field, id_user_update, date_update_field, show_min, show_max, formula, thousand_separator, decimal_precision, id_source_tenant, id_source, id_change_set, ref_name_olap_reference, ref_name_field_access_type, is_percentage_used, value_filter, show_aggregated_result, threshold_comparison_field, threshold_min_value, threshold_max_value, is_threshold_enabled, show_only_aggregated_result, aggregation_type) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_fields_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_indicators                                                        */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'pr_ind_bonus_approval', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'bonus_approval', 'GV_Objective', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', 'Mar 27 2018  7:10AM', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', 'pr_ind_bonus_team', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'bonus_team', 'GV_Objective', '#NULL#', '0', '#NULL#', '#NULL#', '#NULL#', 'Oct 28 2025  7:17AM', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, name_ind, ref_categorie1_ind_name, ref_category_parent_name_1, ref_categorie2_ind_name, ref_category_parent_name_2, ref_categorie3_ind_name, ref_category_parent_name_3, status_ind, comment_ind, ref_indicator_type_name, id_mask, is_olap, id_perimeter, olap_dimension_date, id_owner, date_create_ind, id_user_update, date_update_ind, id_timeframe, id_source_tenant, id_source, id_change_set, ref_perspective_name) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_indicators_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_indicators_fields                                                 */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'pr_ind_bonus_approval', 'Bonus Approval Involvement Status', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', 'pr_ind_bonus_approval', 'Bonus Approval Overall Status', '2', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', 'pr_ind_bonus_approval', 'Bonus Approval Reason', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', 'pr_ind_bonus_team', 'Bonus Team Assignment Correct', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', 'pr_ind_bonus_team', 'Bonus Team Comment', '2', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', 'pr_ind_bonus_team', 'Bonus Team Comment Check', '3', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', 'pr_ind_bonus_team', 'Bonus Team Final', '7', '#NULL#', '#NULL#', '#NULL#')
-, 	('8', 'pr_ind_bonus_team', 'Bonus Team PRT Message', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('9', 'pr_ind_bonus_team', 'Bonus Team Step 1', '4', '#NULL#', '#NULL#', '#NULL#')
-, 	('10', 'pr_ind_bonus_team', 'Bonus Team Step 2', '5', '#NULL#', '#NULL#', '#NULL#')
-, 	('11', 'pr_ind_bonus_team', 'Bonus Team Step 3', '6', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_indicator, ref_name_field, sort, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_indicators_fields_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_workflow_step                                                     */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'WFL_Bonus Verification', 'pr_wfs_approval', '1', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_workflow, name_step, sort_step, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_workflow_step_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_workflow_step_group                                               */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_workflow                                                        */
-	/* FILTER 1 - VALUE:           WFL_Bonus Verification                                                */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'WFL_Bonus Verification', '1317', 'pr_wfs_approval', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', 'bonus_approval_involvement_status1121::bonus_approval_overall_status0121::bonus_approval_reason1121::bonus_team_assignment_correct1211::bonus_team_comment1211::bonus_team_comment_check0211::bonus_team_final1211::bonus_team_prt_message1211::bonus_team_step_11211::bonus_team_step_21211::bonus_team_step_31211::', 'Administrator::Comp Admin::Human Resource::Human Resources LG8::Manager::Manager LG8::Super User::')
-	) s ( rn, name_workflow, id_wflstepgroup, ref_name_step, level_step, is_min_level, enable_validation, enable_invalidation, enable_massvalidation, enable_massinvalidation, id_source_tenant, id_source, id_change_set, detail_attr, profile_attr) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_workflow_step_group_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_workflow_step_group_detail                                        */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_workflow                                                        */
-	/* FILTER 1 - VALUE:           WFL_Bonus Verification                                                */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', '1317', 'Bonus Approval Involvement Status', '1', 'pr_ind_bonus_approval', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', '1317', 'Bonus Approval Overall Status', '0', 'pr_ind_bonus_approval', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', '1317', 'Bonus Approval Reason', '1', 'pr_ind_bonus_approval', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', '1317', 'Bonus Team Assignment Correct', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', '1317', 'Bonus Team Comment', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', '1317', 'Bonus Team Comment Check', '0', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', '1317', 'Bonus Team Final', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('8', '1317', 'Bonus Team PRT Message', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('9', '1317', 'Bonus Team Step 1', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('10', '1317', 'Bonus Team Step 2', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-, 	('11', '1317', 'Bonus Team Step 3', '1', 'pr_ind_bonus_team', '1', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_id_wflstepgroup, ref_name_field, is_editable, ref_name_indicator, is_readable, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_workflow_step_group_detail_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_workflow_step_group_profile                                       */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_workflow                                                        */
-	/* FILTER 1 - VALUE:           WFL_Bonus Verification                                                */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', '1317', 'Administrator', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', '1317', 'Comp Admin', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', '1317', 'Human Resource', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', '1317', 'Human Resources LG8', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', '1317', 'Manager', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', '1317', 'Manager LG8', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', '1317', 'Super User', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_id_wflstepgroup, ref_name_profile, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_workflow_step_group_profile_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans                                                             */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', '#NULL#', '#NULL#', 'ND_Processes', '#NULL#', '#NULL#', '#NULL#', 'Bonus Verification', 'GV_Yearly', 'Bonus Approval 2026', 'WFL_Bonus Verification', '#NULL#', '#NULL#', '-1', '#NULL#', '#NULL#', '#NULL#', '0', '-1', 'Jan  1 2026 12:00AM', 'Dec 31 2026 11:59PM', '0', '-1', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '1', '1', '0', '#NULL#', '0', '-2', '25', '0', '0', '0', '0', '34', '35', '32', '33', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '50', '1', '1', '100', '100', '100', '100', '0', '0', '0', '65509CA7-8A0E-49BB-BFB9-AA9A802FBA62', '89E323D4-000B-4F4D-88B6-07F4B33B574D')
-	) s ( rn, name_plan, comment_plan, nb_frozen_columns, ref_name_folder, nb_default_page_size, nb_indicator_plan, status_plan, ref_name_type_plan, ref_name_frequency, ref_name_period, ref_name_workflow, id_form, id_report, id_owner, date_create_plan, id_user_update, date_update_plan, selfAppraisal, idLevelComment, start_date_plan, end_date_plan, is_begin_date_frequency_start, id_plan_layout_type, root_form_container_id, id_source_tenant, id_source, id_change_set, is_workflow_active, show_employee_info_template, is_quota_enabled, id_structure, tqm_showExtraColumns, id_plan_importexport_options, page_size, is_level_calculation_payee_only, filter_start_date_visibility, filter_end_date_visibility, filter_workflow_step_visibility, sort_order_start_date, sort_order_end_date, sort_order_workflow_step, sort_order_workflow_status, available_start_date, available_end_date, available_workflow_status, available_workflow_step_name, start_date_is_locked, end_date_is_locked, workflow_status_is_locked, workflow_step_is_locked, default_level, is_data_grouping_allowed, is_simulatable, attached_object_close_after_save, attached_object_refresh_after_save, attached_object_refresh_after_save_always, attached_object_height, wrap_header, header_tooltip, width_start_date, width_end_date, width_workflow_status, width_workflow_step_name, is_picture_shown, enable_group_summary, allow_attached_file, uid_object, uid_datasource) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_indicators                                                  */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', 'pr_ind_bonus_approval', '591', '#NULL#', '26', 'Jan  1 2026 12:00AM', 'Dec 31 2026 11:59PM', '#NULL#', '#NULL#', '#NULL#', '0', '#ffffff')
-, 	('2', 'Bonus', 'pr_ind_bonus_team', '1763', '#NULL#', '18', 'Jan  1 2026 12:00AM', 'Dec 31 2026 11:59PM', '#NULL#', '#NULL#', '#NULL#', '0', '#ffffff')
-	) s ( rn, ref_name_plan, ref_name_indicator, weight_plan_ind, comment_plan_ind, sort_plan_ind, start_date_plan_ind, end_date_plan_ind, id_source_tenant, id_source, id_change_set, is_frozen, color_code) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_indicators_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_informations                                                */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', 'idCompGroup', 'Bonus Verification', '100', '11', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('2', 'Bonus', 'pr_inf_bon_annualBonusPct', 'Bonus Verification', '88', '8', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('3', 'Bonus', 'pr_inf_bon_BDIShortTermTarget', 'Bonus Verification', '106', '7', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('4', 'Bonus', 'pr_inf_bon_BonusTeamNameProcess', 'Bonus Verification', '228', '17', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('5', 'Bonus', 'pr_inf_bon_changed_date', 'Bonus Verification', '160', '31', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('6', 'Bonus', 'pr_inf_bon_CompGroupName', 'Bonus Verification', '144', '12', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('7', 'Bonus', 'pr_inf_bon_currency', 'Bonus Verification', '100', '4', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('8', 'Bonus', 'pr_inf_bon_end_month', 'Bonus Verification', '93', '14', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('9', 'Bonus', 'pr_inf_bon_fullname', 'Bonus Verification', '184', '0', '1', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('10', 'Bonus', 'pr_inf_bon_gpid', 'Bonus Verification', '89', '1', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('11', 'Bonus', 'pr_inf_bon_IsDoubleHat', 'Bonus Verification', '145', '15', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('12', 'Bonus', 'pr_inf_bon_IsDoubleHat_Text', 'Bonus Verification', '176', '16', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('13', 'Bonus', 'pr_inf_bon_LevelCode', 'Bonus Verification', '119', '2', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('14', 'Bonus', 'pr_inf_bon_loa_proration', 'Bonus Verification', '100', '10', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('15', 'Bonus', 'pr_inf_bon_login_user_status', 'Bonus Verification', '145', '30', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('16', 'Bonus', 'pr_inf_bon_PremBonusPct', 'Bonus Verification', '108', '9', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('17', 'Bonus', 'pr_inf_bon_salary', 'Bonus Verification', '107', '5', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('18', 'Bonus', 'pr_inf_bon_start_month', 'Bonus Verification', '92', '13', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('19', 'Bonus', 'pr_inf_fp_SalaryPlan', 'Bonus Verification', '165', '3', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-, 	('20', 'Bonus', 'Red Circle', 'Bonus Verification', '100', '6', '0', '#NULL#', '#NULL#', '#NULL#', '1')
-	) s ( rn, ref_name_plan, ref_name_grid_field, ref_name_grid, width, sort, is_locked, id_source_tenant, id_source, id_change_set, type) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_informations_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plan_display                                                      */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', 'Administrator', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '1', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('2', 'Bonus', 'Comp Admin', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('3', 'Bonus', 'Etl Tester', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('4', 'Bonus', 'Human Resource', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('5', 'Bonus', 'Human Resources LG8', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('6', 'Bonus', 'Manager', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('7', 'Bonus', 'Manager LG8', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('8', 'Bonus', 'No access', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-, 	('9', 'Bonus', 'Super User', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '0', '#NULL#', '1')
-	) s ( rn, ref_name_plan, ref_name_profile, available_start_date, available_end_date, available_workflow_status, available_workflow_step_name, show_start_date, show_end_date, show_workflow_status, show_workflow_step_name, optional_show_start_date, optional_show_end_date, optional_show_workflow_status, optional_show_workflow_step_name, id_source_tenant, id_source, id_change_set, available_default_form_header, workflow_level, refresh_grid_after_save) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plan_display_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plan_display_field                                                */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus;;;Administrator', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', 'Bonus;;;Administrator', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', 'Bonus;;;Administrator', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('8', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('9', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('10', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('11', 'Bonus;;;Administrator', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('12', 'Bonus;;;Comp Admin', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('13', 'Bonus;;;Comp Admin', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('14', 'Bonus;;;Comp Admin', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('15', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('16', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('17', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('18', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('19', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('20', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('21', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('22', 'Bonus;;;Comp Admin', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('23', 'Bonus;;;Etl Tester', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('24', 'Bonus;;;Etl Tester', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('25', 'Bonus;;;Etl Tester', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('26', 'Bonus;;;Human Resource', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('27', 'Bonus;;;Human Resource', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('28', 'Bonus;;;Human Resource', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('29', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('30', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('31', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('32', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('33', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('34', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('35', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('36', 'Bonus;;;Human Resource', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('37', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('38', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('39', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('40', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('41', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('42', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('43', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('44', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('45', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('46', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('47', 'Bonus;;;Human Resources LG8', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('48', 'Bonus;;;Manager', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('49', 'Bonus;;;Manager', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('50', 'Bonus;;;Manager', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('51', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('52', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('53', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('54', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('55', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('56', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('57', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('58', 'Bonus;;;Manager', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('59', 'Bonus;;;Manager LG8', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('60', 'Bonus;;;Manager LG8', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('61', 'Bonus;;;Manager LG8', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('62', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('63', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('64', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('65', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('66', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('67', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('68', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('69', 'Bonus;;;Manager LG8', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('70', 'Bonus;;;No access', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('71', 'Bonus;;;No access', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('72', 'Bonus;;;No access', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('73', 'Bonus;;;Super User', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('74', 'Bonus;;;Super User', 'pr_ind_bonus_approval;;;Bonus Approval Overall Status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('75', 'Bonus;;;Super User', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('76', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('77', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Comment', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('78', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('79', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Final', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('80', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('81', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Step 1', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('82', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Step 2', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('83', 'Bonus;;;Super User', 'pr_ind_bonus_team;;;Bonus Team Step 3', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_plan_display, ref_name_indicator_field, available_plan_display_field, show_plan_display_field, optional_show_plan_display_field, id_source_tenant, id_source, id_change_set, filter_order) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plan_display_field_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plan_display_information                                          */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus_Administrator', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', 'Bonus_Administrator', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', 'Bonus_Administrator', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', 'Bonus_Administrator', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', 'Bonus_Administrator', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', 'Bonus_Administrator', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', 'Bonus_Administrator', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('8', 'Bonus_Administrator', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('9', 'Bonus_Administrator', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('10', 'Bonus_Administrator', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('11', 'Bonus_Administrator', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('12', 'Bonus_Administrator', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('13', 'Bonus_Administrator', 'Bonus_pr_inf_bon_loa_proration', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('14', 'Bonus_Administrator', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('15', 'Bonus_Administrator', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('16', 'Bonus_Administrator', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('17', 'Bonus_Administrator', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('18', 'Bonus_Administrator', 'Bonus_pr_inf_fp_SalaryPlan', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('19', 'Bonus_Administrator', 'Bonus_Red Circle', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('20', 'Bonus_Comp Admin', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('21', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('22', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('23', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('24', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('25', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('26', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('27', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('28', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('29', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('30', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('31', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('32', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_loa_proration', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('33', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('34', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('35', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('36', 'Bonus_Comp Admin', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('37', 'Bonus_Comp Admin', 'Bonus_pr_inf_fp_SalaryPlan', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('38', 'Bonus_Comp Admin', 'Bonus_Red Circle', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('39', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_annualBonusPct', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('40', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_BDIShortTermTarget', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('41', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_CompGroupName', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('42', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_currency', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('43', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_end_month', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('44', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_gpid', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('45', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_LevelCode', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('46', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_login_user_status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('47', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_PremBonusPct', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('48', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_salary', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('49', 'Bonus_Etl Tester', 'Bonus_pr_inf_bon_start_month', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('50', 'Bonus_Human Resource', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('51', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('52', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('53', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('54', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('55', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('56', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('57', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('58', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('59', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('60', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('61', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('62', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_loa_proration', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('63', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('64', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('65', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('66', 'Bonus_Human Resource', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('67', 'Bonus_Human Resource', 'Bonus_pr_inf_fp_SalaryPlan', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('68', 'Bonus_Human Resource', 'Bonus_Red Circle', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('69', 'Bonus_Human Resources LG8', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('70', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('71', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('72', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('73', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('74', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('75', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('76', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('77', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('78', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('79', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('80', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('81', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('82', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('83', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('84', 'Bonus_Human Resources LG8', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('85', 'Bonus_Manager', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('86', 'Bonus_Manager', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('87', 'Bonus_Manager', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('88', 'Bonus_Manager', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('89', 'Bonus_Manager', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('90', 'Bonus_Manager', 'Bonus_pr_inf_bon_CompGroupName', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('91', 'Bonus_Manager', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('92', 'Bonus_Manager', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('93', 'Bonus_Manager', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('94', 'Bonus_Manager', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('95', 'Bonus_Manager', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('96', 'Bonus_Manager', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('97', 'Bonus_Manager', 'Bonus_pr_inf_bon_loa_proration', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('98', 'Bonus_Manager', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('99', 'Bonus_Manager', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('100', 'Bonus_Manager', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('101', 'Bonus_Manager', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('102', 'Bonus_Manager', 'Bonus_pr_inf_fp_SalaryPlan', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('103', 'Bonus_Manager', 'Bonus_Red Circle', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('104', 'Bonus_Manager LG8', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('105', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('106', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('107', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('108', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('109', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('110', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('111', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('112', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('113', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('114', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('115', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('116', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('117', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('118', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('119', 'Bonus_Manager LG8', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('120', 'Bonus_No access', 'Bonus_pr_inf_bon_annualBonusPct', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('121', 'Bonus_No access', 'Bonus_pr_inf_bon_BDIShortTermTarget', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('122', 'Bonus_No access', 'Bonus_pr_inf_bon_CompGroupName', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('123', 'Bonus_No access', 'Bonus_pr_inf_bon_currency', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('124', 'Bonus_No access', 'Bonus_pr_inf_bon_end_month', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('125', 'Bonus_No access', 'Bonus_pr_inf_bon_gpid', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('126', 'Bonus_No access', 'Bonus_pr_inf_bon_LevelCode', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('127', 'Bonus_No access', 'Bonus_pr_inf_bon_login_user_status', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('128', 'Bonus_No access', 'Bonus_pr_inf_bon_PremBonusPct', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('129', 'Bonus_No access', 'Bonus_pr_inf_bon_salary', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('130', 'Bonus_No access', 'Bonus_pr_inf_bon_start_month', '0', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('131', 'Bonus_Super User', 'Bonus_idCompGroup', '1', '0', '0', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('132', 'Bonus_Super User', 'Bonus_pr_inf_bon_annualBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('133', 'Bonus_Super User', 'Bonus_pr_inf_bon_BDIShortTermTarget', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('134', 'Bonus_Super User', 'Bonus_pr_inf_bon_BonusTeamNameProcess', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('135', 'Bonus_Super User', 'Bonus_pr_inf_bon_changed_date', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('136', 'Bonus_Super User', 'Bonus_pr_inf_bon_CompGroupName', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('137', 'Bonus_Super User', 'Bonus_pr_inf_bon_currency', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('138', 'Bonus_Super User', 'Bonus_pr_inf_bon_end_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('139', 'Bonus_Super User', 'Bonus_pr_inf_bon_gpid', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('140', 'Bonus_Super User', 'Bonus_pr_inf_bon_IsDoubleHat', '1', '0', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('141', 'Bonus_Super User', 'Bonus_pr_inf_bon_IsDoubleHat_Text', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('142', 'Bonus_Super User', 'Bonus_pr_inf_bon_LevelCode', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('143', 'Bonus_Super User', 'Bonus_pr_inf_bon_loa_proration', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('144', 'Bonus_Super User', 'Bonus_pr_inf_bon_login_user_status', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('145', 'Bonus_Super User', 'Bonus_pr_inf_bon_PremBonusPct', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('146', 'Bonus_Super User', 'Bonus_pr_inf_bon_salary', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('147', 'Bonus_Super User', 'Bonus_pr_inf_bon_start_month', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('148', 'Bonus_Super User', 'Bonus_pr_inf_fp_SalaryPlan', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-, 	('149', 'Bonus_Super User', 'Bonus_Red Circle', '1', '1', '1', '#NULL#', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_plan_display, ref_name_plan_information, available_plan_display_information, show_plan_display_information, optional_show_plan_display_information, id_source_tenant, id_source, id_change_set, filter_order) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plan_display_information_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plan_profile_status_group                                         */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', 'Administrator', '')
-, 	('2', 'Bonus', 'Comp Admin', '')
-, 	('3', 'Bonus', 'Human Resource', '')
-, 	('4', 'Bonus', 'Human Resources LG8', '')
-, 	('5', 'Bonus', 'Manager', '')
-, 	('6', 'Bonus', 'Manager LG8', '')
-, 	('7', 'Bonus', 'Super User', '')
-	) s ( rn, ref_name_plan, ref_name_profile, description) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plan_profile_status_group_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_field_validation                                            */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Compensation Review                                                   */
-	/* ================================================================================================= */
-
-				if object_id('tempdb..#sync_data_diff') is not null
-					drop table #sync_data_diff
-				go
-
-				select	*
-				into	#sync_data_diff
-				from	(values
-				
-	('1', 'Bonus Verification', '12_54', 'IN', '#NULL#', 'pr_ind_bonus_approval', 'Bonus Approval Involvement Status')
-, 	('2', 'Bonus Verification', '12_55', 'IN', '#NULL#', 'pr_ind_bonus_approval', 'Bonus Approval Reason')
-, 	('3', 'Bonus Verification', '21_137', 'IN', '#NULL#', 'pr_ind_bonus_team', 'Bonus Team Assignment Correct')
-, 	('4', 'Bonus Verification', '21_139', 'IN', '#NULL#', 'pr_ind_bonus_team', 'Bonus Team Comment')
-, 	('5', 'Bonus Verification', '21_140', 'IN', '#NULL#', 'pr_ind_bonus_team', 'Bonus Team Step 1')
-, 	('6', 'Bonus Verification', 'ic_18739', 'PC', 'pr_inf_bon_IsDoubleHat', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_grid, formula, type_column, name_column, id_ind, id_ind_field) ;
-
-
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_field_validation                                            */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_approval;;;Bonus Approval Involvement Status', '#NULL#', '1==2', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_approval', '0', '1', '0')
-, 	('2', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '#NULL#', '[12_54]!=''REJECTED'' || [12_54]==''REJECTED'' && [12_55] != ''''', '0', '1', 'Reject Reason must be entered when Rejecting a Bonus', '1', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_approval', '0', '1', '1')
-, 	('3', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '#NULL#', '[21_137]==''SELECT''||[21_137]==''CORRECT''||[21_137]==''INCORRECT_DATA''||([21_137]==''INCORRECT_TEAM''&&([21_140]!=''''||[ic_18739]==1))||([21_137]==''INCORRECT_TEAM_DATA''&&([21_140]!=''''||[ic_18739]==1))', '1', '1', 'Choose a business to adjust the Bonus Team', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '1')
-, 	('4', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Comment', '#NULL#', '[21_137]==''INCORRECT_TEAM''||[21_137]==''INCORRECT_TEAM_DATA''||[21_137]==''INCORRECT_DATA''', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-, 	('5', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '#NULL#', '(([21_137]==''INCORRECT_DATA''
-||
-[21_137]==''INCORRECT_TEAM_DATA'')
-&&[21_139]!='''') ||[21_137]==''CORRECT''||[21_137]==''SELECT''||[21_137]==''INCORRECT_TEAM''', '0', '1', 'Comment is mandatory when the Involvement Data is incorrect', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '1', '1', '1')
-, 	('6', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Final', '#NULL#', '1==2', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-, 	('7', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team PRT Message', '#NULL#', '1==2', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-, 	('8', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Step 1', '#NULL#', '([21_137]==''INCORRECT_TEAM''
-||[21_137]==''INCORRECT_TEAM_DATA''
-)&&[ic_18739]==0', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-, 	('9', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Step 2', '#NULL#', '(([21_137]==''INCORRECT_TEAM''
-||[21_137]==''INCORRECT_TEAM_DATA''
-)&&[ic_18739]==0)&&[21_140]!=''BTB047''', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-, 	('10', 'Bonus Verification', 'Bonus', 'pr_ind_bonus_team;;;Bonus Team Step 3', '#NULL#', '(([21_137]==''INCORRECT_TEAM''
-||[21_137]==''INCORRECT_TEAM_DATA''
-)&&[ic_18739]==0)&&[21_140]!=''BTB047''', '1', '0', '', '0', '000000', 'C30014', 'FDF3F3', '0', '000000', '3FA440', '94CD94', 'Bonus;;;pr_ind_bonus_team', '0', '1', '0')
-	) s ( rn, ref_name_grid, ref_name_plan, ref_name_indicator_field, ref_name_plan_information, formula, action_false_allow_saving, action_false_show_error, action_false_error_message, action_false_use_field_style, action_false_text_color, action_false_border_color, action_false_background_color, action_true_use_field_style, action_true_text_color, action_true_border_color, action_true_background_color, ref_name_plan_indicator, action_false_show_error_on_change, enable_client_side_validation, action_false_allow_editing) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_field_validation_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_field_validation_formula_items                              */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus;;;pr_ind_bonus_approval;;;Bonus Approval Reason', 'pr_ind_bonus_approval;;;Bonus Approval Reason', '#NULL#')
-, 	('2', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Assignment Correct', 'pr_ind_bonus_team;;;Bonus Team Assignment Correct', '#NULL#')
-, 	('3', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Comment', 'pr_ind_bonus_team;;;Bonus Team Comment', '#NULL#')
-, 	('4', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Comment Check', 'pr_ind_bonus_team;;;Bonus Team Comment Check', '#NULL#')
-, 	('5', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Step 1', 'pr_ind_bonus_team;;;Bonus Team Step 1', '#NULL#')
-, 	('6', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Step 2', 'pr_ind_bonus_team;;;Bonus Team Step 2', '#NULL#')
-, 	('7', 'Bonus;;;pr_ind_bonus_team;;;Bonus Team Step 3', 'pr_ind_bonus_team;;;Bonus Team Step 3', '#NULL#')
-	) s ( rn, ref_name_plan_field_validation, ref_name_indicator_field, ref_name_plan_info) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_field_validation_formula_items_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plans_form_report                                                 */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus', 'Process Bonus Involvements and Overrides', 'Involvements and Overrides', 'Employee Report', '#NULL#', '#NULL#', '#NULL#', '0', '1', 'A90392DA-BAD5-4C59-BB83-EFD5F42CEAD7')
-, 	('2', 'Bonus', 'Process Bonus Team Details', 'rep_process_emp_team_details', 'Employee Report', '#NULL#', '#NULL#', '#NULL#', '0', '0', 'AC81F4E3-0D29-44F3-93D5-EBD45DBDBABF')
-, 	('3', 'Bonus', 'Process Parameter Report Employee', 'Parameters', 'Employee Report', '#NULL#', '#NULL#', '#NULL#', '0', '3', '1926044E-23E0-4051-8BA3-DF1EF301485C')
-, 	('4', 'Bonus', 'Process Values Employee', 'rep_process_emp_change_history', 'Employee Report', '#NULL#', '#NULL#', '#NULL#', '0', '2', '857063BC-0B77-4E27-ABB1-5E0CA4177972')
-, 	('5', 'Bonus', 'Process Help', 'rep_process_man_bonus', 'Manager Report', '#NULL#', '#NULL#', '#NULL#', '0', '0', 'BE6DC61F-9EC2-464C-9889-FB697A857C3F')
-, 	('6', 'Bonus', 'Process Parameter Report Manager', 'rep_process_emp_parameters', 'Manager Report', '#NULL#', '#NULL#', '#NULL#', '0', '1', 'CA91FC7A-A5FD-4A44-858F-B90ACE13AE04')
-	) s ( rn, ref_name_plan, ref_name_report, name_form, ref_name_plan_form_report_type, id_source_tenant, id_source, id_change_set, show_by_default, sort_order, uid_object_relation) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plans_form_report_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_m_plan_display_tab                                                  */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Bonus;;;Administrator', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('2', 'Bonus;;;Administrator', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('3', 'Bonus;;;Administrator', '#NULL#', 'Bonus;;;Process Parameter Report Employee;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('4', 'Bonus;;;Administrator', '#NULL#', 'Bonus;;;Process Parameter Report Manager;;;Manager Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('5', 'Bonus;;;Administrator', '#NULL#', 'Bonus;;;Process Values Employee;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('6', 'Bonus;;;Comp Admin', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('7', 'Bonus;;;Comp Admin', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('8', 'Bonus;;;Comp Admin', '#NULL#', 'Bonus;;;Process Values Employee;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('9', 'Bonus;;;Human Resource', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('10', 'Bonus;;;Human Resource', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('11', 'Bonus;;;Human Resources LG8', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('12', 'Bonus;;;Human Resources LG8', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('13', 'Bonus;;;Manager', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('14', 'Bonus;;;Manager', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('15', 'Bonus;;;Manager LG8', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('16', 'Bonus;;;Manager LG8', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('17', 'Bonus;;;Super User', '#NULL#', 'Bonus;;;Process Bonus Involvements and Overrides;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('18', 'Bonus;;;Super User', '#NULL#', 'Bonus;;;Process Bonus Team Details;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-, 	('19', 'Bonus;;;Super User', '#NULL#', 'Bonus;;;Process Values Employee;;;Employee Report', '0', '#NULL#', '#NULL#', '#NULL#')
-	) s ( rn, ref_name_plan_display, ref_name_plan_tab_standard, ref_name_plan_form_report, display_order, id_source_tenant, id_source, id_change_set) ;
-
-
-	exec [dbo].[_sp_sync_process_k_m_plan_display_tab_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_modules                                                             */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'ND_ProcessReports', 'Process Bonus Involvements and Overrides', '-9', 'Process Bonus Involvements and Overrides', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-, 	('2', 'ND_ProcessReports', 'Process Bonus Team Details', '-9', 'Process Bonus Team Details', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-, 	('3', 'ND_ProcessReports', 'Process Help', '-9', 'Process Help', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-, 	('4', 'ND_ProcessReports', 'Process Parameter Report Employee', '-9', 'Process Parameter Report Employee', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-, 	('5', 'ND_ProcessReports', 'Process Parameter Report Manager', '-9', 'Process Parameter Report Manager', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-, 	('6', 'ND_ProcessReports', 'Process Values Employee', '-9', 'Process Values Employee', '0', '#NULL#', '#NULL#', '#NULL#', '1', 'report')
-	) s ( rn, ref_parent_name_module, name_module, id_tab, ref_name_object, order_module, id_source_tenant, id_source, id_change_set, show_in_accordion, ref_name_module_type) ;
-
-
-	exec [dbo].[_sp_sync_k_modules_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_modules_rights                                                      */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-, 	('2', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-, 	('3', 'Process Parameter Report Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-, 	('4', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-, 	('5', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-, 	('6', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'report')
-	) s ( rn, ref_name_object, ref_name_right, id_source_tenant, id_source, id_change_set, ref_name_module_type) ;
-
-
-	exec [dbo].[_sp_sync_k_modules_rights_data_merge];
-
-	/* ================================================================================================= */
-	/* TABLE NAME:                 k_profiles_modules_rights                                             */
-	/* SCRIPT GENERATION TIME:     2026-10-20 09:12:32.                                                  */
-	/* USER:					   tymoteusz.kruk@beqom.com                                              */
-	/* FILTER 1 - NAME:            @name_process                                                         */
-	/* FILTER 1 - VALUE:           Bonus                                                                 */
-	/* ================================================================================================= */
-
-			if object_id('tempdb..#sync_data') is not null
-				drop table #sync_data
-			go
-		
-			select	*
-			into	#sync_data
-			from	(values
-			
-	('1', 'Administrator', 'Process Parameter Report Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('2', 'Administrator', 'Process Parameter Report Employee', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('3', 'Administrator', 'Process Parameter Report Employee', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('4', 'Administrator', 'Process Parameter Report Employee', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('5', 'Administrator', 'Process Parameter Report Employee', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('6', 'Administrator', 'Process Parameter Report Employee', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('7', 'Administrator', 'Process Parameter Report Employee', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('8', 'Administrator', 'Process Parameter Report Employee', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('9', 'Administrator', 'Process Parameter Report Employee', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('10', 'Administrator', 'Process Parameter Report Employee', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('11', 'Administrator', 'Process Parameter Report Employee', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('12', 'Administrator', 'Process Parameter Report Employee', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Name Title')
-, 	('13', 'Administrator', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('14', 'Administrator', 'Process Parameter Report Manager', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('15', 'Administrator', 'Process Parameter Report Manager', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('16', 'Administrator', 'Process Parameter Report Manager', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('17', 'Administrator', 'Process Parameter Report Manager', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('18', 'Administrator', 'Process Parameter Report Manager', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('19', 'Administrator', 'Process Parameter Report Manager', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('20', 'Administrator', 'Process Parameter Report Manager', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('21', 'Administrator', 'Process Parameter Report Manager', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('22', 'Administrator', 'Process Parameter Report Manager', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('23', 'Administrator', 'Process Parameter Report Manager', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('24', 'Administrator', 'Process Parameter Report Manager', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Type')
-, 	('25', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('26', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('27', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('28', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('29', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('30', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('31', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('32', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('33', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('34', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('35', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('36', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'LG vs eCom Level Types')
-, 	('37', 'Administrator', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('38', 'Administrator', 'Process Bonus Team Details', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('39', 'Administrator', 'Process Bonus Team Details', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('40', 'Administrator', 'Process Bonus Team Details', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('41', 'Administrator', 'Process Bonus Team Details', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('42', 'Administrator', 'Process Bonus Team Details', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('43', 'Administrator', 'Process Bonus Team Details', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('44', 'Administrator', 'Process Bonus Team Details', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('45', 'Administrator', 'Process Bonus Team Details', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('46', 'Administrator', 'Process Bonus Team Details', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('47', 'Administrator', 'Process Bonus Team Details', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('48', 'Administrator', 'Process Bonus Team Details', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Employee Status')
-, 	('49', 'Administrator', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('50', 'Administrator', 'Process Help', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('51', 'Administrator', 'Process Help', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('52', 'Administrator', 'Process Help', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('53', 'Administrator', 'Process Help', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('54', 'Administrator', 'Process Help', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('55', 'Administrator', 'Process Help', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('56', 'Administrator', 'Process Help', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('57', 'Administrator', 'Process Help', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('58', 'Administrator', 'Process Help', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('59', 'Administrator', 'Process Help', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('60', 'Administrator', 'Process Help', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'Vehicle Type')
-, 	('61', 'Administrator', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('62', 'Administrator', 'Process Values Employee', 'EXC_modify', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('63', 'Administrator', 'Process Values Employee', 'EXC_create', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('64', 'Administrator', 'Process Values Employee', 'EXC_delete', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('65', 'Administrator', 'Process Values Employee', 'EXC_export', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('66', 'Administrator', 'Process Values Employee', 'EXC_import', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('67', 'Administrator', 'Process Values Employee', 'EXC_publish_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('68', 'Administrator', 'Process Values Employee', 'EXC_validate_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('69', 'Administrator', 'Process Values Employee', 'EXC_access_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('70', 'Administrator', 'Process Values Employee', 'EXC_delete_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('71', 'Administrator', 'Process Values Employee', 'EXC_modify_staging', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('72', 'Administrator', 'Process Values Employee', 'EXC_execute_sp', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'grid', 'PEPSICO_stg_EmpPayComponentRecurring_Error')
-, 	('73', 'Administrator', 'Process Parameter Report Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Parameter Report Employee')
-, 	('74', 'Administrator', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('75', 'Administrator', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('76', 'Administrator', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('77', 'Administrator', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Values Employee')
-, 	('78', 'Administrator', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'node', '_vw_ad_hoc_dataset_dlti')
-, 	('79', 'Manager', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'Jan  1 2025 12:00AM', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('80', 'Manager', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('81', 'Manager', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('82', 'Manager LG8', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('83', 'Manager LG8', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('84', 'Manager LG8', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('85', 'Human Resource', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('86', 'Human Resource', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('87', 'Human Resource', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('88', 'Human Resource', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', 'Jan  1 2025 12:00AM', '#NULL#', 'report', 'Process Values Employee')
-, 	('89', 'Human Resource', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'node', '_vw_ad_hoc_dataset_dlti')
-, 	('90', 'Human Resources LG8', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('91', 'Human Resources LG8', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('92', 'Human Resources LG8', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('93', 'Human Resources LG8', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Values Employee')
-, 	('94', 'Comp Admin', 'Process Parameter Report Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Parameter Report Employee')
-, 	('95', 'Comp Admin', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('96', 'Comp Admin', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('97', 'Comp Admin', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('98', 'Comp Admin', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Values Employee')
-, 	('99', 'Comp Admin', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'node', '_vw_ad_hoc_dataset_dlti')
-, 	('100', 'Super User', 'Process Parameter Report Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Parameter Report Employee')
-, 	('101', 'Super User', 'Process Bonus Involvements and Overrides', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Involvements and Overrides')
-, 	('102', 'Super User', 'Process Bonus Team Details', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Bonus Team Details')
-, 	('103', 'Super User', 'Process Help', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Help')
-, 	('104', 'Super User', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Values Employee')
-, 	('105', 'Super User', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'node', '_vw_ad_hoc_dataset_dlti')
-, 	('106', 'Tech Admin', 'Process Parameter Report Manager', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'node', '_vw_ad_hoc_dataset_dlti')
-, 	('107', 'Job Architecture Admin', 'Process Values Employee', 'EXC_read', '#NULL#', '#NULL#', '#NULL#', '#NULL#', '#NULL#', 'report', 'Process Values Employee')
-	) s ( rn, ref_name_profile, ref_name_object, ref_name_right, id_source_tenant, id_source, id_change_set, start_date, end_date, ref_name_module_type, ref_name_module) ;
-
-
-	exec [dbo].[_sp_sync_k_profiles_modules_rights_data_merge];
-
-	GO
-
--- SECTION 19: Scripts/PostDeploy/40_Config/add_step_3_to_bonus_process.sql
-PRINT N'Scripts/PostDeploy/40_Config/add_step_3_to_bonus_process.sql';
-GO
-
-declare @now datetime = getutcdate()
-declare @plan_id int = (select top 1 id_plan from k_m_plans where name_plan like 'Bonus')
-declare @template_id int = 
-	(select top 1 id_base_grid from k_m_type_plan where id_type_plan =
-		(select top 1 id_type_plan from k_m_plans where id_plan = @plan_id))
-declare @indicator_name nvarchar(100) = 'pr_ind_bonus_team' 
-declare @id_ind int = (select top 1 id_ind from k_m_indicators where name_ind = @indicator_name)
-
-
-if not exists (select 1 from k_m_fields where code_field = 'bonus_team_step_3')
-insert into k_m_fields
-(name_field,label_field,code_field,width,id_unit,id_field_type,id_control_type,type_value,is_olap,date_create_field,show_min,show_max,thousand_separator,decimal_precision,id_access_type,is_percentage_used,show_aggregated_result,threshold_min_value,threshold_max_value,is_threshold_enabled,show_only_aggregated_result ,aggregation_type)
-select
-	'Bonus Team Step 3','pr_col_bonus_team_step_3','bonus_team_step_3',194,-3,-3,-7,1,0,@now,1,1,0,0,-1,0,0,-1,0,0,0,1
-
-declare @id_ind_field_3 int = (select top 1 id_field from k_m_fields where code_field = 'bonus_team_step_3')
-declare @id_ind_field_2 int = (select top 1 id_field from k_m_fields where code_field = 'bonus_team_step_2')
-declare @sort_ind_field_2 int = (select top 1 sort from k_m_indicators_fields where id_field = @id_ind_field_2)
-declare @sort_ind int =  (select top 1 sort_plan_ind from k_m_plans_indicators where id_ind = @id_ind)
-
--- sort shift and indicator link only on first run
-if not exists (select 1 from k_m_indicators_fields where id_ind = @id_ind and id_field = @id_ind_field_3)
-begin
-	update k_m_indicators_fields
-	set sort = sort + 1
-	where id_ind = @id_ind
-	and sort > @sort_ind_field_2
-
-	update k_m_plans_informations
-	set sort = sort + 1
-	where sort > @sort_ind
-		and id_plan = @plan_id
-
-	update k_m_plans_indicators
-	set sort_plan_ind = sort_plan_ind + 1
-	where sort_plan_ind > @sort_ind
-		and id_plan = @plan_id
-
-	insert into k_m_indicators_fields
-	(id_ind
-	,id_field
-	,sort)
-	select @id_ind, @id_ind_field_3, @sort_ind_field_2 + 1
-end
-
-
-insert into k_m_plan_display_field 
-	(id_plan_display
-	,id_indicator_field
-	,available_plan_display_field
-	,show_plan_display_field
-	,optional_show_plan_display_field
-	)
-select 
-	pd.id_plan_display
-	,fi.id_indicator_field
-	,1,1,1
-from k_m_plan_display pd 
-join k_profiles pr
-	on pr.id_profile = pd.id_profile
-	and pd.id_plan = @plan_id
-	and pr.name_profile in 
-	(
-	'Administrator'
-	,'Manager'
-	,'Manager LG8'
-	,'Human Resource'
-	,'Human Resources LG8'
-	,'Comp Admin'
-	,'Super User'
-	) 
-join k_m_indicators_fields fi
-	on fi.id_field in (@id_ind_field_3)
-where not exists
-	(select 1 from k_m_plan_display_field pdf
-	where pdf.id_plan_display = pd.id_plan_display
-		and pdf.id_indicator_field = fi.id_indicator_field)
-
---rollback
-
-
-
-GO
-
-insert into k_m_workflow_step_group_detail
-	(id_wflstepgroup
-	,id_field
-	,is_editable
-	,id_ind
-	,is_readable)
-select
-	s.id_wflstepgroup
-	,(select top 1 id_field from k_m_fields where name_field = 'Bonus Team Step 3')
-	,s.is_editable
-	,s.id_ind
-	,s.is_readable
-from k_m_workflow_step_group_detail s
-where s.id_field = (select top 1 id_field from k_m_fields where name_field = 'Bonus Team Step 1')
-	and not exists
-		(select 1 from k_m_workflow_step_group_detail d
-		where d.id_wflstepgroup = s.id_wflstepgroup
-			and d.id_ind = s.id_ind
-			and d.id_field = (select top 1 id_field from k_m_fields where name_field = 'Bonus Team Step 3'))
-
-
-GO
-/******************************************************************************
-Purpose: Configure the Bonus process field bonus_team_step_3 as a cascading
-         drop-down sourced from dbo.vPEPSICO_bonus_team_step3_business:
-           - filtered by the Comp Group of the process row,
-           - excluding the Business selected in bonus_team_step_1,
-           - excluding the Business selected in bonus_team_step_2.
-         Idempotent: all ids are resolved by name, relations are re-created.
-Prereqs: - dbo.vPEPSICO_bonus_team_step3_business deployed,
-         - field bonus_team_step_3 exists in the Bonus process (pr_ind_bonus_team),
-         - bonus_team_step_1 already has its Comp Group relation (IC_ column).
-******************************************************************************/
-
-/* Register the view and its columns in k_referential_tables_views(_fields) */
-EXEC sp_client_std_synchronize 'vPEPSICO_bonus_team_step3_business', 'view', 0;
-GO
-
-
-SET NOCOUNT ON;
-SET XACT_ABORT ON;
-
-BEGIN TRY
-    DECLARE
-        @id_plan                INT
-    ,   @id_ind                 INT
-    ,   @id_field_step_1        INT
-    ,   @id_field_step_2        INT
-    ,   @id_field_step_3        INT
-    ,   @id_control_type        INT
-    ,   @id_table_view          INT
-    ,   @id_tv_code             INT
-    ,   @id_tv_value            INT
-    ,   @id_tv_comp_group       INT
-    ,   @id_tv_filter_1         INT
-    ,   @id_tv_filter_2         INT
-    ,   @alias_step_1           NVARCHAR(255)
-    ,   @alias_step_2           NVARCHAR(255)
-    ,   @alias_step_3           NVARCHAR(255)
-    ,   @parent_comp_group      NVARCHAR(255);
-
-    SELECT @id_plan = id_plan
-    FROM dbo.k_m_plans
-    WHERE name_plan = 'Bonus';
-
-    SELECT @id_ind = id_ind
-    FROM dbo.k_m_indicators
-    WHERE name_ind = 'pr_ind_bonus_team';
-
-    SELECT
-        @id_field_step_1 = MAX(CASE WHEN code_field = 'bonus_team_step_1' THEN id_field END)
-    ,   @id_field_step_2 = MAX(CASE WHEN code_field = 'bonus_team_step_2' THEN id_field END)
-    ,   @id_field_step_3 = MAX(CASE WHEN code_field = 'bonus_team_step_3' THEN id_field END)
-    ,   @id_control_type = MAX(CASE WHEN code_field = 'bonus_team_step_1' THEN id_control_type END)
-    FROM dbo.k_m_fields
-    WHERE code_field IN ('bonus_team_step_1', 'bonus_team_step_2', 'bonus_team_step_3');
-
-    SELECT @id_table_view = id_table_view
-    FROM dbo.k_referential_tables_views
-    WHERE name_table_view = 'vPEPSICO_bonus_team_step3_business';
-
-    SELECT
-        @id_tv_code         = MAX(CASE WHEN name_field = 'BTBusinessCode'      THEN id_field END)
-    ,   @id_tv_value        = MAX(CASE WHEN name_field = 'BTBusinessValue'     THEN id_field END)
-    ,   @id_tv_comp_group   = MAX(CASE WHEN name_field = 'idCompGroup'         THEN id_field END)
-    ,   @id_tv_filter_1     = MAX(CASE WHEN name_field = 'BTBusiness_filter_1' THEN id_field END)
-    ,   @id_tv_filter_2     = MAX(CASE WHEN name_field = 'BTBusiness_filter_2' THEN id_field END)
-    FROM dbo.k_referential_tables_views_fields
-    WHERE id_table_view = @id_table_view;
-
-    IF @id_plan IS NULL OR @id_ind IS NULL
-        THROW 50001, 'Bonus plan or indicator pr_ind_bonus_team not found.', 1;
-
-    IF @id_field_step_1 IS NULL OR @id_field_step_2 IS NULL OR @id_field_step_3 IS NULL
-        THROW 50002, 'Field bonus_team_step_1, bonus_team_step_2 or bonus_team_step_3 not found in k_m_fields.', 1;
-
-    IF @id_tv_code IS NULL OR @id_tv_value IS NULL OR @id_tv_comp_group IS NULL
-        OR @id_tv_filter_1 IS NULL OR @id_tv_filter_2 IS NULL
-        THROW 50003, 'vPEPSICO_bonus_team_step3_business is not registered or misses columns.', 1;
-
-    /* Field alias format used by process metadata: <id_plan>_<id_ind>_<id_field> */
-    SET @alias_step_1 = CONCAT(@id_plan, '_', @id_ind, '_', @id_field_step_1);
-    SET @alias_step_2 = CONCAT(@id_plan, '_', @id_ind, '_', @id_field_step_2);
-    SET @alias_step_3 = CONCAT(@id_plan, '_', @id_ind, '_', @id_field_step_3);
-
-    /* Reuse the Comp Group parent (IC_<id_column> of Bonus Verification grid) already used by Step 1 */
-    SELECT TOP (1) @parent_comp_group = id_parent_field
-    FROM dbo.k_m_fields_relation
-    WHERE id_plan = @id_plan
-        AND id_field = @alias_step_1
-        AND id_parent_field LIKE 'IC[_]%'
-    ORDER BY id_field_relation DESC;
-
-    IF @parent_comp_group IS NULL
-        THROW 50004, 'Comp Group relation for bonus_team_step_1 not found in k_m_fields_relation.', 1;
-
-    BEGIN TRANSACTION;
-
-        UPDATE dbo.k_m_fields
-        SET id_control_type     = @id_control_type
-        ,   combo_table_view    = @id_table_view
-        ,   combo_value_field   = @id_tv_code
-        ,   combo_text_field    = @id_tv_value
-        WHERE id_field = @id_field_step_3;
-
-        DELETE FROM dbo.k_m_fields_relation
-        WHERE id_plan = @id_plan
-            AND id_field = @alias_step_3;
-
-        INSERT INTO dbo.k_m_fields_relation (id_plan, id_field, id_parent_field, id_field_table_view)
-        VALUES
-            (@id_plan, @alias_step_3, @parent_comp_group, @id_tv_comp_group)
-        ,   (@id_plan, @alias_step_3, @alias_step_1,      @id_tv_filter_1)
-        ,   (@id_plan, @alias_step_3, @alias_step_2,      @id_tv_filter_2);
-
-    COMMIT TRANSACTION;
-
-    PRINT CONCAT('bonus_team_step_3 drop-down configured: field ', @alias_step_3
-        , ', table view ', @id_table_view, ', Comp Group parent ', @parent_comp_group, '.');
-END TRY
-BEGIN CATCH
-    IF @@TRANCOUNT > 0
-        ROLLBACK TRANSACTION;
-    THROW;
-END CATCH;
-GO
-
-declare @id_step_3 int = (select top 1 id_field from k_m_fields where code_field = 'bonus_team_step_3')
-declare @id_step_1 int = (select top 1 id_field from k_m_fields where code_field = 'bonus_team_step_1')
-declare @id_ind int = (select top 1 id_ind from k_m_indicators where name_ind = 'pr_ind_bonus_team')
-declare @id_ind_field_step_1 int = (select TOP 1 id_indicator_field from k_m_indicators_fields where id_field = @id_step_1 and id_ind = @id_ind)
-declare @id_ind_field_step_3 int = (select TOP 1 id_indicator_field from k_m_indicators_fields where id_field = @id_step_3 and id_ind = @id_ind)
-
-
-insert into [k_m_plans_field_validation]
-	(id_plan
-	,id_indicator_field
-	,id_planInfo
-	,formula
-	,action_false_allow_saving
-	,action_false_show_error
-	,action_false_error_message
-	,action_false_use_field_style
-	,action_false_text_color
-	,action_false_border_color
-	,action_false_background_color
-	,action_true_use_field_style
-	,action_true_text_color
-	,action_true_border_color
-	,action_true_background_color
-	,id_plan_indicator
-	,action_false_show_error_on_change
-	,enable_client_side_validation
-	,action_false_allow_editing)
-select 
-	id_plan
-	,@id_ind_field_step_3
-	,id_planInfo
-	,formula
-	,action_false_allow_saving
-	,action_false_show_error
-	,action_false_error_message
-	,action_false_use_field_style
-	,action_false_text_color
-	,action_false_border_color
-	,action_false_background_color
-	,action_true_use_field_style
-	,action_true_text_color
-	,action_true_border_color
-	,action_true_background_color
-	,id_plan_indicator
-	,action_false_show_error_on_change
-	,enable_client_side_validation
-	,action_false_allow_editing
-from [dbo].[k_m_plans_field_validation] v
-WHERE v.id_indicator_field =  @id_ind_field_step_1
-	AND NOT EXISTS
-		(SELECT 1 FROM [dbo].[k_m_plans_field_validation] v3
-		WHERE v3.id_plan = v.id_plan
-			AND v3.id_indicator_field = @id_ind_field_step_3)
-
-/* Formula items: copy from the Step 1 validation, pointing Step 1 references to Step 3 */
-INSERT INTO [dbo].[k_m_plans_field_validation_formula_items]
-	(id_plans_field_validation
-	,id_indicator_field
-	,id_planInfo)
-SELECT
-	v3.id_plans_field_validation
-	,CASE WHEN fi1.id_indicator_field = @id_ind_field_step_1 THEN @id_ind_field_step_3 ELSE fi1.id_indicator_field END
-	,fi1.id_planInfo
-FROM [dbo].[k_m_plans_field_validation] v1
-JOIN [dbo].[k_m_plans_field_validation_formula_items] fi1
-	ON fi1.id_plans_field_validation = v1.id_plans_field_validation
-JOIN [dbo].[k_m_plans_field_validation] v3
-	ON v3.id_plan = v1.id_plan
-	AND v3.id_indicator_field = @id_ind_field_step_3
-WHERE v1.id_indicator_field = @id_ind_field_step_1
-	AND NOT EXISTS
-		(SELECT 1 FROM [dbo].[k_m_plans_field_validation_formula_items] fi3
-		WHERE fi3.id_plans_field_validation = v3.id_plans_field_validation)
-GO
-
-/* Translation for the Step 3 column header, derived from the Step 2 labels */
-IF NOT EXISTS (SELECT 1 FROM dbo.PEPSICO_system_translations WHERE field_key = 'pr_col_bonus_team_step_3')
-BEGIN
-	INSERT INTO dbo.PEPSICO_system_translations
-		(field_key
-		,label_english
-		,label_chinese
-		,label_polish
-		,label_german
-		,label_portugees
-		,label_spanish
-		,label_italian
-		,label_french
-		,label_turkish)
-	SELECT
-		'pr_col_bonus_team_step_3'
-		,REPLACE(label_english,   '2', '3')
-		,REPLACE(label_chinese,   '2', '3')
-		,REPLACE(label_polish,    '2', '3')
-		,REPLACE(label_german,    '2', '3')
-		,REPLACE(label_portugees, '2', '3')
-		,REPLACE(label_spanish,   '2', '3')
-		,REPLACE(label_italian,   '2', '3')
-		,REPLACE(label_french,    '2', '3')
-		,REPLACE(label_turkish,   '2', '3')
-	FROM dbo.PEPSICO_system_translations
-	WHERE field_key = 'pr_col_bonus_team_step_2';
-
-	/* Fallback when Step 2 has no translation row */
-	IF @@ROWCOUNT = 0
-		INSERT INTO dbo.PEPSICO_system_translations (field_key, label_english)
-		VALUES ('pr_col_bonus_team_step_3', 'Bonus Team Step 3');
-END
-
-/* Push translations to rps_localization */
-EXEC dbo.PEPSICO_SP_Refresh_Translations;
-GO
-/* Report header for the new SelectBusiness3 column in Report_Bonus_Verification, derived from rep_select_business2 */
-INSERT INTO dbo.PEPSICO_config_translation_for_reports
-	(report_name
-	,english_key
-	,culture
-	,[value])
-SELECT
-	t2.report_name
-	,'rep_select_business3'
-	,t2.culture
-	,REPLACE(t2.[value], '2', '3')
-FROM dbo.PEPSICO_config_translation_for_reports t2
-WHERE t2.english_key = 'rep_select_business2'
-	AND NOT EXISTS
-		(SELECT 1 FROM dbo.PEPSICO_config_translation_for_reports t3
-		WHERE ISNULL(t3.report_name, '') = ISNULL(t2.report_name, '')
-			AND t3.culture = t2.culture
-			AND t3.english_key = 'rep_select_business3');
-GO
-
--- SECTION 20: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql
+-- SECTION 17: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql';
 GO
 
@@ -2590,7 +1067,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 21: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
+-- SECTION 18: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql';
 GO
 
@@ -2631,7 +1108,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 22: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
+-- SECTION 19: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql';
 GO
 
@@ -2847,7 +1324,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 23: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql
+-- SECTION 20: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql';
 GO
 
@@ -2888,7 +1365,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 24: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql
+-- SECTION 21: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql';
 GO
 
@@ -3097,7 +1574,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 25: AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql
+-- SECTION 22: AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql
 PRINT N'AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql';
 GO
 
@@ -6136,7 +4613,7 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 END
 GO
 
--- SECTION 26: Verify the deployed full OnChange definition
+-- SECTION 23: Verify the deployed full OnChange definition
 PRINT N'Verify the deployed full OnChange definition';
 GO
 
@@ -6145,14 +4622,14 @@ IF CHARINDEX(N'dbo._ufn_get_comp_round_extended(@idStep,@idCompGroup)',
     THROW 51043, 'OnChange does not use the Comp Round Extended lookup.', 1;
 GO
 
--- SECTION 27: Initial Division exception-cache refresh; no scheduler is added
+-- SECTION 24: Initial Division exception-cache refresh; no scheduler is added
 PRINT N'Initial Division exception-cache refresh; no scheduler is added';
 GO
 
 EXEC dbo.SP_RefreshEmployeeCompRoundException;
 GO
 
--- SECTION 28: Validate final schema and allocation selector uniqueness
+-- SECTION 25: Validate final schema and allocation selector uniqueness
 PRINT N'Validate final schema and allocation selector uniqueness';
 GO
 
@@ -6183,7 +4660,6 @@ GO
 PRINT N'PASS: all Bonus Team deployment sections completed.';
 GO
 
--- SHA256 6868a211689cc81181d93b89bb8209d1fa31d7d277f570e482ba6a0f3db1336c  Objects/Tables/dbo.PEPSICO_bonus_team_business_mapping.sql
 -- SHA256 b8497faf2dd67ffb3443daffa014066b83f94c9354285e4c209d7f61417cd295  Objects/Tables/dbo.PEPSICO_bonus_team_allocation_rule.sql
 -- SHA256 49ac7fe5eb3614e16707fd174bcbfb9661d18e5387a4f63fef5b69e8def42743  Objects/Tables/dbo.PEPSICO_CompRoundExtendedRule.sql
 -- SHA256 4a914fedfcf60960de0cb14ed0835776c03caeb7d29f2544a3e29ef62c487567  Objects/Tables/dbo.PEPSICO_EmployeeCompRoundException.sql
@@ -6194,8 +4670,6 @@ GO
 -- SHA256 c66fd1b8adeea2845d2fdda8a9702dec94012235060a6670f7d396bbc1fa74f0  Objects/Views/dbo.vPEPSICO_bonus_team_step1_business.sql
 -- SHA256 8b16507bc9395e408b0a11a9d43729e330d954801d69f365f70d8d0351bf7f8c  Objects/Views/dbo.vPEPSICO_bonus_team_step2_business.sql
 -- SHA256 44a61d2df2fa3b0a4d95e7c03b9e0366589a00685f88b7248806fc7a42673e15  Objects/Views/dbo.vPEPSICO_bonus_team_step3_business.sql
--- SHA256 b0d761096a66369f53359f985ed415a57d2036afb739f71ee58512ed38dcb93a  Scripts/PostDeploy/30_Wrappers/Process/Bonus.sql
--- SHA256 1e759e5c9414911758eb4aaf972dd504a856f4db545104ee3c3eb35b3c3057df  Scripts/PostDeploy/40_Config/add_step_3_to_bonus_process.sql
 -- SHA256 db2483fb53e5f989c703501db60cb9f52597d57b356ff9f8aee953ccf0fa7157  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql
 -- SHA256 e261d2f0d7fccd5c3aa88a97bbd1bbe81d6b4b2dd7e42c8c915904b4a644173b  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
 -- SHA256 c1f0a0e848689c3c3bec8e4a2d3456a8c81089fed5e4e03d016cbdd4d9636814  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
