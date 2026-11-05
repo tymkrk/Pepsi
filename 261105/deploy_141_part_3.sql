@@ -9,7 +9,8 @@ For unattended execution use sqlcmd -b -f 65001 to stop on the first SQL error.
 Individual configuration scripts retain their own local transactions.
 Requires Step 3 process metadata already deployed by the previous PR.
 Does not replay the Bonus metadata wrapper, Step 3 installation or translations.
-Includes targeted Step 2/3 editability updates and the branch Kernel OnChange snapshot.
+Preserves process metadata, including Step 2/3 validation formulas and editability flags.
+Includes the branch Kernel OnChange snapshot.
 Includes one initial Division-cache refresh; no refresh schedule is added.
 OPEN BUSINESS QUESTION: Lipton JV North America belongs only to IB (working assumption).
 The source manifest at the end records embedded repository definitions.
@@ -942,132 +943,7 @@ CROSS JOIN dbo.PEPSICO_Bonus_Team_Business AS b
 WHERE cg.CompGroupName = N'North America';
 GO
 
--- SECTION 17: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql
-PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql';
-GO
-
--- Step 2/3 client editability. Requires registered Step 3 metadata.
--- Retains the status/Double Hat condition from Step 1; rerunnable.
-SET NOCOUNT ON;
-SET XACT_ABORT ON;
-
-BEGIN TRY
-    BEGIN TRANSACTION;
-
-    DECLARE @id_plan INT = (SELECT idPlanBonusApproval FROM dbo.vPEPSICO_FocalPoint_Parameters);
-    DECLARE @id_ind INT =
-    (
-        SELECT i.id_ind
-        FROM dbo.k_m_indicators AS i
-        INNER JOIN dbo.k_m_plans_indicators AS pi ON pi.id_ind = i.id_ind
-        WHERE pi.id_plan = @id_plan AND i.comment_ind = N'bonus_team'
-    );
-    DECLARE @id_field_step_1 INT = (SELECT id_field FROM dbo.k_m_fields WHERE code_field = N'bonus_team_step_1');
-    DECLARE @id_step_1 INT =
-    (
-        SELECT inf.id_indicator_field
-        FROM dbo.k_m_indicators_fields AS inf
-        INNER JOIN dbo.k_m_fields AS f ON f.id_field = inf.id_field
-        WHERE inf.id_ind = @id_ind AND f.code_field = N'bonus_team_step_1'
-    );
-    DECLARE @id_step_2 INT =
-    (
-        SELECT inf.id_indicator_field
-        FROM dbo.k_m_indicators_fields AS inf
-        INNER JOIN dbo.k_m_fields AS f ON f.id_field = inf.id_field
-        WHERE inf.id_ind = @id_ind AND f.code_field = N'bonus_team_step_2'
-    );
-    DECLARE @id_step_3 INT =
-    (
-        SELECT inf.id_indicator_field
-        FROM dbo.k_m_indicators_fields AS inf
-        INNER JOIN dbo.k_m_fields AS f ON f.id_field = inf.id_field
-        WHERE inf.id_ind = @id_ind AND f.code_field = N'bonus_team_step_3'
-    );
-    DECLARE @other_code NVARCHAR(50) =
-    (
-        SELECT DISTINCT BTBusinessCode
-        FROM dbo.vPEPSICO_bonus_team_step1_business
-        WHERE LTRIM(RTRIM(REPLACE(BTBusinessValue, NCHAR(160), N' '))) = N'Other'
-    );
-
-    IF @id_plan IS NULL OR @id_ind IS NULL OR @id_step_1 IS NULL
-        OR @id_step_2 IS NULL OR @id_step_3 IS NULL
-        OR @id_field_step_1 IS NULL OR @other_code IS NULL
-        THROW 50001, 'Missing Bonus metadata or Other code in the Step 1 dropdown.', 1;
-
-    IF (SELECT COUNT(1) FROM dbo.k_m_plans_field_validation
-        WHERE id_plan = @id_plan AND id_indicator_field = @id_step_1) <> 1
-        OR (SELECT COUNT(1) FROM dbo.k_m_plans_field_validation
-            WHERE id_plan = @id_plan AND id_indicator_field = @id_step_2) <> 1
-        THROW 50002, 'Expected exactly one existing validation for Step 1 and Step 2.', 1;
-
-    IF (SELECT COUNT(1) FROM dbo.k_m_plans_field_validation
-        WHERE id_plan = @id_plan AND id_indicator_field = @id_step_3) > 1
-        THROW 50003, 'Multiple Step 3 validations exist; resolve duplicates first.', 1;
-
-    DECLARE @base_formula NVARCHAR(MAX) =
-    (
-        SELECT formula FROM dbo.k_m_plans_field_validation
-        WHERE id_plan = @id_plan AND id_indicator_field = @id_step_1
-    );
-    IF NULLIF(LTRIM(RTRIM(@base_formula)), N'') IS NULL
-        THROW 50004, 'Step 1 validation formula is empty.', 1;
-
-    IF CHARINDEX(NCHAR(39), @other_code) > 0 OR CHARINDEX(NCHAR(92), @other_code) > 0
-        THROW 50005, 'Dropdown code contains unsupported formula literal characters.', 1;
-
-    -- Compare the Other dropdown code to the native [indicator_field] reference.
-    -- The Step 1 selection contains BTBusinessCode, not its displayed name.
-    DECLARE @formula NVARCHAR(MAX) = CONCAT(
-        N'(', @base_formula, N')&&[', @id_ind, N'_', @id_field_step_1,
-        N']!=', NCHAR(39), @other_code, NCHAR(39));
-
-    IF NOT EXISTS (SELECT 1 FROM dbo.k_m_plans_field_validation
-                   WHERE id_plan = @id_plan AND id_indicator_field = @id_step_3)
-    BEGIN
-        INSERT INTO dbo.k_m_plans_field_validation
-        (
-            id_plan, id_indicator_field, id_planInfo, formula,
-            action_false_allow_saving, action_false_show_error, action_false_error_message,
-            action_false_use_field_style, action_false_text_color, action_false_border_color,
-            action_false_background_color, action_true_use_field_style, action_true_text_color,
-            action_true_border_color, action_true_background_color, id_plan_indicator,
-            action_false_show_error_on_change, enable_client_side_validation, action_false_allow_editing
-        )
-        SELECT id_plan, @id_step_3, id_planInfo, formula,
-               action_false_allow_saving, action_false_show_error, action_false_error_message,
-               action_false_use_field_style, action_false_text_color, action_false_border_color,
-               action_false_background_color, action_true_use_field_style, action_true_text_color,
-               action_true_border_color, action_true_background_color, id_plan_indicator,
-               action_false_show_error_on_change, enable_client_side_validation, action_false_allow_editing
-        FROM dbo.k_m_plans_field_validation
-        WHERE id_plan = @id_plan AND id_indicator_field = @id_step_2;
-    END;
-
-    -- Preserve existing action/style settings; change only formula and editability flags.
-    UPDATE dbo.k_m_plans_field_validation
-    SET formula = @formula,
-        enable_client_side_validation = 1,
-        action_false_allow_editing = 0
-    WHERE id_plan = @id_plan AND id_indicator_field IN (@id_step_2, @id_step_3);
-
-    COMMIT TRANSACTION;
-
-    SELECT v.id_plans_field_validation, v.id_plan, f.code_field, v.formula,
-           v.enable_client_side_validation, v.action_false_allow_editing
-    FROM dbo.k_m_plans_field_validation AS v
-    INNER JOIN dbo.k_m_indicators_fields AS inf ON inf.id_indicator_field = v.id_indicator_field
-    INNER JOIN dbo.k_m_fields AS f ON f.id_field = inf.id_field
-    WHERE v.id_plan = @id_plan AND v.id_indicator_field IN (@id_step_2, @id_step_3);
-END TRY
-BEGIN CATCH
-    IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
-    THROW;
-END CATCH;
-GO
-
--- SECTION 18: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
+-- SECTION 17: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql';
 GO
 
@@ -1108,7 +984,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 19: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
+-- SECTION 18: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql';
 GO
 
@@ -1324,7 +1200,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 20: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql
+-- SECTION 19: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql';
 GO
 
@@ -1365,7 +1241,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 21: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql
+-- SECTION 20: Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql
 PRINT N'Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_allocation_rule.sql';
 GO
 
@@ -1574,7 +1450,7 @@ BEGIN CATCH
 END CATCH;
 GO
 
--- SECTION 22: AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql
+-- SECTION 21: AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql
 PRINT N'AI/beqom_sync_objects/Stored Procedures/Kernel_SP_Process_DataOnChange.sql';
 GO
 
@@ -4613,7 +4489,7 @@ INSERT into zz_temp_jm (temp_datetime, temp_value) values (getdate(), 'input val
 END
 GO
 
--- SECTION 23: Verify the deployed full OnChange definition
+-- SECTION 22: Verify the deployed full OnChange definition
 PRINT N'Verify the deployed full OnChange definition';
 GO
 
@@ -4622,14 +4498,14 @@ IF CHARINDEX(N'dbo._ufn_get_comp_round_extended(@idStep,@idCompGroup)',
     THROW 51043, 'OnChange does not use the Comp Round Extended lookup.', 1;
 GO
 
--- SECTION 24: Initial Division exception-cache refresh; no scheduler is added
+-- SECTION 23: Initial Division exception-cache refresh; no scheduler is added
 PRINT N'Initial Division exception-cache refresh; no scheduler is added';
 GO
 
 EXEC dbo.SP_RefreshEmployeeCompRoundException;
 GO
 
--- SECTION 25: Validate final schema and allocation selector uniqueness
+-- SECTION 24: Validate final schema and allocation selector uniqueness
 PRINT N'Validate final schema and allocation selector uniqueness';
 GO
 
@@ -4670,7 +4546,6 @@ GO
 -- SHA256 c66fd1b8adeea2845d2fdda8a9702dec94012235060a6670f7d396bbc1fa74f0  Objects/Views/dbo.vPEPSICO_bonus_team_step1_business.sql
 -- SHA256 8b16507bc9395e408b0a11a9d43729e330d954801d69f365f70d8d0351bf7f8c  Objects/Views/dbo.vPEPSICO_bonus_team_step2_business.sql
 -- SHA256 44a61d2df2fa3b0a4d95e7c03b9e0366589a00685f88b7248806fc7a42673e15  Objects/Views/dbo.vPEPSICO_bonus_team_step3_business.sql
--- SHA256 db2483fb53e5f989c703501db60cb9f52597d57b356ff9f8aee953ccf0fa7157  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_step3_validation.sql
 -- SHA256 e261d2f0d7fccd5c3aa88a97bbd1bbe81d6b4b2dd7e42c8c915904b4a644173b  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_00_comp_round_extended_rules.sql
 -- SHA256 c1f0a0e848689c3c3bec8e4a2d3456a8c81089fed5e4e03d016cbdd4d9636814  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping.sql
 -- SHA256 98931d99fc2306641b949704d33469c8e908dfbcc7dfe95a21556e80678500bf  Scripts/PostDeploy/90_PostDeploy/deploy_bonus_team_business_mapping_cleanup.sql
