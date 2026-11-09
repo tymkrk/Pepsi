@@ -1,12 +1,14 @@
 /* Bonus Team latest changes - 2026-11-09
-Run the whole file in the intended existing PepsiCo/beqom database in SSMS, one session.
-Plain T-SQL with GO; no SQLCMD mode or external files required.
-Requires the previous extended-round / Step 3 deployment and existing Override grid metadata.
-Includes V3 allocation, Lipton dual mapping, Division ALL fallback, Override field validation
-and the read-only mismatch column. Includes one Division exception-cache refresh.
-No global transaction: on any error STOP, inspect and correct before continuing.
-Completed batches remain committed. For unattended execution use sqlcmd -b.
-Recurring cache-refresh scheduling is not included.
+Run the WHOLE file in the intended existing PepsiCo/beqom database in SSMS, one session.
+Direct T-SQL / GO batches; no SQLCMD mode, dynamic DDL or external files.
+Requires the previous extended-round/Step 3 deployment, Override/Upload grids and mismatch field.
+Includes V3 allocation, Global Corporate overrides for 2/3 businesses, Procurement single
+business = 100% first business for both region flags, Lipton dual mapping, Division ALL fallback,
+Override field exclusivity, and read-only mismatch column. Southern Africa mapping is unchanged.
+Includes ONE Division-cache refresh. Recurring refresh integration remains separate.
+NO GLOBAL TRANSACTION: completed batches remain committed if a later batch fails.
+On any error STOP, inspect and correct before continuing. Unattended execution: sqlcmd -b.
+Canonical source definitions embedded below; original objects remain in Objects/ and PostDeploy.
 */
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
@@ -21,21 +23,31 @@ IF COL_LENGTH(N'dbo.PEPSICO_bonus_team_allocation_rule', N'comp_round_extended')
     OR OBJECT_ID(N'dbo.PEPSICO_CompRoundExtendedRule', N'U') IS NULL
     OR OBJECT_ID(N'dbo.PEPSICO_EmployeeCompRoundException', N'U') IS NULL
     OR OBJECT_ID(N'dbo._ufn_get_employee_bonus_team', N'FN') IS NULL
-    THROW 51521, 'Previous Bonus Team extended-round prerequisites are missing.', 1;
+    THROW 51521, 'Previous Bonus Team extended-round deployment is required.', 1;
 IF OBJECT_ID(N'dbo.SP_Grid_Add_Pre_PEPSICO_OvrdBonusTeam_ProcessUpdate', N'P') IS NULL
     OR OBJECT_ID(N'dbo.SP_Grid_Save_Pre_PEPSICO_OvrdBonusTeam_ProcessUpdate', N'P') IS NULL
-    THROW 51522, 'Existing Override grid procedures are required.', 1;
+    OR COL_LENGTH(N'dbo.PEPSICO_OvrdBonusTeam_ProcessUpdate', N'CompGroupBonusTeamMismatchFlag') IS NULL
+    THROW 51522, 'Existing Override procedures and mismatch field are required.', 1;
 IF (SELECT COUNT(*) FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Upload') <> 1
     OR (SELECT COUNT(*) FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Override') <> 1
-    THROW 51523, 'Expected existing Upload and Override grids.', 1;
+    THROW 51523, 'Expected one Upload grid and one Override grid.', 1;
 IF NOT EXISTS
 (
-    SELECT 1 FROM dbo.k_referential_grids AS g
+    SELECT 1 FROM dbo.k_referential_grids AS s
+    INNER JOIN dbo.k_referential_grids AS t ON t.id_table_view = s.id_table_view
+    WHERE s.name_grid = N'Bonus Team Upload' AND t.name_grid = N'Bonus Team Override'
+)
+    THROW 51524, 'Upload and Override must use the same table/view.', 1;
+IF (SELECT COUNT(*) FROM dbo.k_referential_grids AS g
     INNER JOIN dbo.k_referential_grids_fields AS gf ON gf.id_grid = g.id_grid
     INNER JOIN dbo.k_referential_tables_views_fields AS f ON f.id_field = gf.id_field
-    WHERE g.name_grid = N'Bonus Team Upload' AND f.name_field = N'CompGroupBonusTeamMismatchFlag'
-)
-    THROW 51524, 'Existing Upload mismatch column is required.', 1;
+    WHERE g.name_grid = N'Bonus Team Upload' AND f.name_field = N'CompGroupBonusTeamMismatchFlag') <> 1
+    THROW 51525, 'Expected one source mismatch flag column in Upload.', 1;
+IF (SELECT COUNT(*) FROM dbo.k_referential_grids AS g
+    INNER JOIN dbo.k_referential_grids_fields AS gf ON gf.id_grid = g.id_grid
+    INNER JOIN dbo.k_referential_tables_views_fields AS f ON f.id_field = gf.id_field
+    WHERE g.name_grid = N'Bonus Team Override' AND f.name_field = N'CompGroupBonusTeamMismatchFlag') > 1
+    THROW 51526, 'Duplicate Override mismatch columns; inspect before deployment.', 1;
 GO
 
 -- SECTION 01: Objects/Functions/dbo._fn_get_bonus_team.sql
@@ -898,7 +910,7 @@ BEGIN TRY
         (N'EMEA Foods', 2, N'50% 1st Bonus Team / 50% 2nd Bonus Team', 0, 0),
         (N'EMEA Foods', 3, N'100% OU or 100% Sector', 0, 0),
         (N'Global Procurement', 1, N'100% 1st Bonus Team', 0, 0),
-        (N'Global Procurement', 1, N'75% Bonus Team / 25% Corporate', 1, 0),
+        (N'Global Procurement', 1, N'100% 1st Bonus Team', 1, 0),
         (N'Global Procurement', 2, N'50% 1st Bonus Team / 50% 2nd Bonus Team', 0, 0),
         (N'Global Procurement', 2, N'75% Selected Region / 25% Corporate', 1, 0),
         (N'Global Procurement', 3, N'100% OU or 100% Sector', 0, 0),
@@ -946,7 +958,8 @@ BEGIN TRY
         (comp_round_extended, number_of_businesses, split_rule, is_region, corporate_override)
     SELECT round_def.comp_round_extended, business_count.number_of_businesses, N'100% Corporate', 0, 1
     FROM (VALUES (N'APAC Foods'), (N'EMEA Foods'), (N'LATAM'),
-        (N'International Beverages'), (N'North America'), (N'Global Procurement'), (N'Corporate GGF')) AS round_def(comp_round_extended)
+        (N'International Beverages'), (N'North America'), (N'Global Procurement'), (N'Corporate GGF'),
+        (N'Global')) AS round_def(comp_round_extended)
     CROSS JOIN (VALUES (2), (3)) AS business_count(number_of_businesses);
 
     ;WITH configured_comp_round AS
@@ -993,12 +1006,11 @@ BEGIN TRY
          ) THEN
         DELETE;
 
-    -- Procurement single non-region business follows 1 Business Supported, not Bonus with Corp Component.
+    -- Procurement single business follows 1 Business Supported for both region flags.
     DELETE legacy
     FROM dbo.PEPSICO_bonus_team_allocation_rule AS legacy
     WHERE legacy.comp_round_extended = N'Global Procurement'
       AND legacy.number_of_businesses = 1
-      AND legacy.is_region = 0
       AND legacy.corporate_override = 0
       AND legacy.split_rule = N'75% Bonus Team / 25% Corporate'
       AND EXISTS
@@ -1007,7 +1019,7 @@ BEGIN TRY
           FROM dbo.PEPSICO_bonus_team_allocation_rule AS replacement
           WHERE replacement.comp_round_extended = legacy.comp_round_extended
             AND replacement.number_of_businesses = 1
-            AND replacement.is_region = 0
+            AND replacement.is_region = legacy.is_region
             AND replacement.corporate_override = 0
             AND replacement.split_rule = N'100% 1st Bonus Team'
       );
@@ -1304,56 +1316,22 @@ History:
 END
 GO
 
--- SECTION 08: Override mismatch column
-/* 2026-11-05 /Tymoteusz Kruk/
-Copy the existing Upload mismatch flag column to the Override child, read-only.
-Run in SSMS in the target database. No SQLCMD mode required.
-*/
-SET NOCOUNT ON;
-SET XACT_ABORT ON;
-
+-- SECTION 08: Append read-only mismatch column to Override without replaying the grid wrapper.
+PRINT N'Override mismatch flag column';
+GO
 BEGIN TRY
     BEGIN TRANSACTION;
-
     DECLARE @source_grid INT, @target_grid INT, @field INT, @next_order INT;
-
-    IF (SELECT COUNT(*) FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Upload') <> 1
-        THROW 51510, 'Expected exactly one Bonus Team Upload grid.', 1;
-    IF (SELECT COUNT(*) FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Override') <> 1
-        THROW 51511, 'Expected exactly one Bonus Team Override grid.', 1;
-
     SELECT @source_grid = id_grid FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Upload';
     SELECT @target_grid = id_grid FROM dbo.k_referential_grids WHERE name_grid = N'Bonus Team Override';
-
-    IF NOT EXISTS
-    (
-        SELECT 1
-        FROM dbo.k_referential_grids AS s
-        JOIN dbo.k_referential_grids AS t ON t.id_table_view = s.id_table_view
-        WHERE s.id_grid = @source_grid AND t.id_grid = @target_grid
-    )
-        THROW 51512, 'Source and target grids must use the same table/view.', 1;
-
-    IF (SELECT COUNT(*)
-        FROM dbo.k_referential_grids_fields AS gf
-        JOIN dbo.k_referential_tables_views_fields AS f ON f.id_field = gf.id_field
-        WHERE gf.id_grid = @source_grid AND f.name_field = N'CompGroupBonusTeamMismatchFlag') <> 1
-        THROW 51513, 'Expected exactly one mismatch flag column in Upload.', 1;
-
     SELECT @field = gf.id_field
     FROM dbo.k_referential_grids_fields AS gf
-    JOIN dbo.k_referential_tables_views_fields AS f ON f.id_field = gf.id_field
+    INNER JOIN dbo.k_referential_tables_views_fields AS f ON f.id_field = gf.id_field
     WHERE gf.id_grid = @source_grid AND f.name_field = N'CompGroupBonusTeamMismatchFlag';
-
     SELECT @next_order = ISNULL(MAX(order_column), -1) + 1
     FROM dbo.k_referential_grids_fields WITH (UPDLOCK, HOLDLOCK)
     WHERE id_grid = @target_grid;
-
-    IF NOT EXISTS
-    (
-        SELECT 1 FROM dbo.k_referential_grids_fields
-        WHERE id_grid = @target_grid AND id_field = @field
-    )
+    IF NOT EXISTS (SELECT 1 FROM dbo.k_referential_grids_fields WHERE id_grid = @target_grid AND id_field = @field)
     BEGIN
         INSERT INTO dbo.k_referential_grids_fields
         (
@@ -1447,28 +1425,18 @@ BEGIN TRY
             src.[hyperlink_type]
         FROM dbo.k_referential_grids_fields AS src
         WHERE src.id_grid = @source_grid AND src.id_field = @field;
-    END;
+    END
     ELSE
-    BEGIN
-        UPDATE dbo.k_referential_grids_fields
-        SET is_editable = 0
+        UPDATE dbo.k_referential_grids_fields SET is_editable = 0
         WHERE id_grid = @target_grid AND id_field = @field;
-    END;
-
     COMMIT TRANSACTION;
-
-    SELECT id_column, id_grid, id_field, name_column, order_column, is_editable
-    FROM dbo.k_referential_grids_fields
-    WHERE id_grid = @target_grid AND id_field = @field;
 END TRY
 BEGIN CATCH
     IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
     THROW;
 END CATCH;
-
 GO
-
--- SECTION 09: Initial Division cache refresh
+-- SECTION 09: Publish current Division routing once.
 EXEC dbo.SP_RefreshEmployeeCompRoundException;
 GO
 PRINT N'Bonus Team latest changes deployment completed.';
