@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ShowPlanXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.613" Build="18.0.319.205" xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementCompId="1" StatementEstRows="1" StatementId="1" StatementOptmLevel="FULL" StatementOptmEarlyAbortReason="GoodEnoughPlanFound" CardinalityEstimationModelVersion="160" StatementSubTreeCost="0.0310961" StatementText="SELECT * FROM [vPEPSICO_bonus_team_step3_business] WHERE [BTBusiness_filter_1]=@1 AND [BTBusiness_filter_2]=@2 AND [idCompGroup]=@3" StatementType="SELECT" QueryHash="0x3C391FFF706C5F4F" QueryPlanHash="0xE570114938D302FB" RetrievedFromCache="false" StatementSqlHandle="0x0900DE6A7DCA038E8A967F489742878B96DA0000000000000000000000000000000000000000000000000000" DatabaseContextSettingsId="8" ParentObjectId="0" StatementParameterizationType="0" SecurityPolicyApplied="false">
+          <StatementSetOptions ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" NUMERIC_ROUNDABORT="false" QUOTED_IDENTIFIER="true" />
+          <QueryPlan DegreeOfParallelism="1" CachedPlanSize="80" CompileTime="15" CompileCPU="15" CompileMemory="1616">
+            <MemoryGrantInfo SerialRequiredMemory="0" SerialDesiredMemory="0" GrantedMemory="0" MaxUsedMemory="0" />
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="544256" EstimatedPagesCached="816384" EstimatedAvailableDegreeOfParallelism="8" MaxCompileMemory="86970104" />
+            <OptimizerStatsUsage>
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Statistics="[_WA_Sys_00000002_4F9D96F5]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-10-10T10:36:32.44" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Statistics="[_WA_Sys_00000003_54AF9231]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-02-25T18:42:57.35" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Statistics="[PK_CompGroup]" ModificationCount="0" SamplingPercent="100" LastUpdate="2026-02-24T01:11:53.2" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Statistics="[PK_PEPSICO_Bonus_Team_Business_per_CompGroup]" ModificationCount="0" SamplingPercent="100" LastUpdate="2025-11-29T11:18:56.93" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Statistics="[ci_PEPSICO_Bonus_Team_Business_per_CompGroup]" ModificationCount="0" SamplingPercent="100" LastUpdate="2025-11-29T11:18:56.93" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Statistics="[PK_PEPSICO_Bonus_Team_Business]" ModificationCount="0" SamplingPercent="100" LastUpdate="2025-11-29T11:18:51.78" />
+              <StatisticsInfo Database="[3e3e0b9f-7e02-4716-b9cf-e0dacfab9751]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Statistics="[ci_PEPSICO_Bonus_Team_Business_Code]" ModificationCount="0" SamplingPercent="100" LastUpdate="2025-11-29T11:18:51.78" />
+            </OptimizerStatsUsage>
+            <QueryTimeStats CpuTime="0" ElapsedTime="0" />
+            <RelOp AvgRowSize="234" EstimateCPU="1E-07" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Compute Scalar" NodeId="0" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.0310961">
+              <OutputList>
+                <ColumnReference Column="Union1018" />
+                <ColumnReference Column="Union1019" />
+                <ColumnReference Column="Union1020" />
+                <ColumnReference Column="Union1021" />
+                <ColumnReference Column="Union1022" />
+              </OutputList>
+              <ComputeScalar>
+                <DefinedValues>
+                  <DefinedValue>
+                    <ColumnReference Column="Union1018" />
+                    <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [bcg].[BTBusinessCode]">
+                      <Identifier>
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                      </Identifier>
+                    </ScalarOperator>
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Column="Union1019" />
+                    <ScalarOperator ScalarString="[Expr1010]">
+                      <Identifier>
+                        <ColumnReference Column="Expr1010" />
+                      </Identifier>
+                    </ScalarOperator>
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Column="Union1020" />
+                    <ScalarOperator ScalarString="[Expr1011]">
+                      <Identifier>
+                        <ColumnReference Column="Expr1011" />
+                      </Identifier>
+                    </ScalarOperator>
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Column="Union1021" />
+                    <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s1].[BTBusinessCode]">
+                      <Identifier>
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                      </Identifier>
+                    </ScalarOperator>
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Column="Union1022" />
+                    <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s2].[BTBusinessCode]">
+                      <Identifier>
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                      </Identifier>
+                    </ScalarOperator>
+                  </DefinedValue>
+                </DefinedValues>
+                <RelOp AvgRowSize="234" EstimateCPU="0.00564948" EstimateIO="0.000313" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Inner Join" NodeId="1" Parallel="false" PhysicalOp="Merge Join" EstimatedTotalSubtreeCost="0.031096">
+                  <OutputList>
+                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                    <ColumnReference Column="Expr1010" />
+                    <ColumnReference Column="Expr1011" />
+                  </OutputList>
+                  <RunTimeInformation>
+                    <RunTimeCountersPerThread Thread="0" ActualRows="6" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="0" ActualLogicalReads="0" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                  </RunTimeInformation>
+                  <Merge ManyToMany="true">
+                    <InnerSideJoinColumns>
+                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessCode" />
+                    </InnerSideJoinColumns>
+                    <OuterSideJoinColumns>
+                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                    </OuterSideJoinColumns>
+                    <Residual>
+                      <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_Bonus_Team_Business].[BTBusinessCode] as [btb].[BTBusinessCode]=[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [bcg].[BTBusinessCode]">
+                        <Compare CompareOp="EQ">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessCode" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                            </Identifier>
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                    </Residual>
+                    <RelOp AvgRowSize="131" EstimateCPU="4.18E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Left Anti Semi Join" NodeId="2" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.0209398">
+                      <OutputList>
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                        <ColumnReference Column="Expr1011" />
+                      </OutputList>
+                      <RunTimeInformation>
+                        <RunTimeCountersPerThread Thread="0" ActualRows="6" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" />
+                      </RunTimeInformation>
+                      <NestedLoops Optimized="false">
+                        <OuterReferences>
+                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                        </OuterReferences>
+                        <RelOp AvgRowSize="135" EstimateCPU="0.000133643" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" LogicalOp="Inner Join" NodeId="3" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.0176521">
+                          <OutputList>
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                            <ColumnReference Column="Expr1011" />
+                          </OutputList>
+                          <RunTimeInformation>
+                            <RunTimeCountersPerThread Thread="0" ActualRows="6" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" />
+                          </RunTimeInformation>
+                          <NestedLoops Optimized="false">
+                            <Predicate>
+                              <ScalarOperator ScalarString="[Expr1026]=[Expr1027] AND [pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s1].[BTBusinessCode]&lt;&gt;[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s2].[BTBusinessCode] AND [pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [bcg].[BTBusinessCode]&lt;&gt;[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s2].[BTBusinessCode]">
+                                <Logical Operation="AND">
+                                  <ScalarOperator>
+                                    <Compare CompareOp="EQ">
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Column="Expr1026" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Column="Expr1027" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                    </Compare>
+                                  </ScalarOperator>
+                                  <ScalarOperator>
+                                    <Compare CompareOp="NE">
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                    </Compare>
+                                  </ScalarOperator>
+                                  <ScalarOperator>
+                                    <Compare CompareOp="NE">
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                    </Compare>
+                                  </ScalarOperator>
+                                </Logical>
+                              </ScalarOperator>
+                            </Predicate>
+                            <RelOp AvgRowSize="87" EstimateCPU="0.00046775" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="2.28371" LogicalOp="Inner Join" NodeId="4" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.0139645">
+                              <OutputList>
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                <ColumnReference Column="Expr1011" />
+                                <ColumnReference Column="Expr1027" />
+                              </OutputList>
+                              <RunTimeInformation>
+                                <RunTimeCountersPerThread Thread="0" ActualRows="7" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" />
+                              </RunTimeInformation>
+                              <NestedLoops Optimized="false">
+                                <Predicate>
+                                  <ScalarOperator ScalarString="[Expr1011]=[Expr1027] AND [pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [bcg].[BTBusinessCode]&lt;&gt;[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[BTBusinessCode] as [s1].[BTBusinessCode]">
+                                    <Logical Operation="AND">
+                                      <ScalarOperator>
+                                        <Compare CompareOp="EQ">
+                                          <ScalarOperator>
+                                            <Identifier>
+                                              <ColumnReference Column="Expr1011" />
+                                            </Identifier>
+                                          </ScalarOperator>
+                                          <ScalarOperator>
+                                            <Identifier>
+                                              <ColumnReference Column="Expr1027" />
+                                            </Identifier>
+                                          </ScalarOperator>
+                                        </Compare>
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Compare CompareOp="NE">
+                                          <ScalarOperator>
+                                            <Identifier>
+                                              <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                            </Identifier>
+                                          </ScalarOperator>
+                                          <ScalarOperator>
+                                            <Identifier>
+                                              <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                            </Identifier>
+                                          </ScalarOperator>
+                                        </Compare>
+                                      </ScalarOperator>
+                                    </Logical>
+                                  </ScalarOperator>
+                                </Predicate>
+                                <RelOp AvgRowSize="31" EstimateCPU="0.0001142" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="7.993" LogicalOp="Compute Scalar" NodeId="5" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.0083561">
+                                  <OutputList>
+                                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                    <ColumnReference Column="Expr1011" />
+                                  </OutputList>
+                                  <ComputeScalar>
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Column="Expr1011" />
+                                        <ScalarOperator ScalarString="isnull([pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[idCompGroup] as [bcg].[idCompGroup],(0))">
+                                          <Intrinsic FunctionName="isnull">
+                                            <ScalarOperator>
+                                              <Identifier>
+                                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                              </Identifier>
+                                            </ScalarOperator>
+                                            <ScalarOperator>
+                                              <Const ConstValue="(0)" />
+                                            </ScalarOperator>
+                                          </Intrinsic>
+                                        </ScalarOperator>
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <RelOp AvgRowSize="27" EstimateCPU="0.0014132" EstimateIO="0.0068287" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="7.993" EstimatedRowsRead="1142" LogicalOp="Clustered Index Scan" NodeId="6" Parallel="false" PhysicalOp="Clustered Index Scan" EstimatedTotalSubtreeCost="0.0082419" TableCardinality="1142">
+                                      <OutputList>
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                      </OutputList>
+                                      <RunTimeInformation>
+                                        <RunTimeCountersPerThread Thread="0" ActualRows="8" ActualRowsRead="1142" Batches="0" ActualEndOfScans="1" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="1" ActualLogicalReads="8" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                      </RunTimeInformation>
+                                      <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                                        <DefinedValues>
+                                          <DefinedValue>
+                                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="BTBusinessCode" />
+                                          </DefinedValue>
+                                          <DefinedValue>
+                                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                          </DefinedValue>
+                                        </DefinedValues>
+                                        <Object Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Index="[ci_PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" IndexKind="Clustered" Storage="RowStore" />
+                                        <Predicate>
+                                          <ScalarOperator ScalarString="isnull([pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[idCompGroup] as [bcg].[idCompGroup],(0))=(33)">
+                                            <Compare CompareOp="EQ">
+                                              <ScalarOperator>
+                                                <Intrinsic FunctionName="isnull">
+                                                  <ScalarOperator>
+                                                    <Identifier>
+                                                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                                    </Identifier>
+                                                  </ScalarOperator>
+                                                  <ScalarOperator>
+                                                    <Const ConstValue="(0)" />
+                                                  </ScalarOperator>
+                                                </Intrinsic>
+                                              </ScalarOperator>
+                                              <ScalarOperator>
+                                                <Const ConstValue="(33)" />
+                                              </ScalarOperator>
+                                            </Compare>
+                                          </ScalarOperator>
+                                        </Predicate>
+                                      </IndexScan>
+                                    </RelOp>
+                                  </ComputeScalar>
+                                </RelOp>
+                                <RelOp AvgRowSize="65" EstimateCPU="1.4E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="6.993" EstimatedExecutionMode="Row" EstimateRows="14" LogicalOp="Compute Scalar" NodeId="7" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.00451418">
+                                  <OutputList>
+                                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                    <ColumnReference Column="Expr1027" />
+                                  </OutputList>
+                                  <ComputeScalar>
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Column="Expr1027" />
+                                        <ScalarOperator ScalarString="isnull([pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[idCompGroup] as [s1].[idCompGroup],(0))">
+                                          <Intrinsic FunctionName="isnull">
+                                            <ScalarOperator>
+                                              <Identifier>
+                                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="idCompGroup" />
+                                              </Identifier>
+                                            </ScalarOperator>
+                                            <ScalarOperator>
+                                              <Const ConstValue="(0)" />
+                                            </ScalarOperator>
+                                          </Intrinsic>
+                                        </ScalarOperator>
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <RelOp AvgRowSize="65" EstimateCPU="0.0001724" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="6.993" EstimatedExecutionMode="Row" EstimateRows="14" EstimatedRowsRead="14" LogicalOp="Clustered Index Seek" NodeId="8" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="0.00450299" TableCardinality="1142">
+                                      <OutputList>
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="idCompGroup" />
+                                      </OutputList>
+                                      <RunTimeInformation>
+                                        <RunTimeCountersPerThread Thread="0" ActualRows="112" ActualRowsRead="112" Batches="0" ActualEndOfScans="8" ActualExecutions="8" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="8" ActualLogicalReads="16" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                      </RunTimeInformation>
+                                      <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                                        <DefinedValues>
+                                          <DefinedValue>
+                                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                          </DefinedValue>
+                                          <DefinedValue>
+                                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="idCompGroup" />
+                                          </DefinedValue>
+                                        </DefinedValues>
+                                        <Object Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Index="[ci_PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" IndexKind="Clustered" Storage="RowStore" />
+                                        <SeekPredicates>
+                                          <SeekPredicateNew>
+                                            <SeekKeys>
+                                              <Prefix ScanType="EQ">
+                                                <RangeColumns>
+                                                  <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s1]" Column="BTBusinessCode" />
+                                                </RangeColumns>
+                                                <RangeExpressions>
+                                                  <ScalarOperator ScalarString="N'BTB001'">
+                                                    <Const ConstValue="N'BTB001'" />
+                                                  </ScalarOperator>
+                                                </RangeExpressions>
+                                              </Prefix>
+                                            </SeekKeys>
+                                          </SeekPredicateNew>
+                                        </SeekPredicates>
+                                      </IndexScan>
+                                    </RelOp>
+                                  </ComputeScalar>
+                                </RelOp>
+                              </NestedLoops>
+                            </RelOp>
+                            <RelOp AvgRowSize="65" EstimateCPU="1.4E-06" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="1.28371" EstimatedExecutionMode="Row" EstimateRows="14" LogicalOp="Compute Scalar" NodeId="9" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.00352191">
+                              <OutputList>
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                <ColumnReference Column="Expr1026" />
+                              </OutputList>
+                              <ComputeScalar>
+                                <DefinedValues>
+                                  <DefinedValue>
+                                    <ColumnReference Column="Expr1026" />
+                                    <ScalarOperator ScalarString="isnull([pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[idCompGroup] as [s2].[idCompGroup],(0))">
+                                      <Intrinsic FunctionName="isnull">
+                                        <ScalarOperator>
+                                          <Identifier>
+                                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="idCompGroup" />
+                                          </Identifier>
+                                        </ScalarOperator>
+                                        <ScalarOperator>
+                                          <Const ConstValue="(0)" />
+                                        </ScalarOperator>
+                                      </Intrinsic>
+                                    </ScalarOperator>
+                                  </DefinedValue>
+                                </DefinedValues>
+                                <RelOp AvgRowSize="65" EstimateCPU="0.0001724" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="1.28371" EstimatedExecutionMode="Row" EstimateRows="14" EstimatedRowsRead="14" LogicalOp="Clustered Index Seek" NodeId="10" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="0.00351871" TableCardinality="1142">
+                                  <OutputList>
+                                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                    <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="idCompGroup" />
+                                  </OutputList>
+                                  <RunTimeInformation>
+                                    <RunTimeCountersPerThread Thread="0" ActualRows="98" ActualRowsRead="98" Batches="0" ActualEndOfScans="7" ActualExecutions="7" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="7" ActualLogicalReads="14" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                                  </RunTimeInformation>
+                                  <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                                    <DefinedValues>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                      </DefinedValue>
+                                      <DefinedValue>
+                                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="idCompGroup" />
+                                      </DefinedValue>
+                                    </DefinedValues>
+                                    <Object Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Index="[ci_PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" IndexKind="Clustered" Storage="RowStore" />
+                                    <SeekPredicates>
+                                      <SeekPredicateNew>
+                                        <SeekKeys>
+                                          <Prefix ScanType="EQ">
+                                            <RangeColumns>
+                                              <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[s2]" Column="BTBusinessCode" />
+                                            </RangeColumns>
+                                            <RangeExpressions>
+                                              <ScalarOperator ScalarString="N'BTB013'">
+                                                <Const ConstValue="N'BTB013'" />
+                                              </ScalarOperator>
+                                            </RangeExpressions>
+                                          </Prefix>
+                                        </SeekKeys>
+                                      </SeekPredicateNew>
+                                    </SeekPredicates>
+                                  </IndexScan>
+                                </RelOp>
+                              </ComputeScalar>
+                            </RelOp>
+                          </NestedLoops>
+                        </RelOp>
+                        <RelOp AvgRowSize="29" EstimateCPU="0.0001581" EstimateIO="0.003125" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="1" EstimatedRowsRead="1" LogicalOp="Clustered Index Seek" NodeId="11" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="0.0032831" TableCardinality="48">
+                          <OutputList />
+                          <RunTimeInformation>
+                            <RunTimeCountersPerThread Thread="0" ActualRows="0" ActualRowsRead="6" Batches="0" ActualEndOfScans="6" ActualExecutions="6" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="0" ActualLogicalReads="12" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                          </RunTimeInformation>
+                          <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                            <DefinedValues />
+                            <Object Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Index="[PK_CompGroup]" Alias="[cg]" TableReferenceId="1" IndexKind="Clustered" Storage="RowStore" />
+                            <SeekPredicates>
+                              <SeekPredicateNew>
+                                <SeekKeys>
+                                  <Prefix ScanType="EQ">
+                                    <RangeColumns>
+                                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Alias="[cg]" Column="idCompGroup" />
+                                    </RangeColumns>
+                                    <RangeExpressions>
+                                      <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_Bonus_Team_Business_per_CompGroup].[idCompGroup] as [bcg].[idCompGroup]">
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business_per_CompGroup]" Alias="[bcg]" Column="idCompGroup" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                    </RangeExpressions>
+                                  </Prefix>
+                                </SeekKeys>
+                              </SeekPredicateNew>
+                            </SeekPredicates>
+                            <Predicate>
+                              <ScalarOperator ScalarString="[pepprod].[dbo].[PEPSICO_CompGroup].[CompGroupName] as [cg].[CompGroupName]=N'North America'">
+                                <Compare CompareOp="EQ">
+                                  <ScalarOperator>
+                                    <Identifier>
+                                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_CompGroup]" Alias="[cg]" Column="CompGroupName" />
+                                    </Identifier>
+                                  </ScalarOperator>
+                                  <ScalarOperator>
+                                    <Const ConstValue="N'North America'" />
+                                  </ScalarOperator>
+                                </Compare>
+                              </ScalarOperator>
+                            </Predicate>
+                          </IndexScan>
+                        </RelOp>
+                      </NestedLoops>
+                    </RelOp>
+                    <RelOp AvgRowSize="126" EstimateCPU="1.4E-05" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="140" LogicalOp="Compute Scalar" NodeId="12" Parallel="false" PhysicalOp="Compute Scalar" EstimatedTotalSubtreeCost="0.00419074">
+                      <OutputList>
+                        <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessCode" />
+                        <ColumnReference Column="Expr1010" />
+                      </OutputList>
+                      <ComputeScalar>
+                        <DefinedValues>
+                          <DefinedValue>
+                            <ColumnReference Column="Expr1010" />
+                            <ScalarOperator ScalarString="CASE WHEN [pepprod].[dbo].[PEPSICO_Bonus_Team_Business].[BTBusinessValue] as [btb].[BTBusinessValue]=N'Other' THEN [pepprod].[dbo].[PEPSICO_Bonus_Team_Business].[BTBusinessValue] as [btb].[BTBusinessValue] ELSE concat(N' ',[pepprod].[dbo].[PEPSICO_Bonus_Team_Business].[BTBusinessValue] as [btb].[BTBusinessValue]) END">
+                              <IF>
+                                <Condition>
+                                  <ScalarOperator>
+                                    <Compare CompareOp="EQ">
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessValue" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Const ConstValue="N'Other'" />
+                                      </ScalarOperator>
+                                    </Compare>
+                                  </ScalarOperator>
+                                </Condition>
+                                <Then>
+                                  <ScalarOperator>
+                                    <Identifier>
+                                      <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessValue" />
+                                    </Identifier>
+                                  </ScalarOperator>
+                                </Then>
+                                <Else>
+                                  <ScalarOperator>
+                                    <Intrinsic FunctionName="concat">
+                                      <ScalarOperator>
+                                        <Const ConstValue="N' '" />
+                                      </ScalarOperator>
+                                      <ScalarOperator>
+                                        <Identifier>
+                                          <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessValue" />
+                                        </Identifier>
+                                      </ScalarOperator>
+                                    </Intrinsic>
+                                  </ScalarOperator>
+                                </Else>
+                              </IF>
+                            </ScalarOperator>
+                          </DefinedValue>
+                        </DefinedValues>
+                        <RelOp AvgRowSize="125" EstimateCPU="0.000311" EstimateIO="0.00386574" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="140" EstimatedRowsRead="140" LogicalOp="Clustered Index Scan" NodeId="13" Parallel="false" PhysicalOp="Clustered Index Scan" EstimatedTotalSubtreeCost="0.00417674" TableCardinality="140">
+                          <OutputList>
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessCode" />
+                            <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessValue" />
+                          </OutputList>
+                          <RunTimeInformation>
+                            <RunTimeCountersPerThread Thread="0" ActualRows="64" ActualRowsRead="64" Batches="0" ActualEndOfScans="0" ActualExecutions="1" ActualExecutionMode="Row" ActualElapsedms="0" ActualCPUms="0" ActualScans="1" ActualLogicalReads="3" ActualPhysicalReads="0" ActualReadAheads="0" ActualLobLogicalReads="0" ActualLobPhysicalReads="0" ActualLobReadAheads="0" />
+                          </RunTimeInformation>
+                          <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                            <DefinedValues>
+                              <DefinedValue>
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessCode" />
+                              </DefinedValue>
+                              <DefinedValue>
+                                <ColumnReference Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Alias="[btb]" Column="BTBusinessValue" />
+                              </DefinedValue>
+                            </DefinedValues>
+                            <Object Database="[pepprod]" Schema="[dbo]" Table="[PEPSICO_Bonus_Team_Business]" Index="[ci_PEPSICO_Bonus_Team_Business_Code]" Alias="[btb]" IndexKind="Clustered" Storage="RowStore" />
+                          </IndexScan>
+                        </RelOp>
+                      </ComputeScalar>
+                    </RelOp>
+                  </Merge>
+                </RelOp>
+              </ComputeScalar>
+            </RelOp>
+            <ParameterList>
+              <ColumnReference Column="@3" ParameterDataType="tinyint" ParameterCompiledValue="(33)" ParameterRuntimeValue="(33)" />
+              <ColumnReference Column="@2" ParameterDataType="varchar(8000)" ParameterCompiledValue="'BTB013'" ParameterRuntimeValue="'BTB013'" />
+              <ColumnReference Column="@1" ParameterDataType="varchar(8000)" ParameterCompiledValue="'BTB001'" ParameterRuntimeValue="'BTB001'" />
+            </ParameterList>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>
