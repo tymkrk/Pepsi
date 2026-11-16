@@ -1,0 +1,1 @@
+Provider=MSOLEDBSQL;Data Source=bqm-east-us-elasticdbs-prod-v12.database.windows.net;User ID=tymoteusz.kruk@beqom.com;Initial Catalog=bqm2017r3devpepsi;Use Encryption for Data=true;Authentication=ActiveDirectoryInteractive
