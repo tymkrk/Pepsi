@@ -269,7 +269,7 @@
                           <Style>None</Style>
                         </Border>
                       </Style>
-                      <Enabled>None</Enabled>
+                      <Enabled>False</Enabled>
                     </ChartMajorTickMarks>
                     <ChartMinorTickMarks>
                       <Style>
@@ -278,7 +278,7 @@
                         </Border>
                       </Style>
                       <Length>0.5</Length>
-                      <Enabled>None</Enabled>
+                      <Enabled>False</Enabled>
                     </ChartMinorTickMarks>
                     <CrossAt>NaN</CrossAt>
                     <Minimum>NaN</Minimum>
@@ -335,7 +335,7 @@
                           <Style>None</Style>
                         </Border>
                       </Style>
-                      <Enabled>None</Enabled>
+                      <Enabled>False</Enabled>
                     </ChartMajorTickMarks>
                     <ChartMinorTickMarks>
                       <Style>
@@ -344,7 +344,7 @@
                         </Border>
                       </Style>
                       <Length>0.5</Length>
-                      <Enabled>None</Enabled>
+                      <Enabled>False</Enabled>
                     </ChartMinorTickMarks>
                     <CrossAt>NaN</CrossAt>
                     <Minimum>0</Minimum>
